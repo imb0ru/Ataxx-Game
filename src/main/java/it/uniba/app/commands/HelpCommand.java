@@ -1,4 +1,4 @@
-package it.uniba.app;
+package it.uniba.app.commands;
 
 /**
  * Classe Help
@@ -7,13 +7,13 @@ package it.uniba.app;
  * <p>Classe che visualizza le informazioni di aiuto
  * per l'utilizzo dell'applicazione.</p>
  */
-public class Help {
+public class HelpCommand {
 
         /**
          * Costruttore della classe Help.
          * Visualizza le informazioni di aiuto per l'utilizzo
          */
-        public Help() {
+        public HelpCommand() {
             System.out.println("ATAXX 1.0.0 Team Berners-Lee\n");
             System.out.println("""
                     Prodotto da:

@@ -1,11 +1,12 @@
 package it.uniba.app;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.uniba.app.commands.HelpCommand;
 
 import java.util.Scanner;
 /**
  * Classe App
- * << Control >>
+ * << Boundary >>
  *
  * <p>Classe principale dell'applicazione.</p>
  */
@@ -60,7 +61,7 @@ public final class App {
         if (args.length != 0) {
             if (args[0].equalsIgnoreCase("--help")
                     || args[0].equalsIgnoreCase("-h")) {
-                new Help();
+                new HelpCommand();
             } else {
                 System.out.println("Opzione non riconosciuta. "
                         + "Usa --help o -h "

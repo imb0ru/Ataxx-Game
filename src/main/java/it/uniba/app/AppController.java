@@ -1,8 +1,10 @@
 package it.uniba.app;
 
+import it.uniba.app.commands.HelpCommand;
+
 /**
  * Classe AppController
- * << Boundary >>
+ * << Control >>
  *
  * <p>Controller principale dell'applicazione.
  * Gestisce le chiamate dei comandi di gioco
@@ -19,12 +21,10 @@ public final class AppController {
     AppController(final String command) {
         switch (command) {
             case "/help":
-                new Help();
+                new HelpCommand();
                 break;
             default:
-                System.out.println("Comando non riconosciuto."
-                        + " Usa /help per visualizzare i "
-                        + "comandi disponibili.");
+                /* todo: gestire comando errato o non previsto */
                 break;
         }
     }
