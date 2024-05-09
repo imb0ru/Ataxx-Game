@@ -1,25 +1,30 @@
 package it.uniba.app;
 
 /**
- * Main class of the application.
+ * Classe App
+ * << Control >>
+ *
+ * <p>Classe principale dell'applicazione.</p>
  */
 public final class App {
-
     /**
-     * Get a greeting sentence.
+     * Costruttore della classe App.
+     * Avvia l'applicazione.
      *
-     * @return the "Hello World!" string.
+     * @param args argomenti della riga di comando
      */
-    public String getGreeting() {
-        return "Hello World!!!";
-    }
-
-    /**
-     * Entrypoint of the application.
-     *
-     * @param args command line arguments
-     */
-    public static void main(final String[] args) {
+    private App(final String[] args) {
         new AppController(args);
     }
+
+    /**
+     * Metodo main dell'applicazione.
+     *
+     * @param args argomenti della riga di comando
+     */
+    public static void main(final String[] args) {
+        new App(args);
+    }
+
+
 }
