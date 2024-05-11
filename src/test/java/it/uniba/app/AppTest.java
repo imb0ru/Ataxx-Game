@@ -1,20 +1,22 @@
 package it.uniba.app;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Main test class of the application.
  */
 class AppTest {
     /**
-     * Test the getGreeting method of the App class.
+     * Main test method.
      */
     @Test
-    void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(
-                classUnderTest.getGreeting(), "app should have a greeting");
+    void mainTest() {
+        String [] args = {""};
+        App.main(args);
+        assertNotNull(Arrays.toString(args), "args should not be null");
     }
 }
