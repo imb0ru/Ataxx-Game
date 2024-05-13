@@ -67,11 +67,21 @@ public final class Board {
          */
         public Position {
             if (row < 0 || row >= SIZE) {
-                throw new InvalidPositionException(String.format("Riga non valida %d (0 <= riga < %d)", row, SIZE));
+                throw new InvalidPositionException(
+                    String.format("Riga non valida %d (0 <= riga < %d)",
+                        row,
+                        SIZE
+                    )
+                );
             }
 
             if (column < 0 || column >= SIZE) {
-                throw new InvalidPositionException(String.format("Colonna non valida %d (0 <= colonna < %d)", column, SIZE));
+                throw new InvalidPositionException(
+                    String.format("Colonna non valida %d (0 <= colonna < %d)",
+                        column,
+                        SIZE
+                    )
+                );
             }
         }
 
@@ -108,13 +118,14 @@ public final class Board {
      * @throws InvalidBoardException se la stringa non rappresenta un tavoliere
      */
     public Board(final String boardString) throws InvalidBoardException {
+        final int BASE = 10;
         int boardIndex = 0;
         int index = 0;
         while (index < boardString.length()) {
             var character = boardString.charAt(index);
             int count = 0;
             while (Character.isDigit(character)) {
-                count = count * 10 + Character.getNumericValue(character);
+                count = count * BASE + Character.getNumericValue(character);
                 character = boardString.charAt(++index);
             }
 
