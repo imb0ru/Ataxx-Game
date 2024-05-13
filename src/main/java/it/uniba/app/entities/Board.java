@@ -118,14 +118,15 @@ public final class Board {
      * @throws InvalidBoardException se la stringa non rappresenta un tavoliere
      */
     public Board(final String boardString) throws InvalidBoardException {
-        final int BASE = 10;
+        final int base = 10;
+
         int boardIndex = 0;
         int index = 0;
         while (index < boardString.length()) {
             var character = boardString.charAt(index);
             int count = 0;
             while (Character.isDigit(character)) {
-                count = count * BASE + Character.getNumericValue(character);
+                count = count * base + Character.getNumericValue(character);
                 character = boardString.charAt(++index);
             }
 
