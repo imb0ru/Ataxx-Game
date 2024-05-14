@@ -1,6 +1,6 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
-    <option name="RIGHT_MARGIN" value="80" />
+    <option name="RIGHT_MARGIN" value="120" />
     <codeStyleSettings language="JAVA">
       <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
       <option name="BINARY_OPERATION_SIGN_ON_NEXT_LINE" value="true" />

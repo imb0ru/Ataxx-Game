@@ -7,6 +7,18 @@
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="PDMPlugin">
+    <option name="customRuleSets">
+      <list>
+        <option value="$PROJECT_DIR$/config/pmd/pmd-ruleset.xml" />
+      </list>
+    </option>
+    <option name="optionKeyToValue">
+      <map>
+        <entry key="Statistics URL" value="" />
+        <entry key="Target JDK" value="20-preview" />
+        <entry key="Threads" value="16" />
+      </map>
+    </option>
     <option name="skipTestSources" value="false" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_19" project-jdk-name="corretto-19" project-jdk-type="JavaSDK" />
