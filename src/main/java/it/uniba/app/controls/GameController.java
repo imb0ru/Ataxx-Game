@@ -131,8 +131,9 @@ public final class GameController {
     public ArrayList<Move> getLegalMovesForCurrentPlayer(final Board.Position from) {
         final var legalMoves = new ArrayList<Move>();
 
-        for (int rowOffset = -Move.MAX_DISTANCE; rowOffset <= Move.MAX_DISTANCE; ++rowOffset) {
-            for (int columnOffset = -Move.MAX_DISTANCE; columnOffset <= Move.MAX_DISTANCE; ++columnOffset) {
+       final int m = Move.MAX_DISTANCE;
+        for (int rowOffset = -m; rowOffset <= m; ++rowOffset) {
+            for (int columnOffset = -m; columnOffset <= m; ++columnOffset) {
                 if (rowOffset == 0 && columnOffset == 0) {
                     continue;
                 }

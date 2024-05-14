@@ -141,15 +141,18 @@ public final class Board {
                 default -> throw new InvalidBoardException("Carattere non valido: " + character);
             };
 
-            while (count > 0) {
-                if (boardIndex >= SIZE * SIZE) {
-                    throw new InvalidBoardException("Tavoliere troppo lungo");
-                }
-
-                this.cells[boardIndex++] = cell;
-                --count;
+            if (boardIndex + count > SIZE * SIZE) {
+                throw new InvalidBoardException("Tavoliere troppo lungo");
             }
 
+            Arrays.fill(
+                this.cells,
+                boardIndex,
+                boardIndex + count,
+                cell
+            );
+
+            boardIndex += count;
             ++index;
         }
     }
