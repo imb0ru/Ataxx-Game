@@ -1,6 +1,7 @@
 package it.uniba.app.entities;
 
 import it.uniba.app.exceptions.InvalidMoveException;
+import it.uniba.app.utils.Strings;
 
 /**
  * Classe << Entity >> che rappresenta una mossa all'interno della partita.
@@ -45,7 +46,7 @@ public record Move(Board.Position from, Board.Position to) {
         final var columnDistance = Math.abs(to.column() - from.column());
 
         if (rowDistance > MAX_DISTANCE || columnDistance > MAX_DISTANCE) {
-            throw new InvalidMoveException("La distanza tra le posizioni deve essere <= 2");
+            throw new InvalidMoveException(Strings.Move.DISTANCE_TOO_BIG_EXCEPTION);
         }
     }
 

@@ -3,6 +3,7 @@ package it.uniba.app.commands;
 import it.uniba.app.controls.AppController;
 import it.uniba.app.boundaries.GamePrinter;
 import it.uniba.app.controls.GameController;
+import it.uniba.app.utils.Strings;
 
 /**
  * Classe << Boundary >> che si occupa di eseguire il comando `/play`.
@@ -23,7 +24,7 @@ public final class PlayCommand {
             app.setGame(new GameController());
             GamePrinter.print(app.getGame(), GamePrinter.PrintMoves.NO);
         } else {
-            System.out.println("Partita già in corso. Completala o terminala prima di iniziarne una nuova.");
+            System.out.println(Strings.PlayCommand.GAME_ALREADY_STARTED);
         }
     }
 }

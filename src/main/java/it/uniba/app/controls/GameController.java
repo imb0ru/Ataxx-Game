@@ -5,6 +5,7 @@ import it.uniba.app.entities.Move;
 import it.uniba.app.exceptions.InvalidBoardException;
 import it.uniba.app.exceptions.InvalidGameException;
 import it.uniba.app.exceptions.InvalidMoveException;
+import it.uniba.app.utils.Strings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +39,9 @@ public final class GameController {
         @Override
         public String toString() {
             return switch (this) {
-                case IN_PROGRESS -> "In corso";
-                case BLACK_WINS -> "Vince il nero";
-                case WHITE_WINS -> "Vince il bianco";
+                case IN_PROGRESS -> Strings.GameController.IN_PROGRESS_STATE;
+                case BLACK_WINS -> Strings.GameController.BLACK_WINS_STATE;
+                case WHITE_WINS -> Strings.GameController.WHITE_WINS_STATE;
             };
         }
     }
@@ -84,17 +85,17 @@ public final class GameController {
     public GameController(final String gameString) throws InvalidGameException, InvalidBoardException {
         final var parts = gameString.split(" - ");
         if (parts.length != 2) {
-            throw new InvalidGameException("La stringa di gioco non è nel formato corretto");
+            throw new InvalidGameException(Strings.GameController.INVALID_GAME_STRING_EXCEPTION);
         }
 
         if (parts[0].length() != 1) {
-            throw new InvalidGameException("La stringa di gioco non contiene il giocatore corrente");
+            throw new InvalidGameException(Strings.GameController.NO_CURRENT_PLAYER_EXCEPTION);
         }
 
         this.currentPlayer = switch (parts[0].charAt(0)) {
             case 'B' -> Board.Cell.BLACK;
             case 'W' -> Board.Cell.WHITE;
-            default -> throw new InvalidGameException("Il giocatore corrente non è valido");
+            default -> throw new InvalidGameException(Strings.GameController.INVALID_CURRENT_PLAYER_EXCEPTION);
         };
 
         this.board = new Board(parts[1]);
@@ -198,7 +199,7 @@ public final class GameController {
         final var current = this.currentPlayer;
 
         if (board.getCell(move.from()) != current) {
-            throw new InvalidMoveException("La cella di partenza non contiene il giocatore corrente");
+            throw new InvalidMoveException(Strings.GameController.INVALID_STARTING_CELL_EXCEPTION);
         }
 
         board.setCell(move.to(), current);

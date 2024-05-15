@@ -1,5 +1,6 @@
 package it.uniba.app.commands;
 
+import it.uniba.app.utils.Strings;
 /**
  * Classe Help
  * << Boundary >>
@@ -15,41 +16,26 @@ public final class HelpCommand {
      * Esegue il comando.
      */
     public static void run() {
-        System.out.println("ATAXX 1.0.0 Team Berners-Lee\n");
-        System.out.println("""
-                Prodotto da:
-                  - Marco Ferrara
-                  - Davide Carella
-                  - Maria Teresa Di Chio
-                  - Luca Ardito
-                  - Yuri Colangelo""");
+        System.out.println(Strings.HelpCommand.GAME_VERSION);
+        System.out.println();
 
-        System.out.println("\nUtilizzo: java -jar <jarfile> [opzioni]\n");
+        System.out.println(Strings.HelpCommand.DEVELOPERS);
+        System.out.println();
 
-        System.out.println("Opzioni:");
-        System.out.println("  -h, --help\t\t"
-                + "Visualizza questo messaggio di aiuto\n");
+        System.out.println(Strings.HelpCommand.HOW_TO);
+        System.out.println();
 
-        System.out.println("Comandi disponibili durante"
-                + " l'esecuzione:");
-        System.out.println("  /help\t\t\t\t"
-                + "Visualizza questo messaggio di aiuto");
-        System.out.println("  /info\t\t\t\t"
-                + "Visualizza le informazioni dell'applicazione");
-        System.out.println("  /gioca\t\t\t"
-                + "Avvia il gioco se nessuna partita è in corso");
-        System.out.println("  /vuoto\t\t\t"
-                + "Mostra il tavoliere vuoto");
-        System.out.println("  /tavoliere\t\t"
-                + "In gioco, mostra la posizione di tutte le"
-                + " pedine sul tavoliere");
-        System.out.println("  /qualimosse\t\t"
-                + "In gioco, mostra tutte le mosse disponibili"
-                + " per il giocatore di turno");
-        System.out.println("  /abbandona\t\t"
-                + "In gioco, abbandona la partita in corso,"
-                + " previa conferma");
-        System.out.println("  /esci\t\t\t\t"
-                + "Esce dall'applicazione previa conferma");
+        System.out.println(Strings.HelpCommand.OPTIONS);
+        System.out.println(Strings.HelpCommand.HELP_OPTION);
+        System.out.println();
+
+        System.out.println(Strings.HelpCommand.IN_GAME_COMMANDS);
+        System.out.println(Strings.HelpCommand.HELP_COMMAND);
+        System.out.println(Strings.HelpCommand.PLAY_COMMAND);
+        System.out.println(Strings.HelpCommand.EMPTY_BOARD_COMMAND);
+        System.out.println(Strings.HelpCommand.BOARD_COMMAND);
+        System.out.println(Strings.HelpCommand.WHAT_MOVES_COMMAND);
+        System.out.println(Strings.HelpCommand.QUIT_COMMAND);
+        System.out.println(Strings.HelpCommand.EXIT_COMMAND);
     }
 }

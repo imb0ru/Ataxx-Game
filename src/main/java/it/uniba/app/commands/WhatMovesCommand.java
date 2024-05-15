@@ -2,6 +2,7 @@ package it.uniba.app.commands;
 
 import it.uniba.app.controls.AppController;
 import it.uniba.app.boundaries.GamePrinter;
+import it.uniba.app.utils.Strings;
 
 /**
  * Classe << Boundary >> che si occupa di eseguire il comando `/qualimosse`.
@@ -19,7 +20,7 @@ public final class WhatMovesCommand {
     public static void run(final AppController app) {
         final var game = app.getGame();
         if (game == null) {
-            System.out.println("Nessuna partita in corso. Avvia una nuova partita con il comando /gioca.");
+            System.out.println(Strings.WhatMovesCommand.NO_RUNNING_GAME);
         } else {
             GamePrinter.print(game, GamePrinter.PrintMoves.YES);
         }

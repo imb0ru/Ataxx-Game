@@ -3,6 +3,7 @@ package it.uniba.app.controls;
 import it.uniba.app.commands.PlayCommand;
 import it.uniba.app.commands.HelpCommand;
 import it.uniba.app.commands.WhatMovesCommand;
+import it.uniba.app.utils.Strings;
 
 /**
  * Classe AppController
@@ -28,12 +29,12 @@ public final class AppController {
      */
     public void run(final String command) {
         switch (command) {
-            case "/help" -> HelpCommand.run();
-            case "/gioca" -> PlayCommand.run(this);
-            case "/qualimosse" -> WhatMovesCommand.run(this);
+            case Strings.AppController.HELP_COMMAND -> HelpCommand.run();
+            case Strings.AppController.PLAY_COMMAND -> PlayCommand.run(this);
+            case Strings.AppController.WHAT_MOVES_COMMAND -> WhatMovesCommand.run(this);
             default -> {
                 // FIXME: Handle moves
-                System.out.println("Comando non riconosciuto. Digita /help per visualizzare i comandi disponibili.");
+                System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);
             }
         }
     }
