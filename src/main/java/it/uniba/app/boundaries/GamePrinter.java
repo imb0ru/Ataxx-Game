@@ -4,6 +4,7 @@ import it.uniba.app.controls.GameController;
 import it.uniba.app.entities.Board;
 import it.uniba.app.entities.Move;
 import it.uniba.app.utils.Color;
+import it.uniba.app.utils.Strings;
 
 /**
  * Classe << Boundary >> che si occupa di stampare lo stato della partita.
@@ -73,12 +74,12 @@ public final class GamePrinter {
          */
         public char getCharacter() {
             if (this.hasJumpAndReplicate || this.hasJump) {
-                return '#';
+                return Strings.GamePrinter.MOVE_CHARACTER;
             }
 
             return switch (this.type) {
-                case EMPTY -> '.';
-                case BLACK, WHITE -> '@';
+                case EMPTY -> Strings.GamePrinter.EMPTY_CELL_CHARACTER;
+                case BLACK, WHITE -> Strings.GamePrinter.FULL_CELL_CHARACTER;
             };
         }
 
@@ -169,7 +170,7 @@ public final class GamePrinter {
      * @param shouldPrintMoves se stampare o meno le mosse possibili
      */
     public static void print(final GameController game, final PrintMoves shouldPrintMoves) {
-        System.out.printf("%s - È il turno del %s%n%n",
+        System.out.printf(Strings.GamePrinter.GAME_STATE_FORMAT,
             game.getGameState().toString(),
             game.getCurrentPlayer().toString().toLowerCase());
 

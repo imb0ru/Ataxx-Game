@@ -2,6 +2,7 @@ package it.uniba.app.entities;
 
 import it.uniba.app.exceptions.InvalidBoardException;
 import it.uniba.app.exceptions.InvalidPositionException;
+import it.uniba.app.utils.Strings;
 
 import java.util.Arrays;
 
@@ -35,9 +36,9 @@ public final class Board {
         @Override
         public String toString() {
             return switch (this) {
-                case EMPTY -> "Vuoto";
-                case BLACK -> "Nero";
-                case WHITE -> "Bianco";
+                case EMPTY -> Strings.Board.EMPTY;
+                case BLACK -> Strings.Board.BLACK;
+                case WHITE -> Strings.Board.WHITE;
             };
         }
 
@@ -48,9 +49,9 @@ public final class Board {
          */
         public char toCharacter() {
             return switch (this) {
-                case EMPTY -> 'E';
-                case BLACK -> 'B';
-                case WHITE -> 'W';
+                case EMPTY -> Strings.Board.SHORT_EMPTY;
+                case BLACK -> Strings.Board.SHORT_BLACK;
+                case WHITE -> Strings.Board.SHORT_WHITE;
             };
         }
     }
@@ -68,7 +69,7 @@ public final class Board {
         public Position {
             if (row < 0 || row >= SIZE) {
                 throw new InvalidPositionException(
-                    String.format("Riga non valida %d (0 <= riga < %d)",
+                    String.format(Strings.Board.INVALID_ROW_EXCEPTION_FORMAT,
                         row,
                         SIZE
                     )
@@ -77,7 +78,7 @@ public final class Board {
 
             if (column < 0 || column >= SIZE) {
                 throw new InvalidPositionException(
-                    String.format("Colonna non valida %d (0 <= colonna < %d)",
+                    String.format(Strings.Board.INVALID_COLUMN_EXCEPTION_FORMAT,
                         column,
                         SIZE
                     )
@@ -96,17 +97,26 @@ public final class Board {
          */
         public static Position fromString(final String positionString) {
             if (positionString.length() != 2) {
-                throw new InvalidPositionException(String.format("Formato non valido: %s", positionString));
+                throw new InvalidPositionException(String.format(
+                    Strings.Board.INVALID_POSITION_EXCEPTION_FORMAT,
+                    positionString
+                ));
             }
 
             char rowCharacter = positionString.charAt(0);
             if (!Character.isDigit(rowCharacter)) {
-                throw new InvalidPositionException(String.format("Riga non valida: %c", rowCharacter));
+                throw new InvalidPositionException(String.format(
+                    Strings.Board.INVALID_ROW_WHEN_PARSING_EXCEPTION_FORMAT,
+                    rowCharacter
+                ));
             }
 
             char columnCharacter = positionString.charAt(1);
             if (!Character.isLowerCase(columnCharacter)) {
-                throw new InvalidPositionException(String.format("Colonna non valida: %c", columnCharacter));
+                throw new InvalidPositionException(String.format(
+                    Strings.Board.INVALID_COLUMN_WHEN_PARSING_EXCEPTION_FORMAT,
+                    columnCharacter
+                ));
             }
 
             return new Position(
@@ -165,14 +175,16 @@ public final class Board {
             }
 
             final var cell = switch (character) {
-                case 'E' -> Cell.EMPTY;
-                case 'B' -> Cell.BLACK;
-                case 'W' -> Cell.WHITE;
-                default -> throw new InvalidBoardException("Carattere non valido: " + character);
+                case Strings.Board.SHORT_EMPTY -> Cell.EMPTY;
+                case Strings.Board.SHORT_BLACK -> Cell.BLACK;
+                case Strings.Board.SHORT_WHITE -> Cell.WHITE;
+                default -> throw new InvalidBoardException(
+                    Strings.Board.UNKNOWN_CHARACTER_WHEN_PARSING_BOARD_EXCEPTION + character
+                );
             };
 
             if (boardIndex + count > SIZE * SIZE) {
-                throw new InvalidBoardException("Tavoliere troppo lungo");
+                throw new InvalidBoardException(Strings.Board.BOARD_TOO_LONG_EXCEPTION);
             }
 
             Arrays.fill(
