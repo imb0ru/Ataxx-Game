@@ -81,8 +81,7 @@ public final class GameController {
      * @throws InvalidBoardException se la stringa contiene una stringa per il
      *                               tavoliere non valida
      */
-    public GameController(final String gameString) throws InvalidGameException,
-            InvalidBoardException {
+    public GameController(final String gameString) throws InvalidGameException, InvalidBoardException {
         final var parts = gameString.split(" - ");
         if (parts.length != 2) {
             throw new InvalidGameException("La stringa di gioco non è nel formato corretto");
@@ -121,6 +120,16 @@ public final class GameController {
     }
 
     /**
+     * Restituisce la cella nella posizione specificata del tavoliere.
+     *
+     * @param position la posizione della cella
+     * @return la cella nella posizione specificata
+     */
+    public Board.Cell getBoardCell(final Board.Position position) {
+        return this.board.getCell(position);
+    }
+
+    /**
      * Restituisce le mosse che può fare il giocatore attuale dalla posizione
      * <code>from</code>.
      *
@@ -128,8 +137,11 @@ public final class GameController {
      * @return un'<code>List</code> che contiene le mosse effettuabili dalla
      *         posizione <code>from</code>
      */
-    public ArrayList<Move> getLegalMovesForCurrentPlayer(final Board.Position from) {
+    public List<Move> getLegalMovesForCurrentPlayer(final Board.Position from) {
         final var legalMoves = new ArrayList<Move>();
+        if (board.getCell(from) != this.currentPlayer) {
+            return legalMoves;
+        }
 
        final int m = Move.MAX_DISTANCE;
         for (int rowOffset = -m; rowOffset <= m; ++rowOffset) {
@@ -169,12 +181,7 @@ public final class GameController {
 
         for (int row = 0; row < Board.SIZE; ++row) {
             for (int column = 0; column < Board.SIZE; ++column) {
-                final var position = new Board.Position(row, column);
-                if (board.getCell(position) != this.currentPlayer) {
-                    continue;
-                }
-
-                legalMoves.addAll(getLegalMovesForCurrentPlayer(position));
+                legalMoves.addAll(getLegalMovesForCurrentPlayer(new Board.Position(row, column)));
             }
         }
 
@@ -269,11 +276,16 @@ public final class GameController {
         }
     }
 
+    /**
+     * Restituisce una rappresentazione testuale della partita.
+     *
+     * @return una stringa che rappresenta la partita
+     */
     @Override
     public String toString() {
         return String.format("%s - %s",
-                this.currentPlayer.toCharacter(),
-                this.board.toString());
+            this.currentPlayer.toCharacter(),
+            this.board.toString());
     }
 }
 
