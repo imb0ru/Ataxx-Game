@@ -1,0 +1,29 @@
+package it.uniba.app.commands;
+
+import it.uniba.app.controls.AppController;
+import it.uniba.app.boundaries.GamePrinter;
+import it.uniba.app.controls.GameController;
+
+/**
+ * Classe << Boundary >> che si occupa di eseguire il comando `/play`.
+ * Comincia una nuova partita se non c'è già una in corso e stampa il tavoliere
+ * iniziale.
+ */
+public final class PlayCommand {
+    private PlayCommand() {
+    }
+
+    /**
+     * Esegue il comando.
+     *
+     * @param app riferimento al contesto dell'applicazione.
+     */
+    public static void run(final AppController app) {
+        if (app.getGame() == null) {
+            app.setGame(new GameController());
+            GamePrinter.print(app.getGame(), GamePrinter.PrintMoves.NO);
+        } else {
+            System.out.println("Partita già in corso. Completala o terminala prima di iniziarne una nuova.");
+        }
+    }
+}

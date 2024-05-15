@@ -86,13 +86,43 @@ public final class Board {
         }
 
         /**
+         * Crea una posizione a partire da una stringa che deve seguire il seguente formato:
+         * ```<riga><colonna>```
+         * dove `riga` è un numero intero compreso tra 1 e 7 e
+         * `colonna` è una lettera minuscola compresa tra 'a' e 'g'.
+         *
+         * @param positionString la stringa dalla quale si vuole creare una posizione
+         * @return la posizione creata dalla stringa
+         */
+        public static Position fromString(final String positionString) {
+            if (positionString.length() != 2) {
+                throw new InvalidPositionException(String.format("Formato non valido: %s", positionString));
+            }
+
+            char rowCharacter = positionString.charAt(0);
+            if (!Character.isDigit(rowCharacter)) {
+                throw new InvalidPositionException(String.format("Riga non valida: %c", rowCharacter));
+            }
+
+            char columnCharacter = positionString.charAt(1);
+            if (!Character.isLowerCase(columnCharacter)) {
+                throw new InvalidPositionException(String.format("Colonna non valida: %c", columnCharacter));
+            }
+
+            return new Position(
+                Character.getNumericValue(rowCharacter) - 1,
+                Character.toLowerCase(columnCharacter) - 'a'
+            );
+        }
+
+        /**
          * Restituisce una rappresentazione testuale della posizione.
          *
          * @return una stringa che rappresenta la posizione
          */
         @Override
         public String toString() {
-            return String.format("(%d, %d)", row, column);
+            return String.format("%d%c", row, 'a' + column);
         }
     }
 
