@@ -1,5 +1,7 @@
 package it.uniba.app.commands;
 
+import it.uniba.app.App;
+import it.uniba.app.controls.AppController;
 import it.uniba.app.utils.Strings;
 
 import java.nio.charset.StandardCharsets;
@@ -18,12 +20,12 @@ public final class ExitCommand {
     /**
      * Esegue il comando.
      */
-    public static void run() {
+    public static void run(final AppController app) {
         System.out.println(Strings.ExitCommand.EXIT_CONFIRMATION);
         Scanner keyboard = new Scanner(System.in, StandardCharsets.UTF_8);
         final String command = keyboard.nextLine().trim();
         if (command.equalsIgnoreCase("s")) {
-            System.exit(0);
+            app.setRunning(false);
         }
     }
 }

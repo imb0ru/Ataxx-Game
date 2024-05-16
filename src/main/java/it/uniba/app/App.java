@@ -44,11 +44,12 @@ public final class App {
         System.out.println(Strings.App.WELCOME);
         System.out.println(Strings.App.INPUT);
 
-        while (true) {
+        while (appController.isRunning()) {
             System.out.print(Strings.App.PROMPT);
             final String command = keyboard.nextLine().trim();
-
             appController.run(command);
         }
+
+        keyboard.close();
     }
 }
