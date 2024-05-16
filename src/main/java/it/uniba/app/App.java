@@ -47,14 +47,8 @@ public final class App {
         while (true) {
             System.out.print(Strings.App.PROMPT);
             final String command = keyboard.nextLine().trim();
-            // FIXME: Remove this when we have '/esci'
-            if (command.isEmpty()) {
-                break;
-            }
 
             appController.run(command);
         }
-
-        keyboard.close();
     }
 }

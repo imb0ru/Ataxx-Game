@@ -101,6 +101,11 @@ public final class Strings {
         public static final String WHAT_MOVES_COMMAND = "/qualimosse";
 
         /**
+         * Comando per {@link it.uniba.app.commands.ExitCommand}.
+         */
+        public static final String EXIT_COMMAND = "/esci";
+
+        /**
          * Messaggio di errore per un comando non riconosciuto.
          */
         public static final String UNRECOGNIZED_COMMAND = "Comando non riconosciuto. "
@@ -383,5 +388,19 @@ public final class Strings {
          */
         public static final String GAME_ALREADY_STARTED = "Partita già in corso. Completala o terminala"
                                                           + " prima di iniziarne una nuova.\n";
+    }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.ExitCommand}.
+     */
+    public static final class ExitCommand {
+
+        private ExitCommand() {
+        }
+
+        /**
+         * Messaggio di conferma per l'uscita.
+         */
+        public static final String EXIT_CONFIRMATION = "Sei sicuro di voler uscire dal gioco? (s/n)";
     }
 }
