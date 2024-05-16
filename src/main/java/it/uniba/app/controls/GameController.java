@@ -112,6 +112,14 @@ public final class GameController {
     }
 
     /**
+     * Indica il gicoatore che ha vinto o che ha perso.
+     *
+     */
+    public void setGameState(final GameState newGameState) {
+        this.gameState = newGameState;
+    }
+
+    /**
      * Restituisce il giocatore che deve effettuare la prossima mossa.
      *
      * @return il giocatore che deve effettuare la prossima mossa
@@ -245,32 +253,39 @@ public final class GameController {
         }
     }
 
-    /**
-     * Aggiorna lo stato della partita in base al tavoliere.
-     */
-    public void updateGameState() {
-        int whiteCells = 0;
-        int blackCells = 0;
-        int emptyCells = 0;
-
+     /**
+      * Conta il numero di celle bianche, celle nere e celle vuote.
+      *
+      * @return un vettore contenente in ordine il numero di celle bianche, nere e vuote.
+      */
+    public int[] countCells() {
+        int[] cells = {0, 0, 0};
         for (int row = 0; row < Board.SIZE; ++row) {
             for (int column = 0; column < Board.SIZE; ++column) {
                 final var position = new Board.Position(row, column);
                 switch (board.getCell(position)) {
-                    case BLACK -> ++blackCells;
-                    case WHITE -> ++whiteCells;
-                    default -> ++emptyCells;
+                    case BLACK -> ++cells[1];
+                    case WHITE -> ++cells[0];
+                    default -> ++cells[2];
                 }
             }
         }
+        return cells;
+    }
 
-        if (whiteCells == 0) {
+    /**
+     * Aggiorna lo stato della partita in base al tavoliere.
+     */
+    public void updateGameState() {
+        int[] cells = countCells();
+
+        if (cells[0] == 0) {
             this.gameState = GameState.BLACK_WINS;
-        } else if (blackCells == 0) {
+        } else if (cells[1] == 0) {
             this.gameState = GameState.WHITE_WINS;
-        } else if (emptyCells != 0) {
+        } else if (cells[2] != 0) {
             this.gameState = GameState.IN_PROGRESS;
-        } else if (whiteCells > blackCells) {
+        } else if (cells[0] > cells[1]) {
             this.gameState = GameState.WHITE_WINS;
         } else {
             this.gameState = GameState.BLACK_WINS;
@@ -289,4 +304,3 @@ public final class GameController {
             this.board.toString());
     }
 }
-

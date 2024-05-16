@@ -101,6 +101,11 @@ public final class Strings {
         public static final String WHAT_MOVES_COMMAND = "/qualimosse";
 
         /**
+         * Comando per {@link it.uniba.app.commands.QuitCommand}.
+         */
+        public static final String QUIT_COMMAND = "/abbandona";
+
+        /**
          * Messaggio di errore per un comando non riconosciuto.
          */
         public static final String UNRECOGNIZED_COMMAND = "Comando non riconosciuto. "
@@ -383,5 +388,38 @@ public final class Strings {
          */
         public static final String GAME_ALREADY_STARTED = "Partita già in corso. Completala o terminala"
                                                           + " prima di iniziarne una nuova.\n";
+    }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.QuitCommand}.
+     */
+    public static final class QuitCommand {
+        private QuitCommand() {
+        }
+
+        /**
+         * Messaggio mostrato per chiedere conferma dell'abbandono partita.
+         */
+        public static final String QUIT_CONFIRM = "Sei sicuro di voler abbandonare la partita? (s/n)";
+
+        /**
+         * Messaggio mostrato per definire che il nero ha vinto la partita dopo l'abbandono del bianco.
+         */
+        public static final String QUIT_BLACK_WIN = "Il nero ha vinto per l'abbandono del bianco!";
+
+        /**
+         * Messaggio mostrato per definire che il bianco ha vinto la partita dopo l'abbandono del nero.
+         */
+        public static final String QUIT_WHITE_WIN = "Il bianco ha vinto per l'abbandono del nero!";
+
+        /**
+         * Messaggio mostrato per definire il numero di pedine con il quale il bianco ha vinto.
+         */
+        public static final String NUMBER_PIECES_WHITE = "Il bianco ha totalizzato %d pedine.%n";
+
+        /**
+         * Messaggio mostrato per definire il numero di pedine con il quale il nero ha vinto.
+         */
+        public static final String NUMBER_PIECES_BLACK = "Il nero ha totalizzato %d pedine.%n";
     }
 }
