@@ -38,7 +38,7 @@ public final class App {
         }
 
         AppController appController = new AppController();
-        final Scanner keyboard = AppController.getKeyboard();
+        Scanner keyboard = appController.getKeyboard();
 
         System.out.println(Strings.App.WELCOME);
         System.out.println(Strings.App.INPUT);

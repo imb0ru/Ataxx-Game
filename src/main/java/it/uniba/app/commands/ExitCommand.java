@@ -18,7 +18,7 @@ public final class ExitCommand {
      */
     public static void run(final AppController app) {
         System.out.println(Strings.ExitCommand.EXIT_CONFIRMATION);
-        final String command = AppController.getKeyboard().nextLine().trim();
+        final String command = app.getKeyboard().nextLine().trim();
         if (command.equalsIgnoreCase("s")) {
             app.setRunning(false);
         }
