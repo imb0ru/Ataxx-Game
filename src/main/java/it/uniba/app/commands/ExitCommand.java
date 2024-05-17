@@ -23,6 +23,7 @@ public final class ExitCommand {
         System.out.println(Strings.ExitCommand.EXIT_CONFIRMATION);
         Scanner keyboard = new Scanner(System.in, StandardCharsets.UTF_8);
         final String command = keyboard.nextLine().trim();
+        keyboard.close();
         if (command.equalsIgnoreCase("s")) {
             app.setRunning(false);
         }
