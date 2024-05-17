@@ -3,9 +3,6 @@ package it.uniba.app.commands;
 import it.uniba.app.controls.AppController;
 import it.uniba.app.utils.Strings;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
-
 /**
  * Classe ExitCommand
  * << Boundary >>
@@ -21,9 +18,7 @@ public final class ExitCommand {
      */
     public static void run(final AppController app) {
         System.out.println(Strings.ExitCommand.EXIT_CONFIRMATION);
-        Scanner keyboard = new Scanner(System.in, StandardCharsets.UTF_8);
-        final String command = keyboard.nextLine().trim();
-        keyboard.close();
+        final String command = AppController.getKeyboard().nextLine().trim();
         if (command.equalsIgnoreCase("s")) {
             app.setRunning(false);
         }
