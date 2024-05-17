@@ -1,5 +1,6 @@
 package it.uniba.app.controls;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.uniba.app.commands.PlayCommand;
 import it.uniba.app.commands.HelpCommand;
 import it.uniba.app.commands.WhatMovesCommand;
@@ -29,6 +30,7 @@ public final class AppController {
      *
      * @return lo scanner per l'input dell'utente
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Scanner getKeyboard() {
         return keyboard;
     }
