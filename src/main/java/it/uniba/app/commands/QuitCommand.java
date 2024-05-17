@@ -1,8 +1,5 @@
 package it.uniba.app.commands;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
-
 import it.uniba.app.controls.AppController;
 import it.uniba.app.utils.Strings;
 import it.uniba.app.entities.Board;

@@ -104,7 +104,7 @@ public final class Strings {
          * Comando per {@link it.uniba.app.commands.QuitCommand}.
          */
         public static final String QUIT_COMMAND = "/abbandona";
-        
+
         /**
          * Comando per {@link it.uniba.app.commands.ExitCommand}.
          */
