@@ -1,10 +1,14 @@
 package it.uniba.app.controls;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.uniba.app.commands.PlayCommand;
 import it.uniba.app.commands.HelpCommand;
 import it.uniba.app.commands.WhatMovesCommand;
 import it.uniba.app.commands.ExitCommand;
 import it.uniba.app.utils.Strings;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 /**
  * Classe AppController
@@ -15,6 +19,22 @@ import it.uniba.app.utils.Strings;
  * in base alle azioni dell'utente.</P>
  */
 public final class AppController {
+
+    /**
+     * Scanner per l'input dell'utente.
+     */
+    private final Scanner keyboard = new Scanner(System.in, StandardCharsets.UTF_8);
+
+    /**
+     * Getter per lo scanner.
+     *
+     * @return lo scanner per l'input dell'utente
+     */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
+    public Scanner getKeyboard() {
+        return keyboard;
+    }
+
 
     /**
      * Partita corrente (se esiste).

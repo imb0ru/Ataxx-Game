@@ -4,7 +4,6 @@ import it.uniba.app.controls.AppController;
 import it.uniba.app.commands.HelpCommand;
 import it.uniba.app.utils.Strings;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -38,8 +37,8 @@ public final class App {
             return;
         }
 
-        Scanner keyboard = new Scanner(System.in, StandardCharsets.UTF_8);
         AppController appController = new AppController();
+        Scanner keyboard = appController.getKeyboard();
 
         System.out.println(Strings.App.WELCOME);
         System.out.println(Strings.App.INPUT);
