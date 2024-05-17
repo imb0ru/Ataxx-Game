@@ -1,10 +1,16 @@
 package it.uniba.app.controls;
 
-import it.uniba.app.commands.WhatMovesCommand;
 import it.uniba.app.commands.BoardCommand;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.uniba.app.commands.PlayCommand;
+import it.uniba.app.commands.QuitCommand;
 import it.uniba.app.commands.HelpCommand;
+import it.uniba.app.commands.WhatMovesCommand;
+import it.uniba.app.commands.ExitCommand;
 import it.uniba.app.utils.Strings;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 /**
  * Classe AppController
@@ -17,9 +23,30 @@ import it.uniba.app.utils.Strings;
 public final class AppController {
 
     /**
+     * Scanner per l'input dell'utente.
+     */
+    private final Scanner keyboard = new Scanner(System.in, StandardCharsets.UTF_8);
+
+    /**
+     * Getter per lo scanner.
+     *
+     * @return lo scanner per l'input dell'utente
+     */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
+    public Scanner getKeyboard() {
+        return keyboard;
+    }
+
+
+    /**
      * Partita corrente (se esiste).
      */
     private GameController currentGame = null;
+
+    /**
+     * Variabile per la gestione del ciclo di gioco.
+     */
+    private boolean running = true;
 
     /**
      * Costruttore della classe AppController.
@@ -34,7 +61,8 @@ public final class AppController {
             case Strings.AppController.PLAY_COMMAND -> PlayCommand.run(this);
             case Strings.AppController.WHAT_MOVES_COMMAND -> WhatMovesCommand.run(this);
             case Strings.AppController.BOARD_COMMAND -> BoardCommand.run(this);
-
+            case Strings.AppController.QUIT_COMMAND -> QuitCommand.run(this);
+            case Strings.AppController.EXIT_COMMAND -> ExitCommand.run(this);
             default -> {
                 // FIXME: Handle moves
                 System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);
@@ -59,4 +87,24 @@ public final class AppController {
     public GameController getGame() {
         return this.currentGame;
     }
+
+    /**
+     * Getter per la variabile di controllo del ciclo di gioco.
+     *
+     * @return true se il gioco è in esecuzione, false altrimenti
+     */
+    public boolean isRunning() {
+        return running;
+    }
+
+    /**
+     * Setter per la variabile di controllo del ciclo di gioco.
+     *
+     * @param newRunning true se il gioco è in esecuzione, false altrimenti
+     */
+    public void setRunning(final boolean newRunning) {
+        this.running = newRunning;
+    }
+
+
 }
