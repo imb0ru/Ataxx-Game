@@ -1,8 +1,9 @@
 package it.uniba.app.controls;
 
+import it.uniba.app.commands.WhatMovesCommand;
+import it.uniba.app.commands.BoardCommand;
 import it.uniba.app.commands.PlayCommand;
 import it.uniba.app.commands.HelpCommand;
-import it.uniba.app.commands.WhatMovesCommand;
 import it.uniba.app.utils.Strings;
 
 /**
@@ -32,6 +33,8 @@ public final class AppController {
             case Strings.AppController.HELP_COMMAND -> HelpCommand.run();
             case Strings.AppController.PLAY_COMMAND -> PlayCommand.run(this);
             case Strings.AppController.WHAT_MOVES_COMMAND -> WhatMovesCommand.run(this);
+            case Strings.AppController.BOARD_COMMAND -> BoardCommand.run(this);
+
             default -> {
                 // FIXME: Handle moves
                 System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);
