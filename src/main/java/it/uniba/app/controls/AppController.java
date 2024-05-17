@@ -7,6 +7,7 @@ import it.uniba.app.commands.QuitCommand;
 import it.uniba.app.commands.HelpCommand;
 import it.uniba.app.commands.WhatMovesCommand;
 import it.uniba.app.commands.ExitCommand;
+import it.uniba.app.commands.EmptyBoardCommand;
 import it.uniba.app.utils.Strings;
 
 import java.nio.charset.StandardCharsets;
@@ -63,6 +64,7 @@ public final class AppController {
             case Strings.AppController.BOARD_COMMAND -> BoardCommand.run(this);
             case Strings.AppController.QUIT_COMMAND -> QuitCommand.run(this);
             case Strings.AppController.EXIT_COMMAND -> ExitCommand.run(this);
+            case Strings.AppController.EMPTY_BOARD_COMMAND -> EmptyBoardCommand.run();
             default -> {
                 // FIXME: Handle moves
                 System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);

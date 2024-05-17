@@ -91,6 +91,11 @@ public final class Strings {
         public static final String HELP_COMMAND = "/help";
 
         /**
+         * Comando per {@link it.uniba.app.commands.EmptyBoardCommand}.
+         */
+        public static final String EMPTY_BOARD_COMMAND = "/vuoto";
+
+        /**
          * Comando per {@link it.uniba.app.commands.PlayCommand}.
          */
         public static final String PLAY_COMMAND = "/gioca";
