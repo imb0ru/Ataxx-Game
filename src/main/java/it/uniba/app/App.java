@@ -44,14 +44,9 @@ public final class App {
         System.out.println(Strings.App.WELCOME);
         System.out.println(Strings.App.INPUT);
 
-        while (true) {
+        while (appController.isRunning()) {
             System.out.print(Strings.App.PROMPT);
             final String command = keyboard.nextLine().trim();
-            // FIXME: Remove this when we have '/esci'
-            if (command.isEmpty()) {
-                break;
-            }
-
             appController.run(command);
         }
 
