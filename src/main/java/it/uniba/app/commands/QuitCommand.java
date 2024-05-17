@@ -31,8 +31,7 @@ public final class QuitCommand {
         }
 
         System.out.println(Strings.QuitCommand.QUIT_CONFIRM);
-        Scanner keyboard = new Scanner(System.in, StandardCharsets.UTF_8);
-        final String confirm = keyboard.nextLine().trim();
+        final String confirm = app.getKeyboard().nextLine().trim();
 
         if (!confirm.equalsIgnoreCase("s")) {
             return;
