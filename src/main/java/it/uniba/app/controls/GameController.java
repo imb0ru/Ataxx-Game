@@ -112,14 +112,6 @@ public final class GameController {
     }
 
     /**
-     * Indica il gicoatore che ha vinto o che ha perso.
-     *
-     */
-    public void setGameState(final GameState newGameState) {
-        this.gameState = newGameState;
-    }
-
-    /**
      * Restituisce il giocatore che deve effettuare la prossima mossa.
      *
      * @return il giocatore che deve effettuare la prossima mossa

@@ -3,7 +3,6 @@ package it.uniba.app.commands;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-import it.uniba.app.controls.GameController.GameState;
 import it.uniba.app.controls.AppController;
 import it.uniba.app.utils.Strings;
 import it.uniba.app.entities.Board;
@@ -28,25 +27,30 @@ public final class QuitCommand {
 
         if (game == null) {
             System.out.println(Strings.WhatMovesCommand.NO_RUNNING_GAME);
-        } else {
-            System.out.println(Strings.QuitCommand.QUIT_CONFIRM);
-            Scanner keyboard = new Scanner(System.in, StandardCharsets.UTF_8);
-            final String confirm = keyboard.nextLine().trim();
-
-            if (confirm.equalsIgnoreCase("s")) {
-                if (game.getCurrentPlayer() == Board.Cell.BLACK) {
-                    game.setGameState(GameState.WHITE_WINS);
-                    System.out.println(Strings.QuitCommand.QUIT_WHITE_WIN);
-                    int pieceCount = game.countCells()[0];
-                    System.out.printf(Strings.QuitCommand.NUMBER_PIECES_WHITE, pieceCount);
-                } else {
-                    game.setGameState(GameState.BLACK_WINS);
-                    System.out.println(Strings.QuitCommand.QUIT_BLACK_WIN);
-                    int pieceCount = game.countCells()[1];
-                    System.out.printf(Strings.QuitCommand.NUMBER_PIECES_BLACK, pieceCount);
-                }
-                app.setGame(null);
-            }
+            return;
         }
+
+        System.out.println(Strings.QuitCommand.QUIT_CONFIRM);
+        Scanner keyboard = new Scanner(System.in, StandardCharsets.UTF_8);
+        final String confirm = keyboard.nextLine().trim();
+
+        if (!confirm.equalsIgnoreCase("s")) {
+            return;
+        }
+
+        Board.Cell currentPlayer = game.getCurrentPlayer();
+        int index;
+        Board.Cell enemy;
+        if (currentPlayer == Board.Cell.WHITE) {
+            enemy = Board.Cell.BLACK;
+            index = 1;
+        } else {
+            enemy = Board.Cell.WHITE;
+            index = 0;
+        }
+
+        int pieceCount = game.countCells()[index];
+        System.out.printf(Strings.QuitCommand.QUIT_WIN_FORMAT, enemy, pieceCount, currentPlayer);
+        app.setGame(null);
     }
 }

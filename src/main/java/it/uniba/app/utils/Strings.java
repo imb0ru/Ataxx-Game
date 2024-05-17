@@ -403,23 +403,8 @@ public final class Strings {
         public static final String QUIT_CONFIRM = "Sei sicuro di voler abbandonare la partita? (s/n)";
 
         /**
-         * Messaggio mostrato per definire che il nero ha vinto la partita dopo l'abbandono del bianco.
+         * Messaggio mostrato per definire il giocatore che ha vinto e con quale punteggio.
          */
-        public static final String QUIT_BLACK_WIN = "Il nero ha vinto per l'abbandono del bianco!";
-
-        /**
-         * Messaggio mostrato per definire che il bianco ha vinto la partita dopo l'abbandono del nero.
-         */
-        public static final String QUIT_WHITE_WIN = "Il bianco ha vinto per l'abbandono del nero!";
-
-        /**
-         * Messaggio mostrato per definire il numero di pedine con il quale il bianco ha vinto.
-         */
-        public static final String NUMBER_PIECES_WHITE = "Il bianco ha totalizzato %d pedine.%n";
-
-        /**
-         * Messaggio mostrato per definire il numero di pedine con il quale il nero ha vinto.
-         */
-        public static final String NUMBER_PIECES_BLACK = "Il nero ha totalizzato %d pedine.%n";
+        public static final String QUIT_WIN_FORMAT = "Il %s ha vinto %d a 0 per l'abbandono del %s!\n";
     }
 }
