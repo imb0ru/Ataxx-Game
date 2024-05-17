@@ -22,15 +22,15 @@ public final class AppController {
     /**
      * Scanner per l'input dell'utente.
      */
-    public static final Scanner KEYBOARD = new Scanner(System.in, StandardCharsets.UTF_8);
+    private final Scanner keyboard = new Scanner(System.in, StandardCharsets.UTF_8);
 
     /**
      * Getter per lo scanner.
      *
      * @return lo scanner per l'input dell'utente
      */
-    public static Scanner getKeyboard() {
-        return KEYBOARD;
+    public Scanner getKeyboard() {
+        return keyboard;
     }
 
 
