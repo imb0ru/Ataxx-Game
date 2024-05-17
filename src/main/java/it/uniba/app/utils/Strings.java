@@ -344,33 +344,33 @@ public final class Strings {
         /**
          * Descrizione del comando `/vuoto`.
          */
-        public static final String EMPTY_BOARD_COMMAND = "  /vuoto"
+        public static final String EMPTY_BOARD_COMMAND = "  " + AppController.EMPTY_BOARD_COMMAND
                                                          + "\t\t\tMostra il tavoliere vuoto";
 
         /**
          * Descrizione del comando `/tavoliere`.
          */
-        public static final String BOARD_COMMAND = "  /tavoliere"
+        public static final String BOARD_COMMAND = "  " + AppController.BOARD_COMMAND
                                                    + "\t\tIn gioco, "
                                                    + "mostra la posizione di tutte le pedine sul tavoliere";
 
         /**
          * Descrizione del comando `/qualimosse`.
          */
-        public static final String WHAT_MOVES_COMMAND = "  /qualimosse"
+        public static final String WHAT_MOVES_COMMAND = "  " + AppController.WHAT_MOVES_COMMAND
                                                         + "\t\tIn gioco, "
                                                         + "mostra tutte le mosse disponibili per il giocatore di turno";
         /**
          * Descrizione del comando `/abbandona`.
          */
-        public static final String QUIT_COMMAND = "  /abbandona"
+        public static final String QUIT_COMMAND = "  " + AppController.QUIT_COMMAND
                                                   + "\t\tIn gioco, "
                                                   + "abbandona la partita in corso, previa conferma";
 
         /**
          * Descrizione del comando `/esci`.
          */
-        public static final String EXIT_COMMAND = "  /esci"
+        public static final String EXIT_COMMAND = "  " + AppController.EXIT_COMMAND
                                                   + "\t\t\t\tEsce dall'applicazione, previa conferma";
 
     }
