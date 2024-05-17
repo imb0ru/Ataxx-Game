@@ -2,6 +2,7 @@ package it.uniba.app.controls;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.uniba.app.commands.PlayCommand;
+import it.uniba.app.commands.QuitCommand;
 import it.uniba.app.commands.HelpCommand;
 import it.uniba.app.commands.WhatMovesCommand;
 import it.uniba.app.commands.ExitCommand;
@@ -58,6 +59,7 @@ public final class AppController {
             case Strings.AppController.HELP_COMMAND -> HelpCommand.run();
             case Strings.AppController.PLAY_COMMAND -> PlayCommand.run(this);
             case Strings.AppController.WHAT_MOVES_COMMAND -> WhatMovesCommand.run(this);
+            case Strings.AppController.QUIT_COMMAND -> QuitCommand.run(this);
             case Strings.AppController.EXIT_COMMAND -> ExitCommand.run(this);
             default -> {
                 // FIXME: Handle moves

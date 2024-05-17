@@ -101,6 +101,11 @@ public final class Strings {
         public static final String WHAT_MOVES_COMMAND = "/qualimosse";
 
         /**
+         * Comando per {@link it.uniba.app.commands.QuitCommand}.
+         */
+        public static final String QUIT_COMMAND = "/abbandona";
+
+        /**
          * Comando per {@link it.uniba.app.commands.ExitCommand}.
          */
         public static final String EXIT_COMMAND = "/esci";
@@ -388,6 +393,24 @@ public final class Strings {
          */
         public static final String GAME_ALREADY_STARTED = "Partita già in corso. Completala o terminala"
                                                           + " prima di iniziarne una nuova.\n";
+    }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.QuitCommand}.
+     */
+    public static final class QuitCommand {
+        private QuitCommand() {
+        }
+
+        /**
+         * Messaggio mostrato per chiedere conferma dell'abbandono partita.
+         */
+        public static final String QUIT_CONFIRM = "Sei sicuro di voler abbandonare la partita? (s/n)";
+
+        /**
+         * Messaggio mostrato per definire il giocatore che ha vinto e con quale punteggio.
+         */
+        public static final String QUIT_WIN_FORMAT = "Il %s ha vinto %d a 0 per l'abbandono del %s!%n";
     }
 
     /**
