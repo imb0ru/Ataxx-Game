@@ -155,12 +155,41 @@ public final class GamePrinter {
                 final var character = cellData.getCharacter();
 
                 System.out.print(color.toANSI());
+                System.out.print(' ');
                 System.out.print(character);
+                System.out.print(' ');
                 System.out.print(Color.RESET.toANSI());
                 System.out.print(' ');
             }
+            System.out.printf("| %d", row + 1);
             System.out.println();
         }
+    }
+
+    /**
+     * Stampa il bordo superiore/inferiore del tavoliere.
+     */
+    private static void printVerticalBorder() {
+        final int charactersPerCell = 4;
+
+        System.out.print("  ");
+        System.out.print("+");
+        for (int i = 0; i < Board.SIZE * charactersPerCell + 1; ++i) {
+            System.out.print('-');
+        }
+        System.out.print("+");
+        System.out.println();
+    }
+
+    /**
+     * Stampa le colonne del tavoliere.
+     */
+    private static void printColumns() {
+        System.out.print("  ");
+        for (char c = 'a'; c < 'a' + Board.SIZE; ++c) {
+            System.out.printf("   %c", c);
+        }
+        System.out.println();
     }
 
     /**
@@ -174,18 +203,12 @@ public final class GamePrinter {
             game.getGameState().toString(),
             game.getCurrentPlayer().toString().toLowerCase());
 
+        printColumns();
+        printVerticalBorder();
+
         printBoard(game, shouldPrintMoves);
 
-        System.out.print("  +");
-        for (int i = 0; i < Board.SIZE * 2; ++i) {
-            System.out.print('-');
-        }
-        System.out.println();
-
-        System.out.print("   ");
-        for (char c = 'a'; c < 'a' + Board.SIZE; ++c) {
-            System.out.printf(" %c", c);
-        }
-        System.out.println();
+        printVerticalBorder();
+        printColumns();
     }
 }

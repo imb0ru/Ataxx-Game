@@ -146,12 +146,12 @@ public final class Strings {
         /**
          * Carattere che rappresenta una cella piena.
          */
-        public static final char FULL_CELL_CHARACTER = '@';
+        public static final char FULL_CELL_CHARACTER = '\u26c0';
 
         /**
          * Stringa di formato per lo stato della partita.
          */
-        public static final String GAME_STATE_FORMAT = "%s - È il turno del %s%n%n";
+        public static final String GAME_STATE_FORMAT = "%s - E' il turno del %s%n%n";
     }
 
     /**
