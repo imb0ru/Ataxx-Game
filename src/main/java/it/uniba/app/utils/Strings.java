@@ -339,8 +339,6 @@ public final class Strings {
         public static final String PLAY_COMMAND = "  " + AppController.PLAY_COMMAND
                                                   + "\t\t\tAvvia il gioco se nessuna partita è in corso";
 
-        // FIXME: Reference command in other class when they are implemented
-
         /**
          * Descrizione del comando `/vuoto`.
          */
