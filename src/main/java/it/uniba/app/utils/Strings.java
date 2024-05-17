@@ -104,6 +104,11 @@ public final class Strings {
          * Comando per {@link it.uniba.app.commands.QuitCommand}.
          */
         public static final String QUIT_COMMAND = "/abbandona";
+        
+        /**
+         * Comando per {@link it.uniba.app.commands.ExitCommand}.
+         */
+        public static final String EXIT_COMMAND = "/esci";
 
         /**
          * Messaggio di errore per un comando non riconosciuto.
@@ -405,6 +410,20 @@ public final class Strings {
         /**
          * Messaggio mostrato per definire il giocatore che ha vinto e con quale punteggio.
          */
-        public static final String QUIT_WIN_FORMAT = "Il %s ha vinto %d a 0 per l'abbandono del %s!\n";
+        public static final String QUIT_WIN_FORMAT = "Il %s ha vinto %d a 0 per l'abbandono del %s!%n";
+    }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.ExitCommand}.
+     */
+    public static final class ExitCommand {
+
+        private ExitCommand() {
+        }
+
+        /**
+         * Messaggio di conferma per l'uscita.
+         */
+        public static final String EXIT_CONFIRMATION = "Sei sicuro di voler uscire dal gioco? (s/n)";
     }
 }
