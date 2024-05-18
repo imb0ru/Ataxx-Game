@@ -19,6 +19,11 @@ public final class GamePrinter {
     public enum PrintMoves { YES, NO };
 
     /**
+     * Flag che indica se stampare o meno lo stato della partita.
+     */
+    public enum PrintGameState { YES, NO };
+
+    /**
      * Classe che contiene i dati di una cella del tavoliere per la sua stampa.
      * In particolare contiene il tipo della cella e i tipi di mossa con le quali è possibile raggiungere questa cella.
      */
@@ -193,15 +198,20 @@ public final class GamePrinter {
     }
 
     /**
-     * Stampa lo stato della partita.
+     * Stampa la partita, ovvero il suo stato (se indicato) seguito dal tavoliere e le mosse possibili (se indicate).
      *
      * @param game la partita da stampare
      * @param shouldPrintMoves se stampare o meno le mosse possibili
+     * @param shouldPrintGameState se stampare o meno lo stato della partita
      */
-    public static void print(final GameController game, final PrintMoves shouldPrintMoves) {
-        System.out.printf(Strings.GamePrinter.GAME_STATE_FORMAT,
-            game.getGameState().toString(),
-            game.getCurrentPlayer().toString().toLowerCase());
+    public static void print(final GameController game,
+                             final PrintMoves shouldPrintMoves,
+                             final PrintGameState shouldPrintGameState) {
+        if (shouldPrintGameState == PrintGameState.YES) {
+            System.out.printf(Strings.GamePrinter.GAME_STATE_FORMAT,
+                game.getGameState().toString(),
+                game.getCurrentPlayer().toString().toLowerCase());
+        }
 
         printColumns();
         printVerticalBorder();

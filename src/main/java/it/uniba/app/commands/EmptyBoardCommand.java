@@ -26,7 +26,7 @@ public final class EmptyBoardCommand {
             throw new AssertionError(exception);
         }
 
-        GamePrinter.print(game, GamePrinter.PrintMoves.NO);
+        GamePrinter.print(game, GamePrinter.PrintMoves.NO, GamePrinter.PrintGameState.NO);
 
     }
 }
