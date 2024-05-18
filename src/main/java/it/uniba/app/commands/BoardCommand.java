@@ -24,7 +24,7 @@ public final class BoardCommand {
         if (game == null) {
             System.out.println(Strings.BoardCommand.NO_RUNNING_GAME);
         } else {
-            GamePrinter.print(game, GamePrinter.PrintMoves.NO);
+            GamePrinter.print(game, GamePrinter.PrintMoves.NO, GamePrinter.PrintGameState.YES);
         }
     }
 }

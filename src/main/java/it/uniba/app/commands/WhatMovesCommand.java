@@ -22,7 +22,7 @@ public final class WhatMovesCommand {
         if (game == null) {
             System.out.println(Strings.WhatMovesCommand.NO_RUNNING_GAME);
         } else {
-            GamePrinter.print(game, GamePrinter.PrintMoves.YES);
+            GamePrinter.print(game, GamePrinter.PrintMoves.YES, GamePrinter.PrintGameState.YES);
         }
     }
 }
