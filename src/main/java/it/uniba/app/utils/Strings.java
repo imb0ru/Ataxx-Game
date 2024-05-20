@@ -263,7 +263,7 @@ public final class Strings {
         /**
          * Stringa per l'eccezione lanciata se la stringa di gioco non è nel formato corretto.
          */
-        public static final String INVALID_GAME_STRING_EXCEPTION = "La stringa di gioco non è nel formato corretto";
+        public static final String INVALID_GAME_STRING_EXCEPTION = "La stringa di gioco non e' nel formato corretto";
 
         /**
          * Stringa per l'eccezione lanciata se la stringa di gioco non contiene il giocatore corrente.
@@ -274,7 +274,7 @@ public final class Strings {
         /**
          * Stringa per l'eccezione lanciata se il giocatore corrente non è valido.
          */
-        public static final String INVALID_CURRENT_PLAYER_EXCEPTION = "Il giocatore corrente non è valido";
+        public static final String INVALID_CURRENT_PLAYER_EXCEPTION = "Il giocatore corrente non e' valido";
 
         /**
          * Stringa per l'eccezione lanciata se il giocatore presente nella cella di partenza non è valido.
@@ -337,7 +337,7 @@ public final class Strings {
          * Descrizione del comando `/gioca`.
          */
         public static final String PLAY_COMMAND = "  " + AppController.PLAY_COMMAND
-                                                  + "\t\t\tAvvia il gioco se nessuna partita è in corso";
+                                                  + "\t\t\tAvvia il gioco se nessuna partita e' in corso";
 
         /**
          * Descrizione del comando `/vuoto`.
