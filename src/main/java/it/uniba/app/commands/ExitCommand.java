@@ -15,6 +15,8 @@ public final class ExitCommand {
 
     /**
      * Esegue il comando.
+     *
+     * @param app riferimento al contesto dell'applicazione
      */
     public static void run(final AppController app) {
         System.out.println(Strings.ExitCommand.EXIT_CONFIRMATION);
