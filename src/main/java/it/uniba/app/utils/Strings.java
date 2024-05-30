@@ -121,6 +121,11 @@ public final class Strings {
         public static final String EXIT_COMMAND = "/esci";
 
         /**
+         * Comando per {@link it.uniba.app.commands.TimeCommand}.
+         */
+        public static final String TIME_COMMAND = "/tempo";
+
+        /**
          * Messaggio di errore per un comando non riconosciuto.
          */
         public static final String UNRECOGNIZED_COMMAND = "Comando non riconosciuto. "
@@ -450,4 +455,36 @@ public final class Strings {
          */
         public static final String EXIT_CONFIRMATION = "Sei sicuro di voler uscire dal gioco? (s/n)";
     }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.TimeCommand}.
+     */
+    public static final class TimeCommand {
+
+        private TimeCommand() {
+        }
+
+        /**
+         * Messaggio per stampare il tempo di gioco.
+         */
+        public static final String TIME = "Tempo di gioco: %02d:%02d:%02d%n";
+    }
+
+    /**
+     * Stringhe utilizzate in più comandi.
+     */
+    public static final class Common {
+
+        private Common() {
+        }
+
+        /**
+         * Messaggio mostrato se nessuna partita è ancora in corso.
+         */
+        public static final String NO_RUNNING_GAME = "Nessuna partita in corso. "
+                                                     + "Avvia una nuova partita con il comando "
+                                                     + Strings.AppController.PLAY_COMMAND
+                                                     + ".";
+    }
+
 }
