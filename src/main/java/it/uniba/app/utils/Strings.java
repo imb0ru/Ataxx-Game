@@ -374,22 +374,6 @@ public final class Strings {
     }
 
     /**
-     * Stringhe utilizzate in {@link it.uniba.app.commands.WhatMovesCommand}.
-     */
-    public static final class WhatMovesCommand {
-        private WhatMovesCommand() {
-        }
-
-        /**
-         * Messaggio mostrato se non c'è nessuna partita in corso.
-         */
-        public static final String NO_RUNNING_GAME = "Nessuna partita in corso. "
-                                                     + "Avvia una nuova partita con il comando "
-                                                     + AppController.PLAY_COMMAND
-                                                     + ".";
-    }
-
-    /**
      * Stringhe utilizzate in {@link it.uniba.app.commands.PlayCommand}.
      */
     public static final class PlayCommand {
@@ -401,22 +385,6 @@ public final class Strings {
          */
         public static final String GAME_ALREADY_STARTED = "Partita già in corso. Completala o terminala"
                                                           + " prima di iniziarne una nuova.\n";
-    }
-
-    /**
-     * Stringhe utilizzate in {@link it.uniba.app.commands.BoardCommand}.
-     */
-    public static final class BoardCommand {
-        private BoardCommand() {
-        }
-
-        /**
-         * Messaggio mostrato se nessuna partita è ancora in corso.
-         */
-        public static final String NO_RUNNING_GAME = "Nessuna partita in corso. "
-                                                     + "Avvia una nuova partita con il comando "
-                                                     + AppController.PLAY_COMMAND
-                                                     + ".";
     }
 
     /**
@@ -450,4 +418,22 @@ public final class Strings {
          */
         public static final String EXIT_CONFIRMATION = "Sei sicuro di voler uscire dal gioco? (s/n)";
     }
+
+    /**
+     * Stringhe utilizzate in più comandi.
+     */
+    public static final class Common {
+
+        private Common() {
+        }
+
+        /**
+         * Messaggio mostrato se nessuna partita è ancora in corso.
+         */
+        public static final String NO_RUNNING_GAME = "Nessuna partita in corso. "
+                                                     + "Avvia una nuova partita con il comando "
+                                                     + Strings.AppController.PLAY_COMMAND
+                                                     + ".";
+    }
+
 }
