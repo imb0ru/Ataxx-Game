@@ -121,6 +121,11 @@ public final class Strings {
         public static final String EXIT_COMMAND = "/esci";
 
         /**
+         * Comando per {@link it.uniba.app.commands.TimeCommand}.
+         */
+        public static final String TIME_COMMAND = "/tempo";
+
+        /**
          * Messaggio di errore per un comando non riconosciuto.
          */
         public static final String UNRECOGNIZED_COMMAND = "Comando non riconosciuto. "
@@ -417,6 +422,20 @@ public final class Strings {
          * Messaggio di conferma per l'uscita.
          */
         public static final String EXIT_CONFIRMATION = "Sei sicuro di voler uscire dal gioco? (s/n)";
+    }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.TimeCommand}.
+     */
+    public static final class TimeCommand {
+
+        private TimeCommand() {
+        }
+
+        /**
+         * Messaggio per stampare il tempo di gioco.
+         */
+        public static final String TIME_FORMAT = "Tempo di gioco: %02d:%02d:%02d%n";
     }
 
     /**

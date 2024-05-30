@@ -7,6 +7,7 @@ import it.uniba.app.exceptions.InvalidGameException;
 import it.uniba.app.exceptions.InvalidMoveException;
 import it.uniba.app.utils.Strings;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +61,11 @@ public final class GameController {
     private GameState gameState;
 
     /**
+     * Istante in cui è iniziata la partita.
+     */
+    private Instant startTime;
+
+    /**
      * Costruttore di default che inizializza il tavoliere a quello iniziale
      * e il giocatore corrente al nero.
      */
@@ -67,6 +73,7 @@ public final class GameController {
         this.board = new Board();
         this.currentPlayer = Board.Cell.BLACK;
         this.gameState = GameState.IN_PROGRESS;
+        this.startTime = Instant.now();
     }
 
     /**
@@ -128,6 +135,15 @@ public final class GameController {
      */
     public Board.Cell getBoardCell(final Board.Position position) {
         return this.board.getCell(position);
+    }
+
+    /**
+     * Restituisce l'istante in cui è iniziata la partita.
+     *
+     * @return l'istante in cui è iniziata la partita
+     */
+    public Instant getStartTime() {
+        return this.startTime;
     }
 
     /**
