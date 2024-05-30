@@ -435,7 +435,7 @@ public final class Strings {
         /**
          * Messaggio per stampare il tempo di gioco.
          */
-        public static final String TIME = "Tempo di gioco: %02d:%02d:%02d%n";
+        public static final String TIME_FORMAT = "Tempo di gioco: %02d:%02d:%02d%n";
     }
 
     /**

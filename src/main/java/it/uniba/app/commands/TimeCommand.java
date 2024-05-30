@@ -30,7 +30,7 @@ public final class TimeCommand {
             long hours = gameTime.toHours();
             long minutes = gameTime.toMinutesPart();
             long seconds = gameTime.toSecondsPart();
-            System.out.printf(Strings.TimeCommand.TIME, hours, minutes, seconds);
+            System.out.printf(Strings.TimeCommand.TIME_FORMAT, hours, minutes, seconds);
         }
     }
 }
