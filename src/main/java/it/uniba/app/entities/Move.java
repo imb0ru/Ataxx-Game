@@ -8,8 +8,9 @@ import it.uniba.app.utils.Strings;
  *
  * @param from la posizione di partenza
  * @param to la posizione di arrivo
+ * @param player il giocatore che ha effettuato la mossa
  */
-public record Move(Board.Position from, Board.Position to) {
+public record Move(Board.Position from, Board.Position to, Board.Cell player) {
     /**
      * Enumerazione che rappresenta il tipo di mossa.
      */
@@ -73,6 +74,12 @@ public record Move(Board.Position from, Board.Position to) {
      */
     @Override
     public String toString() {
-        return String.format("%s -> %s", this.from, this.to);
+        char playerSymbol;
+        if (this.player == Board.Cell.BLACK) {
+            playerSymbol = Strings.Board.SHORT_BLACK;
+        } else {
+            playerSymbol = Strings.Board.SHORT_WHITE;
+        }
+        return String.format(Strings.Move.MOVE_FORMAT, this.from, this.to, playerSymbol);
     }
 }
