@@ -22,7 +22,7 @@ public final class BoardCommand {
     public static void run(final AppController app) {
         final var game = app.getGame();
         if (game == null) {
-            System.out.println(Strings.BoardCommand.NO_RUNNING_GAME);
+            System.out.println(Strings.Common.NO_RUNNING_GAME);
         } else {
             GamePrinter.print(game, GamePrinter.PrintMoves.NO, GamePrinter.PrintGameState.YES);
         }
