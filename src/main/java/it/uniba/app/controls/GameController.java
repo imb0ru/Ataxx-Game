@@ -248,7 +248,6 @@ public final class GameController {
             case BLACK -> Board.Cell.WHITE;
             case WHITE -> Board.Cell.BLACK;
             // NOTE: This can never happen
-            //check locked cell
             default -> null;
 
         };
