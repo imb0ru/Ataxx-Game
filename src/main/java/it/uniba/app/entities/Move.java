@@ -74,12 +74,6 @@ public record Move(Board.Position from, Board.Position to, Board.Cell player) {
      */
     @Override
     public String toString() {
-        char playerSymbol;
-        if (this.player == Board.Cell.BLACK) {
-            playerSymbol = Strings.Board.SHORT_BLACK;
-        } else {
-            playerSymbol = Strings.Board.SHORT_WHITE;
-        }
-        return String.format(Strings.Move.MOVE_FORMAT, this.from, this.to, playerSymbol);
+        return String.format(Strings.Move.MOVE_FORMAT, this.from, this.to, this.player.toCharacter());
     }
 }
