@@ -10,6 +10,7 @@ import it.uniba.app.commands.ExitCommand;
 import it.uniba.app.commands.EmptyBoardCommand;
 import it.uniba.app.commands.TimeCommand;
 import it.uniba.app.commands.BlockCommand;
+import it.uniba.app.entities.Board;
 import it.uniba.app.utils.Strings;
 
 import java.nio.charset.StandardCharsets;
@@ -52,6 +53,12 @@ public final class AppController {
     private boolean running = true;
 
     /**
+     * Tabellone di gioco.
+     */
+    Board board = null;
+
+
+    /**
      * Costruttore della classe AppController.
      * Gestisce l'avvio dell'applicazione
      * e la chiamata dei comandi di gioco.
@@ -70,7 +77,7 @@ public final class AppController {
             case Strings.AppController.QUIT_COMMAND -> QuitCommand.run(this);
             case Strings.AppController.EXIT_COMMAND -> ExitCommand.run(this);
             case Strings.AppController.EMPTY_BOARD_COMMAND -> EmptyBoardCommand.run();
-            case Strings.AppController.BLOCK_COMMAND -> BlockCommand.run(this, argument);
+            case Strings.AppController.BLOCK_COMMAND -> board = BlockCommand.run(this, argument);
             case Strings.AppController.TIME_COMMAND -> TimeCommand.run(this);
             default -> {
                 // FIXME: Handle moves
@@ -115,5 +122,12 @@ public final class AppController {
         this.running = newRunning;
     }
 
-
+    /**
+     * Metodo per ottenere il tabellone di gioco.
+     *
+     * @return il tabellone di gioco
+     */
+    public Board getBoard() {
+        return board;
+    }
 }

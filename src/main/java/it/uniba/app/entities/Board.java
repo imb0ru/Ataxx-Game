@@ -5,8 +5,6 @@ import it.uniba.app.exceptions.InvalidPositionException;
 import it.uniba.app.utils.Strings;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Classe << Entity >> che rappresenta il tavoliere del gioco.
@@ -15,7 +13,7 @@ public final class Board {
     /**
      * Numero massimo di caselle bloccate.
      */
-    private final int MAX_BLOCKED_CELLS = 9;
+    public final int MAX_BLOCKED_CELLS = 9;
 
     /**
      * Contatore delle caselle bloccate.
@@ -80,7 +78,7 @@ public final class Board {
      * @param row la riga della posizione
      * @param column la colonna della posizione
      */
-    public record Position(int row, int column) {
+    public record Position(int column, int row) {
         /**
          * Costruttore che crea la posizione verificando che sia valida.
          */
@@ -106,7 +104,7 @@ public final class Board {
 
         /**
          * Crea una posizione a partire da una stringa che deve seguire il seguente formato:
-         * ```<riga><colonna>```
+         * ```<colonna><riga>```
          * dove `riga` è un numero intero compreso tra 1 e 7 e
          * `colonna` è una lettera minuscola compresa tra 'a' e 'g'.
          *
@@ -138,9 +136,9 @@ public final class Board {
             }
 
             return new Position(
-                Character.getNumericValue(rowCharacter) - 1,
-                Character.toLowerCase(columnCharacter) - 'a'
-            );
+                Character.toLowerCase(columnCharacter) - 'a',
+                Character.getNumericValue(rowCharacter) - 1
+                );
         }
 
         /**
@@ -150,7 +148,7 @@ public final class Board {
          */
         @Override
         public String toString() {
-            return String.format("%d%c", row, 'a' + column);
+            return String.format("%c%d", 'a' + column, row);
         }
     }
 
@@ -312,33 +310,27 @@ public final class Board {
      * @return true se la cella è bloccata, false altrimenti
      */
     public boolean isCellBlocked(final Cell cell) {
-        return cell.toCharacter() == Strings.Board.SHORT_LOCKED;
+        return cell == Cell.LOCKED;
     }
 
     /**
      * Aggiunge una cella all'elenco delle celle bloccate.
      *
-     * @param coordinates la cella da bloccare
+     * @param position posizione della cella da bloccare
      */
-    public void addBlockedCell(final String coordinates) {
-        int colChar = coordinates.charAt(0);
-        int rowChar = coordinates.charAt(1);
-        Position p = new Position(colChar, rowChar);
-
-        setCell(p, Cell.LOCKED);
+    public void addBlockedCell(final Position position) {
+        setCell(position, Cell.LOCKED);
+        blockedCellsCounter++;
     }
 
     /**
      * Setta la cella bloccata a libera.
      *
-     * @param coordinates la cella da sbloccare
+     * @param position posizione della cella da sbloccare
      */
-    public void removeBlockedCell(final String coordinates) {
-        int colChar = coordinates.charAt(0);
-        int rowChar = coordinates.charAt(1);
-        Position p = new Position(colChar, rowChar);
-
-        setCell(p, Cell.EMPTY);
+    public void removeBlockedCell(final Position position) {
+        setCell(position, Cell.EMPTY);
+        blockedCellsCounter--;
     }
 
     /**
@@ -350,6 +342,7 @@ public final class Board {
                 cell = Cell.EMPTY;
             }
         }
+        blockedCellsCounter = 0;
     }
 
     /**

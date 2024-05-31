@@ -10,6 +10,7 @@ import it.uniba.app.utils.Strings;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Classe << Control >> che gestisce la logica del gioco.
@@ -69,8 +70,8 @@ public final class GameController {
      * Costruttore di default che inizializza il tavoliere a quello iniziale
      * e il giocatore corrente al nero.
      */
-    public GameController() {
-        this.board = new Board();
+    public GameController(Board board) {
+        this.board = Objects.requireNonNullElseGet(board, Board::new);
         this.currentPlayer = Board.Cell.BLACK;
         this.gameState = GameState.IN_PROGRESS;
         this.startTime = Instant.now();
@@ -227,7 +228,9 @@ public final class GameController {
             case BLACK -> Board.Cell.WHITE;
             case WHITE -> Board.Cell.BLACK;
             // NOTE: This can never happen
-            case EMPTY -> null;
+            //check locked cell
+            default -> null;
+
         };
 
         for (int rowOffset = -1; rowOffset <= 1; ++rowOffset) {

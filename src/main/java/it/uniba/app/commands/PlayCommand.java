@@ -3,6 +3,7 @@ package it.uniba.app.commands;
 import it.uniba.app.controls.AppController;
 import it.uniba.app.boundaries.GamePrinter;
 import it.uniba.app.controls.GameController;
+import it.uniba.app.entities.Board;
 import it.uniba.app.utils.Strings;
 
 /**
@@ -21,7 +22,7 @@ public final class PlayCommand {
      */
     public static void run(final AppController app) {
         if (app.getGame() == null) {
-            app.setGame(new GameController());
+            app.setGame(new GameController(app.getBoard()));
             GamePrinter.print(app.getGame(), GamePrinter.PrintMoves.NO, GamePrinter.PrintGameState.YES);
         } else {
             System.out.println(Strings.PlayCommand.GAME_ALREADY_STARTED);

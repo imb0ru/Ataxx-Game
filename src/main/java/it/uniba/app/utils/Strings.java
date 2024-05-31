@@ -508,19 +508,6 @@ public final class Strings {
         }
 
         /**
-         * Messaggio di errore per coordinate non valide.
-         */
-        public static final String INVALID_COORDINATES_EXCEPTION = "Coordinate non valide. "
-                                                         + "Inserisci una coordinata valida (es. a1).";
-
-        /**
-         * Messaggio di errore per coordinate fuori dai limiti.
-         */
-        public static final String OUT_OF_BOUNDS_COORDINATES_EXCEPTION = "Coordinate fuori dai limiti. "
-                                                               + "Usa lettere da 'a' a 'h' "
-                                                               + "e numeri da '1' a '8'.";
-
-        /**
          * Messaggio di errore per il tentativo di blocco di celle a partita in corso.
          */
         public static final String GAME_RUNNING_EXCEPTION = "Impossibile bloccare celle durante una partita in corso.";
@@ -529,5 +516,16 @@ public final class Strings {
          * Messaggio di errore per il tentativo di bloccare troppe celle.
          */
         public static final String MAX_BLOCKED_CELLS_EXCEPTION = "Hai raggiunto il numero massimo di celle bloccate.";
+
+        /**
+         * Messaggio di errore per il tentativo di bloccare una cella già bloccata.
+         */
+        public static final String CELL_ALREADY_BLOCKED_EXCEPTION = "La cella selezionata è già bloccata.";
+
+        /**
+         * Messaggio di avvenuto blocco di una cella.
+         */
+        public static final String CELL_BLOCKED = "Cella bloccata: ";
+
     }
 }
