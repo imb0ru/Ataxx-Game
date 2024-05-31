@@ -6,6 +6,8 @@ import it.uniba.app.utils.Strings;
 
 import java.util.Arrays;
 
+import static java.lang.Math.max;
+
 /**
  * Classe << Entity >> che rappresenta il tavoliere del gioco.
  */
@@ -78,7 +80,7 @@ public final class Board {
      * @param row la riga della posizione
      * @param column la colonna della posizione
      */
-    public record Position(int column, int row) {
+    public record Position(int row, int column) {
         /**
          * Costruttore che crea la posizione verificando che sia valida.
          */
@@ -103,6 +105,18 @@ public final class Board {
         }
 
         /**
+         * Verifica se una posizione è adiacente a un'altra.
+         * @param from
+         * @param to
+         * @return
+         */
+        public static int distance(final Position from, final Position to) {
+            int rowDiff = Math.abs(from.row() - to.row());
+            int colDiff = Math.abs(from.column() - to.column());
+            return max(rowDiff, colDiff);
+        }
+
+        /**
          * Crea una posizione a partire da una stringa che deve seguire il seguente formato:
          * ```<colonna><riga>```
          * dove `riga` è un numero intero compreso tra 1 e 7 e
@@ -119,7 +133,7 @@ public final class Board {
                 ));
             }
 
-            char rowCharacter = positionString.charAt(0);
+            char rowCharacter = positionString.charAt(1);
             if (!Character.isDigit(rowCharacter)) {
                 throw new InvalidPositionException(String.format(
                     Strings.Board.INVALID_ROW_WHEN_PARSING_EXCEPTION_FORMAT,
@@ -127,7 +141,7 @@ public final class Board {
                 ));
             }
 
-            char columnCharacter = positionString.charAt(1);
+            char columnCharacter = positionString.charAt(0);
             if (!Character.isLowerCase(columnCharacter)) {
                 throw new InvalidPositionException(String.format(
                     Strings.Board.INVALID_COLUMN_WHEN_PARSING_EXCEPTION_FORMAT,
@@ -136,8 +150,8 @@ public final class Board {
             }
 
             return new Position(
-                Character.toLowerCase(columnCharacter) - 'a',
-                Character.getNumericValue(rowCharacter) - 1
+                Character.getNumericValue(rowCharacter) - 1,
+                Character.toLowerCase(columnCharacter) - 'a'
                 );
         }
 
@@ -148,7 +162,7 @@ public final class Board {
          */
         @Override
         public String toString() {
-            return String.format("%c%d", 'a' + column, row);
+            return String.format("%c%d", 'a' + column, row + 1);
         }
     }
 
@@ -156,6 +170,16 @@ public final class Board {
      * Dimensione del tavoliere.
      */
     public static final int SIZE = 7;
+
+    /**
+     * Posizioni iniziali delle pedine.
+     */
+    private static final Position[] INITIAL_POSITIONS = {
+        new Position(0, 0),
+        new Position(SIZE - 1, SIZE - 1),
+        new Position(0, SIZE - 1),
+        new Position(SIZE - 1, 0)
+    };
 
     /**
      * Array che contiene le celle del tavoliere.
@@ -362,4 +386,33 @@ public final class Board {
     public int getMaxBlockedCells() {
         return MAX_BLOCKED_CELLS;
     }
+
+    /**
+     * Verifica se una posizione è una posizione iniziale.
+     * @param position
+     * @return
+     */
+    public boolean isStartingCell(final Position position) {
+        for (Position initialPosition : INITIAL_POSITIONS) {
+            if (position.equals(initialPosition)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verifica se una posizione è adiacente a una posizione iniziale.
+     * @param position
+     * @return
+     */
+    public boolean isAdjacentToStartingCell(final Position position) {
+        for (Position initialPosition : INITIAL_POSITIONS) {
+            if (Position.distance(initialPosition, position) <= 2) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+

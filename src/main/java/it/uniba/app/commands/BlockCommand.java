@@ -8,12 +8,7 @@ import it.uniba.app.utils.Strings;
 /**
  * Classe << Boundary >> che si occupa di eseguire il comando `/blocca`.
  */
-public class BlockCommand {
-    /**
-     * Riferimento al tabellone di gioco.
-     */
-    private static Board board = new Board();
-
+public final class BlockCommand {
     private BlockCommand() {
     }
 
@@ -22,22 +17,22 @@ public class BlockCommand {
      * @param app riferimento al contesto dell'applicazione
      * @param position coordinate della casella da bloccare
      */
-    public static Board run(final AppController app, final String position) {
+    public static void run(final AppController app, final String position) {
+        Board board = app.getBoard();
         Board.Position p = Board.Position.fromString(position);
+        System.out.println(p);
 
-        if (app.getGame() != null)
+        if (app.getGame() != null) {
             System.out.println(Strings.BlockCommand.GAME_RUNNING_EXCEPTION);
-        else if (board.getBlockedCellsSize() >= board.getMaxBlockedCells())
+        } else if (board.getBlockedCellsSize() >= board.getMaxBlockedCells()) {
             System.out.println(Strings.BlockCommand.MAX_BLOCKED_CELLS_EXCEPTION);
-        else if(board.isCellBlocked(board.getCell(p)))
+        } else if (board.isCellBlocked(board.getCell(p))) {
             System.out.println(Strings.BlockCommand.CELL_ALREADY_BLOCKED_EXCEPTION);
-        //ADDME: Implementare il controllo delle celle non bloccabili
-
-        else{
+        } else if (board.isStartingCell(p) || board.isAdjacentToStartingCell(p)) {
+            System.out.println(Strings.BlockCommand.CELL_STARTING_EXCEPTION);
+        } else {
             board.addBlockedCell(p);
             System.out.println(Strings.BlockCommand.CELL_BLOCKED + p.toString());
         }
-
-        return board;
     }
 }

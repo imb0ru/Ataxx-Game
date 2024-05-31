@@ -3,7 +3,6 @@ package it.uniba.app.commands;
 import it.uniba.app.controls.AppController;
 import it.uniba.app.boundaries.GamePrinter;
 import it.uniba.app.controls.GameController;
-import it.uniba.app.entities.Board;
 import it.uniba.app.utils.Strings;
 
 /**

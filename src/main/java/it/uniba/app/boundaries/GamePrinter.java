@@ -79,7 +79,7 @@ public final class GamePrinter {
          */
         public char getCharacter() {
             if (this.hasJumpAndReplicate || this.hasJump) {
-                return Strings.GamePrinter.MOVE_CHARACTER;
+                return Strings.GamePrinter.FULL_CELL_CHARACTER;
             }
 
             return switch (this.type) {

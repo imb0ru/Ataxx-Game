@@ -56,7 +56,7 @@ public final class AppController {
     /**
      * Tabellone di gioco.
      */
-    Board board = null;
+    private Board board = new Board();
 
 
     /**
@@ -78,7 +78,7 @@ public final class AppController {
             case Strings.AppController.QUIT_COMMAND -> QuitCommand.run(this);
             case Strings.AppController.EXIT_COMMAND -> ExitCommand.run(this);
             case Strings.AppController.EMPTY_BOARD_COMMAND -> EmptyBoardCommand.run();
-            case Strings.AppController.BLOCK_COMMAND -> board = BlockCommand.run(this, argument);
+            case Strings.AppController.BLOCK_COMMAND -> BlockCommand.run(this, argument);
             case Strings.AppController.TIME_COMMAND -> TimeCommand.run(this);
             case Strings.AppController.MOVES_COMMAND -> MovesCommand.run(this);
             default -> {
@@ -129,8 +129,8 @@ public final class AppController {
      *
      * @return il tabellone di gioco
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Board getBoard() {
-        Board board1 = board;
-        return board1;
+        return board;
     }
 }
