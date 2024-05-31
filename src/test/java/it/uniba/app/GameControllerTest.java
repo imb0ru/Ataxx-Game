@@ -20,7 +20,8 @@ class GameControllerTest {
      */
     @Test
     void initialGameTest() {
-        final var game = new GameController();
+        Board board = new Board();
+        final var game = new GameController(board);
         final var moves = game.getLegalMovesForCurrentPlayer();
         assertTrue(game.toString().equals("B - B5EW35EW5EB") && !moves.isEmpty(), "Initial game is not correct");
     }

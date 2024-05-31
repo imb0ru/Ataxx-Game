@@ -10,6 +10,7 @@ import it.uniba.app.utils.Strings;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Classe << Control >> che gestisce la logica del gioco.
@@ -74,8 +75,8 @@ public final class GameController {
      * Costruttore di default che inizializza il tavoliere a quello iniziale
      * e il giocatore corrente al nero.
      */
-    public GameController() {
-        this.board = new Board();
+    public GameController(final Board b) {
+        this.board = Objects.requireNonNullElseGet(b, Board::new);
         this.currentPlayer = Board.Cell.BLACK;
         this.gameState = GameState.IN_PROGRESS;
         this.startTime = Instant.now();
@@ -190,11 +191,9 @@ public final class GameController {
                 }
 
                 final var to = new Board.Position(toRow, toColumn);
-                if (board.getCell(to) != Board.Cell.EMPTY) {
-                    continue;
+                if (board.getCell(to) == Board.Cell.EMPTY) {
+                    legalMoves.add(new Move(from, to, this.currentPlayer));
                 }
-
-                legalMoves.add(new Move(from, to, this.currentPlayer));
             }
         }
 
@@ -232,6 +231,14 @@ public final class GameController {
             throw new InvalidMoveException(Strings.GameController.INVALID_STARTING_CELL_EXCEPTION);
         }
 
+        if (board.getCell(move.to()) == Board.Cell.LOCKED) {
+            throw new InvalidMoveException(Strings.GameController.DESTINATION_CELL_LOCKED_EXCEPTION);
+        }
+
+        if (board.getCell(move.to()) != Board.Cell.EMPTY) {
+            throw new InvalidMoveException(Strings.GameController.DESTINATION_CELL_OCCUPIED_EXCEPTION);
+        }
+
         board.setCell(move.to(), current);
         if (move.getType() == Move.Type.JUMP) {
             board.setCell(move.from(), Board.Cell.EMPTY);
@@ -241,7 +248,8 @@ public final class GameController {
             case BLACK -> Board.Cell.WHITE;
             case WHITE -> Board.Cell.BLACK;
             // NOTE: This can never happen
-            case EMPTY -> null;
+            default -> null;
+
         };
 
         for (int rowOffset = -1; rowOffset <= 1; ++rowOffset) {

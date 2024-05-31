@@ -126,6 +126,11 @@ public final class Strings {
         public static final String TIME_COMMAND = "/tempo";
 
         /**
+         * Comando per {@link it.uniba.app.commands.BlockCommand}.
+         */
+        public static final String BLOCK_COMMAND = "/blocca";
+
+        /**
          * Comando per {@link it.uniba.app.commands.MovesCommand}.
          */
         public static final String MOVES_COMMAND = "/mosse";
@@ -144,11 +149,6 @@ public final class Strings {
      */
     public static class GamePrinter {
         /**
-         * Carattere che rappresenta una mossa possibile.
-         */
-        public static final char MOVE_CHARACTER = '#';
-
-        /**
          * Carattere che rappresenta una cella vuota.
          */
         public static final char EMPTY_CELL_CHARACTER = '.';
@@ -156,7 +156,12 @@ public final class Strings {
         /**
          * Carattere che rappresenta una cella piena.
          */
-        public static final char FULL_CELL_CHARACTER = '\u26c0';
+        public static final char FULL_CELL_CHARACTER = '\u26C0';
+
+        /**
+         * Carattere che rappresenta una cella bloccata.
+         */
+        public static final char LOCKED_CELL_CHARACTER = '\u2205';
 
         /**
          * Stringa di formato per lo stato della partita.
@@ -166,7 +171,7 @@ public final class Strings {
         /**
          * Stringa per comunicare che non sono state effettuate mosse.
          */
-        public static final String NO_MOVES = "Non è stata effettuata nessuna mossa.";
+        public static final String NO_MOVES = "Non e' stata effettuata nessuna mossa.";
 
         /**
          * Stringa per iniziare la stampa delle mosse.
@@ -213,6 +218,16 @@ public final class Strings {
          * Stringa (corta) per {@link it.uniba.app.entities.Board.Cell#WHITE}.
          */
         public static final char SHORT_WHITE = 'W';
+
+        /**
+         * Stringa (lunga) per {@link it.uniba.app.entities.Board.Cell#LOCKED}.
+         */
+        public static final String LOCKED = "Bloccato";
+
+        /**
+         * Stringa (corta) per {@link it.uniba.app.entities.Board.Cell#LOCKED}.
+         */
+        public static final char SHORT_LOCKED = 'L';
 
         /**
          * Messaggio di errore per il numero di righe non valido.
@@ -311,6 +326,17 @@ public final class Strings {
          */
         public static final String INVALID_STARTING_CELL_EXCEPTION =
             "La cella di partenza non contiene il giocatore corrente";
+
+        /**
+         * Stringa per l'eccezione lanciata se la cella di destinazione è bloccata.
+         */
+        public static final String DESTINATION_CELL_LOCKED_EXCEPTION = "La cella di destinazione e' bloccata";
+
+        /**
+         * Stringa per l'eccezione lanciata se la cella di destinazione è occupata.
+         */
+        public static final String DESTINATION_CELL_OCCUPIED_EXCEPTION = "La cella di destinazione e' occupata";
+
     }
 
     /**
@@ -401,6 +427,35 @@ public final class Strings {
         public static final String EXIT_COMMAND = "  " + AppController.EXIT_COMMAND
                                                   + "\t\t\t\tEsce dall'applicazione, previa conferma";
 
+        /**
+         * Descrizione del comando `/tempo`.
+         */
+        public static final String TIME_COMMAND = "  " + AppController.TIME_COMMAND
+                                                  + "\t\t\tIn gioco, mostra il tempo trascorso"
+                                                  + " dall'inizio della partita";
+
+        /**
+         * Descrizione del comando `/blocca`.
+         */
+        public static final String BLOCK_COMMAND = "  " + AppController.BLOCK_COMMAND + " <cella>"
+                                                   + "\tIn gioco, blocca una cella";
+
+    }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.WhatMovesCommand}.
+     */
+    public static final class WhatMovesCommand {
+        private WhatMovesCommand() {
+        }
+
+        /**
+         * Messaggio mostrato se non c'è nessuna partita in corso.
+         */
+        public static final String NO_RUNNING_GAME = "Nessuna partita in corso. "
+                                                     + "Avvia una nuova partita con il comando "
+                                                     + AppController.PLAY_COMMAND
+                                                     + ".";
     }
 
     /**
@@ -415,6 +470,22 @@ public final class Strings {
          */
         public static final String GAME_ALREADY_STARTED = "Partita già in corso. Completala o terminala"
                                                           + " prima di iniziarne una nuova.\n";
+    }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.BoardCommand}.
+     */
+    public static final class BoardCommand {
+        private BoardCommand() {
+        }
+
+        /**
+         * Messaggio mostrato se nessuna partita è ancora in corso.
+         */
+        public static final String NO_RUNNING_GAME = "Nessuna partita in corso. "
+                                                     + "Avvia una nuova partita con il comando "
+                                                     + AppController.PLAY_COMMAND
+                                                     + ".";
     }
 
     /**
@@ -480,4 +551,37 @@ public final class Strings {
                                                      + ".";
     }
 
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.BlockCommand}.
+     */
+    public static final class BlockCommand {
+        private BlockCommand() {
+        }
+
+        /**
+         * Messaggio di errore per il tentativo di blocco di celle a partita in corso.
+         */
+        public static final String GAME_RUNNING_EXCEPTION = "Impossibile bloccare celle durante una partita in corso.";
+
+        /**
+         * Messaggio di errore per il tentativo di bloccare troppe celle.
+         */
+        public static final String MAX_BLOCKED_CELLS_EXCEPTION = "Hai raggiunto il numero massimo di celle bloccate.";
+
+        /**
+         * Messaggio di errore per il tentativo di bloccare una cella già bloccata.
+         */
+        public static final String CELL_ALREADY_BLOCKED_EXCEPTION = "La cella selezionata è già bloccata.";
+
+        /**
+         * Messaggio di avvenuto blocco di una cella.
+         */
+        public static final String CELL_BLOCKED = "Cella bloccata: ";
+
+        /**
+         * Messaggio di errore per il tentativo di bloccare una cella di partenza.
+         */
+        public static final String CELL_STARTING_EXCEPTION = "Impossibile bloccare celle di partenza o adiacenti.";
+
+    }
 }

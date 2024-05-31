@@ -79,12 +79,13 @@ public final class GamePrinter {
          */
         public char getCharacter() {
             if (this.hasJumpAndReplicate || this.hasJump) {
-                return Strings.GamePrinter.MOVE_CHARACTER;
+                return Strings.GamePrinter.FULL_CELL_CHARACTER;
             }
 
             return switch (this.type) {
                 case EMPTY -> Strings.GamePrinter.EMPTY_CELL_CHARACTER;
                 case BLACK, WHITE -> Strings.GamePrinter.FULL_CELL_CHARACTER;
+                case LOCKED -> Strings.GamePrinter.LOCKED_CELL_CHARACTER;
             };
         }
 
@@ -110,6 +111,7 @@ public final class GamePrinter {
                 case EMPTY -> Color.NO_COLOR;
                 case BLACK -> Color.BLACK;
                 case WHITE -> Color.WHITE;
+                case LOCKED -> Color.RED;
             };
         }
     }

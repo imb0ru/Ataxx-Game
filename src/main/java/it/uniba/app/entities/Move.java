@@ -43,10 +43,8 @@ public record Move(Board.Position from, Board.Position to, Board.Cell player) {
      * @param to la posizione di arrivo
      */
     public Move {
-        final var rowDistance = Math.abs(to.row() - from.row());
-        final var columnDistance = Math.abs(to.column() - from.column());
-
-        if (rowDistance > MAX_DISTANCE || columnDistance > MAX_DISTANCE) {
+        final int distance = Board.Position.distance(from, to);
+        if (distance > MAX_DISTANCE) {
             throw new InvalidMoveException(Strings.Move.DISTANCE_TOO_BIG_EXCEPTION);
         }
     }

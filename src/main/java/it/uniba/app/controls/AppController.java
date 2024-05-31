@@ -9,6 +9,8 @@ import it.uniba.app.commands.WhatMovesCommand;
 import it.uniba.app.commands.ExitCommand;
 import it.uniba.app.commands.EmptyBoardCommand;
 import it.uniba.app.commands.TimeCommand;
+import it.uniba.app.commands.BlockCommand;
+import it.uniba.app.entities.Board;
 import it.uniba.app.commands.MovesCommand;
 import it.uniba.app.utils.Strings;
 
@@ -52,6 +54,12 @@ public final class AppController {
     private boolean running = true;
 
     /**
+     * Tabellone di gioco.
+     */
+    private Board board = new Board();
+
+
+    /**
      * Costruttore della classe AppController.
      * Gestisce l'avvio dell'applicazione
      * e la chiamata dei comandi di gioco.
@@ -59,7 +67,10 @@ public final class AppController {
      * @param command comando inserito dall'utente
      */
     public void run(final String command) {
-        switch (command) {
+        String[] parts = command.trim().split("\\s+", 2);
+        String mainCommand = parts[0];
+        String argument = parts.length > 1 ? parts[1] : "";
+        switch (mainCommand) {
             case Strings.AppController.HELP_COMMAND -> HelpCommand.run();
             case Strings.AppController.PLAY_COMMAND -> PlayCommand.run(this);
             case Strings.AppController.WHAT_MOVES_COMMAND -> WhatMovesCommand.run(this);
@@ -67,6 +78,7 @@ public final class AppController {
             case Strings.AppController.QUIT_COMMAND -> QuitCommand.run(this);
             case Strings.AppController.EXIT_COMMAND -> ExitCommand.run(this);
             case Strings.AppController.EMPTY_BOARD_COMMAND -> EmptyBoardCommand.run();
+            case Strings.AppController.BLOCK_COMMAND -> BlockCommand.run(this, argument);
             case Strings.AppController.TIME_COMMAND -> TimeCommand.run(this);
             case Strings.AppController.MOVES_COMMAND -> MovesCommand.run(this);
             default -> {
@@ -112,5 +124,13 @@ public final class AppController {
         this.running = newRunning;
     }
 
-
+    /**
+     * Metodo per ottenere il tabellone di gioco.
+     *
+     * @return il tabellone di gioco
+     */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
+    public Board getBoard() {
+        return board;
+    }
 }

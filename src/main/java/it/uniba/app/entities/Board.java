@@ -6,10 +6,22 @@ import it.uniba.app.utils.Strings;
 
 import java.util.Arrays;
 
+import static java.lang.Math.max;
+
 /**
  * Classe << Entity >> che rappresenta il tavoliere del gioco.
  */
 public final class Board {
+    /**
+     * Numero massimo di caselle bloccate.
+     */
+    public static final int MAX_BLOCKED_CELLS = 9;
+
+    /**
+     * Contatore delle caselle bloccate.
+     */
+    private int blockedCellsCounter = 0;
+
     /**
      * Enumerazione che rappresenta i possibili contenuti di una cella del
      * tavoliere.
@@ -26,7 +38,11 @@ public final class Board {
         /**
          * Cella occupata da una pedina bianca.
          */
-        WHITE;
+        WHITE,
+        /**
+         * Cella bloccata.
+         */
+        LOCKED;
 
         /**
          * Restituisce una rappresentazione testuale del contenuto della cella.
@@ -39,6 +55,7 @@ public final class Board {
                 case EMPTY -> Strings.Board.EMPTY;
                 case BLACK -> Strings.Board.BLACK;
                 case WHITE -> Strings.Board.WHITE;
+                case LOCKED -> Strings.Board.LOCKED;
             };
         }
 
@@ -52,6 +69,7 @@ public final class Board {
                 case EMPTY -> Strings.Board.SHORT_EMPTY;
                 case BLACK -> Strings.Board.SHORT_BLACK;
                 case WHITE -> Strings.Board.SHORT_WHITE;
+                case LOCKED -> Strings.Board.SHORT_LOCKED;
             };
         }
     }
@@ -87,8 +105,20 @@ public final class Board {
         }
 
         /**
+         * Verifica se una posizione è adiacente a un'altra.
+         * @param from
+         * @param to
+         * @return
+         */
+        public static int distance(final Position from, final Position to) {
+            int rowDiff = Math.abs(from.row() - to.row());
+            int colDiff = Math.abs(from.column() - to.column());
+            return max(rowDiff, colDiff);
+        }
+
+        /**
          * Crea una posizione a partire da una stringa che deve seguire il seguente formato:
-         * ```<riga><colonna>```
+         * ```<colonna><riga>```
          * dove `riga` è un numero intero compreso tra 1 e 7 e
          * `colonna` è una lettera minuscola compresa tra 'a' e 'g'.
          *
@@ -103,7 +133,7 @@ public final class Board {
                 ));
             }
 
-            char rowCharacter = positionString.charAt(0);
+            char rowCharacter = positionString.charAt(1);
             if (!Character.isDigit(rowCharacter)) {
                 throw new InvalidPositionException(String.format(
                     Strings.Board.INVALID_ROW_WHEN_PARSING_EXCEPTION_FORMAT,
@@ -111,7 +141,7 @@ public final class Board {
                 ));
             }
 
-            char columnCharacter = positionString.charAt(1);
+            char columnCharacter = positionString.charAt(0);
             if (!Character.isLowerCase(columnCharacter)) {
                 throw new InvalidPositionException(String.format(
                     Strings.Board.INVALID_COLUMN_WHEN_PARSING_EXCEPTION_FORMAT,
@@ -122,7 +152,7 @@ public final class Board {
             return new Position(
                 Character.getNumericValue(rowCharacter) - 1,
                 Character.toLowerCase(columnCharacter) - 'a'
-            );
+                );
         }
 
         /**
@@ -132,7 +162,7 @@ public final class Board {
          */
         @Override
         public String toString() {
-            return String.format("%d%c", row, 'a' + column);
+            return String.format("%c%d", 'a' + column, row + 1);
         }
     }
 
@@ -140,6 +170,16 @@ public final class Board {
      * Dimensione del tavoliere.
      */
     public static final int SIZE = 7;
+
+    /**
+     * Posizioni iniziali delle pedine.
+     */
+    private static final Position[] INITIAL_POSITIONS = {
+        new Position(0, 0),
+        new Position(SIZE - 1, SIZE - 1),
+        new Position(0, SIZE - 1),
+        new Position(SIZE - 1, 0)
+    };
 
     /**
      * Array che contiene le celle del tavoliere.
@@ -178,6 +218,7 @@ public final class Board {
                 case Strings.Board.SHORT_EMPTY -> Cell.EMPTY;
                 case Strings.Board.SHORT_BLACK -> Cell.BLACK;
                 case Strings.Board.SHORT_WHITE -> Cell.WHITE;
+                case Strings.Board.SHORT_LOCKED -> Cell.LOCKED;
                 default -> throw new InvalidBoardException(
                     Strings.Board.UNKNOWN_CHARACTER_WHEN_PARSING_BOARD_EXCEPTION + character
                 );
@@ -285,4 +326,93 @@ public final class Board {
 
         return stringBuilder.toString();
     }
+
+    /**
+     * Verifica se una cella è bloccata.
+     *
+     * @param cell la cella da verificare
+     * @return true se la cella è bloccata, false altrimenti
+     */
+    public boolean isCellBlocked(final Cell cell) {
+        return cell == Cell.LOCKED;
+    }
+
+    /**
+     * Aggiunge una cella all'elenco delle celle bloccate.
+     *
+     * @param position posizione della cella da bloccare
+     */
+    public void addBlockedCell(final Position position) {
+        setCell(position, Cell.LOCKED);
+        blockedCellsCounter++;
+    }
+
+    /**
+     * Setta la cella bloccata a libera.
+     *
+     * @param position posizione della cella da sbloccare
+     */
+    public void removeBlockedCell(final Position position) {
+        setCell(position, Cell.EMPTY);
+        blockedCellsCounter--;
+    }
+
+    /**
+     * Setta le celle bloccate a libere.
+     */
+    public void clearBlockedCells() {
+        for (Cell cell: cells) {
+            if (cell == Cell.LOCKED) {
+                cell = Cell.EMPTY;
+            }
+        }
+        blockedCellsCounter = 0;
+    }
+
+    /**
+     * Restituisce il numero di celle bloccate.
+     *
+     * @return il numero di celle bloccate
+     */
+    public int getBlockedCellsSize() {
+        return blockedCellsCounter;
+    }
+
+    /**
+     * Restituisce il numero massimo di celle bloccabili.
+     *
+     * @return il numero di celle bloccate
+     */
+    public int getMaxBlockedCells() {
+        return MAX_BLOCKED_CELLS;
+    }
+
+    /**
+     * Verifica se una posizione è una posizione iniziale.
+     * @param position
+     * @return
+     */
+    public boolean isStartingCell(final Position position) {
+        for (Position initialPosition : INITIAL_POSITIONS) {
+            if (position.equals(initialPosition)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verifica se una posizione è adiacente a una posizione iniziale.
+     * @param position
+     * @return
+     */
+    public boolean isAdjacentToStartingCell(final Position position) {
+        for (Position initialPosition : INITIAL_POSITIONS) {
+            if (Position.distance(initialPosition, position) <= 2) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
