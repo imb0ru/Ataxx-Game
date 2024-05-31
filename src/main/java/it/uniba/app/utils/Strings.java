@@ -126,6 +126,11 @@ public final class Strings {
         public static final String TIME_COMMAND = "/tempo";
 
         /**
+         * Comando per {@link it.uniba.app.commands.BlockCommand}.
+         */
+        public static final String BLOCK_COMMAND = "/blocca";
+
+        /**
          * Messaggio di errore per un comando non riconosciuto.
          */
         public static final String UNRECOGNIZED_COMMAND = "Comando non riconosciuto. "
@@ -379,6 +384,22 @@ public final class Strings {
     }
 
     /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.WhatMovesCommand}.
+     */
+    public static final class WhatMovesCommand {
+        private WhatMovesCommand() {
+        }
+
+        /**
+         * Messaggio mostrato se non c'è nessuna partita in corso.
+         */
+        public static final String NO_RUNNING_GAME = "Nessuna partita in corso. "
+                                                     + "Avvia una nuova partita con il comando "
+                                                     + AppController.PLAY_COMMAND
+                                                     + ".";
+    }
+
+    /**
      * Stringhe utilizzate in {@link it.uniba.app.commands.PlayCommand}.
      */
     public static final class PlayCommand {
@@ -390,6 +411,22 @@ public final class Strings {
          */
         public static final String GAME_ALREADY_STARTED = "Partita già in corso. Completala o terminala"
                                                           + " prima di iniziarne una nuova.\n";
+    }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.BoardCommand}.
+     */
+    public static final class BoardCommand {
+        private BoardCommand() {
+        }
+
+        /**
+         * Messaggio mostrato se nessuna partita è ancora in corso.
+         */
+        public static final String NO_RUNNING_GAME = "Nessuna partita in corso. "
+                                                     + "Avvia una nuova partita con il comando "
+                                                     + AppController.PLAY_COMMAND
+                                                     + ".";
     }
 
     /**
@@ -455,4 +492,32 @@ public final class Strings {
                                                      + ".";
     }
 
+
+    public static final class BlockCommand {
+        private BlockCommand() {
+        }
+
+        /**
+         * Messaggio di errore per coordinate non valide.
+         */
+        public static final String INVALID_COORDINATES_EXCEPTION = "Coordinate non valide. "
+                                                         + "Inserisci una coordinata valida (es. a1).";
+
+        /**
+         * Messaggio di errore per coordinate fuori dai limiti.
+         */
+        public static final String OUT_OF_BOUNDS_COORDINATES_EXCEPTION = "Coordinate fuori dai limiti. "
+                                                               + "Usa lettere da 'a' a 'h' "
+                                                               + "e numeri da '1' a '8'.";
+
+        /**
+         * Messaggio di errore per il tentativo di blocco di celle a partita in corso.
+         */
+        public static final String GAME_RUNNING_EXCEPTION = "Impossibile bloccare celle durante una partita in corso.";
+
+        /**
+         * Messaggio di errore per il tentativo di bloccare troppe celle.
+         */
+        public static final String MAX_BLOCKED_CELLS_EXCEPTION = "Hai raggiunto il numero massimo di celle bloccate.";
+    }
 }
