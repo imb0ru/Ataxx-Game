@@ -85,6 +85,7 @@ public final class GamePrinter {
             return switch (this.type) {
                 case EMPTY -> Strings.GamePrinter.EMPTY_CELL_CHARACTER;
                 case BLACK, WHITE -> Strings.GamePrinter.FULL_CELL_CHARACTER;
+                case LOCKED -> Strings.GamePrinter.LOCKED_CELL_CHARACTER;
             };
         }
 
@@ -110,6 +111,7 @@ public final class GamePrinter {
                 case EMPTY -> Color.NO_COLOR;
                 case BLACK -> Color.BLACK;
                 case WHITE -> Color.WHITE;
+                case LOCKED -> Color.RED;
             };
         }
     }

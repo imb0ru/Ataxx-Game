@@ -128,6 +128,7 @@ public final class AppController {
      * @return il tabellone di gioco
      */
     public Board getBoard() {
-        return board;
+        Board board1 = board;
+        return board1;
     }
 }

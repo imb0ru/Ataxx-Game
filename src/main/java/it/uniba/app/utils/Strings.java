@@ -156,7 +156,12 @@ public final class Strings {
         /**
          * Carattere che rappresenta una cella piena.
          */
-        public static final char FULL_CELL_CHARACTER = '\u26c0';
+        public static final char FULL_CELL_CHARACTER = '⛀';
+
+        /**
+         * Carattere che rappresenta una cella bloccata.
+         */
+        public static final char LOCKED_CELL_CHARACTER = '⃠';
 
         /**
          * Stringa di formato per lo stato della partita.

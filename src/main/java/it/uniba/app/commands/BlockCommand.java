@@ -38,7 +38,6 @@ public class BlockCommand {
             System.out.println(Strings.BlockCommand.CELL_BLOCKED + p.toString());
         }
 
-
         return board;
     }
 }

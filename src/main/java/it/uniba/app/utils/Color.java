@@ -29,6 +29,10 @@ public enum Color {
      */
     PINK,
     /**
+     * Rosso.
+     */
+    RED,
+    /**
      * Reset del colore.
      */
     RESET;
@@ -46,6 +50,7 @@ public enum Color {
             case YELLOW -> "\u001B[38;5;184m";
             case ORANGE -> "\u001B[38;5;166m";
             case PINK -> "\u001B[38;5;199m";
+            case RED -> "\u001B[38;5;196m";
             case RESET -> "\u001B[0m";
         };
     }

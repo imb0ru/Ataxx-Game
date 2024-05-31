@@ -13,7 +13,7 @@ public final class Board {
     /**
      * Numero massimo di caselle bloccate.
      */
-    public final int MAX_BLOCKED_CELLS = 9;
+    public static final int MAX_BLOCKED_CELLS = 9;
 
     /**
      * Contatore delle caselle bloccate.
