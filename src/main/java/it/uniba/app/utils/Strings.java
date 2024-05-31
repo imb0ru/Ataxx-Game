@@ -200,6 +200,16 @@ public final class Strings {
         public static final char SHORT_WHITE = 'W';
 
         /**
+         * Stringa (lunga) per {@link it.uniba.app.entities.Board.Cell#LOCKED}.
+         */
+        public static final String LOCKED = "Bloccato";
+
+        /**
+         * Stringa (corta) per {@link it.uniba.app.entities.Board.Cell#LOCKED}.
+         */
+        public static final char SHORT_LOCKED = 'L';
+
+        /**
          * Messaggio di errore per il numero di righe non valido.
          */
         public static final String INVALID_ROW_EXCEPTION_FORMAT = "Riga non valida %d (0 <= riga < %d)";

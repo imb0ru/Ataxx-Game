@@ -58,6 +58,8 @@ public class BlockCommand {
         int x = colChar - 'a';
         int y = rowChar - '1';
 
-        //ADDME: Implementare il controllo della cella adiacente
+        //ADDME: Implementare il controllo delle celle non bloccabili
+        //ADDME: restituire la Board aggiornata, gestire questa Board in AppController
+
     }
 }

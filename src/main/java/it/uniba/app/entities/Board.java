@@ -16,15 +16,12 @@ public final class Board {
      * Numero massimo di caselle bloccate.
      */
     private final int MAX_BLOCKED_CELLS = 9;
-    /**
-     * Elenco delle caselle bloccate.
-     */
-    private final Set<String> blockedCells = new HashSet<>();
 
     /**
-     * Elenco delle caselle di partenza.
+     * Contatore delle caselle bloccate.
      */
-    private final Set<String> startingCells = Set.of("a1", "h8", "a8", "h1");
+    private int blockedCellsCounter = 0;
+
     /**
      * Enumerazione che rappresenta i possibili contenuti di una cella del
      * tavoliere.
@@ -41,7 +38,11 @@ public final class Board {
         /**
          * Cella occupata da una pedina bianca.
          */
-        WHITE;
+        WHITE,
+        /**
+         * Cella bloccata.
+         */
+        LOCKED;
 
         /**
          * Restituisce una rappresentazione testuale del contenuto della cella.
@@ -54,6 +55,7 @@ public final class Board {
                 case EMPTY -> Strings.Board.EMPTY;
                 case BLACK -> Strings.Board.BLACK;
                 case WHITE -> Strings.Board.WHITE;
+                case LOCKED -> Strings.Board.LOCKED;
             };
         }
 
@@ -67,6 +69,7 @@ public final class Board {
                 case EMPTY -> Strings.Board.SHORT_EMPTY;
                 case BLACK -> Strings.Board.SHORT_BLACK;
                 case WHITE -> Strings.Board.SHORT_WHITE;
+                case LOCKED -> Strings.Board.SHORT_LOCKED;
             };
         }
     }
@@ -193,6 +196,7 @@ public final class Board {
                 case Strings.Board.SHORT_EMPTY -> Cell.EMPTY;
                 case Strings.Board.SHORT_BLACK -> Cell.BLACK;
                 case Strings.Board.SHORT_WHITE -> Cell.WHITE;
+                case Strings.Board.SHORT_LOCKED -> Cell.LOCKED;
                 default -> throw new InvalidBoardException(
                     Strings.Board.UNKNOWN_CHARACTER_WHEN_PARSING_BOARD_EXCEPTION + character
                 );
@@ -307,38 +311,45 @@ public final class Board {
      * @param cell la cella da verificare
      * @return true se la cella è bloccata, false altrimenti
      */
-    public boolean isCellBlocked(final String cell) {
-        return blockedCells.contains(cell);
+    public boolean isCellBlocked(final Cell cell) {
+        return cell.toCharacter() == Strings.Board.SHORT_LOCKED;
     }
 
     /**
      * Aggiunge una cella all'elenco delle celle bloccate.
      *
-     * @param cell la cella da bloccare
-     * @return true se la cella è stata bloccata correttamente, false se il numero massimo di celle bloccate è già stato raggiunto o se la cella è una cella di partenza
+     * @param coordinates la cella da bloccare
      */
-    public boolean addBlockedCell(final String cell) {
-        if (blockedCells.size() >= MAX_BLOCKED_CELLS || startingCells.contains(cell)) {
-            return false;
-        }
-        return blockedCells.add(cell);
+    public void addBlockedCell(final String coordinates) {
+        int colChar = coordinates.charAt(0);
+        int rowChar = coordinates.charAt(1);
+        Position p = new Position(colChar, rowChar);
+
+        setCell(p, Cell.LOCKED);
     }
 
     /**
-     * Rimuove una cella dall'elenco delle celle bloccate.
+     * Setta la cella bloccata a libera.
      *
-     * @param cell la cella da sbloccare
-     * @return true se la cella è stata sbloccata correttamente, false altrimenti
+     * @param coordinates la cella da sbloccare
      */
-    public boolean removeBlockedCell(final String cell) {
-        return blockedCells.remove(cell);
+    public void removeBlockedCell(final String coordinates) {
+        int colChar = coordinates.charAt(0);
+        int rowChar = coordinates.charAt(1);
+        Position p = new Position(colChar, rowChar);
+
+        setCell(p, Cell.EMPTY);
     }
 
     /**
-     * Svuota l'elenco delle celle bloccate.
+     * Setta le celle bloccate a libere.
      */
     public void clearBlockedCells() {
-        blockedCells.clear();
+        for (Cell cell: cells) {
+            if (cell == Cell.LOCKED) {
+                cell = Cell.EMPTY;
+            }
+        }
     }
 
     /**
@@ -347,7 +358,7 @@ public final class Board {
      * @return il numero di celle bloccate
      */
     public int getBlockedCellsSize() {
-        return blockedCells.size();
+        return blockedCellsCounter;
     }
 
     /**
