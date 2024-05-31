@@ -66,6 +66,11 @@ public final class GameController {
     private Instant startTime;
 
     /**
+     * Lista delle mosse effettuate.
+     */
+    private final List<Move> moves = new ArrayList<Move>();
+
+    /**
      * Costruttore di default che inizializza il tavoliere a quello iniziale
      * e il giocatore corrente al nero.
      */
@@ -147,6 +152,15 @@ public final class GameController {
     }
 
     /**
+     * Restituisce la lista delle mosse effettuate.
+     *
+     * @return la lista delle mosse effettuate
+     */
+    public List<Move> getMoves() {
+        return new ArrayList<Move>(this.moves);
+    }
+
+    /**
      * Restituisce le mosse che può fare il giocatore attuale dalla posizione
      * <code>from</code>.
      *
@@ -180,7 +194,7 @@ public final class GameController {
                     continue;
                 }
 
-                legalMoves.add(new Move(from, to));
+                legalMoves.add(new Move(from, to, this.currentPlayer));
             }
         }
 
@@ -251,6 +265,8 @@ public final class GameController {
         }
 
         updateGameState();
+
+        moves.add(move);
 
         // In case the game is still in progress and the current player has
         // no legal moves we pass the turn to the enemy

@@ -80,7 +80,8 @@ class GameControllerTest {
             final var game = new GameController("B - 31EB17E");
             game.executeMove(new Move(
                     new Board.Position(fromRow, fromColumn),
-                    new Board.Position(toRow, toColumn)));
+                    new Board.Position(toRow, toColumn),
+                    Board.Cell.BLACK));
             assertEquals("W - 24EB6EB17E", game.toString(), "Game state is not correct");
         } catch (Exception e) {
             fail(e);
@@ -103,7 +104,8 @@ class GameControllerTest {
             final var game = new GameController("B - 31EB17E");
             game.executeMove(new Move(
                     new Board.Position(fromRow, fromColumn),
-                    new Board.Position(toRow, toColumn)));
+                    new Board.Position(toRow, toColumn),
+                    Board.Cell.BLACK));
             assertEquals("W - 17EB31E", game.toString(), "Game state is not correct");
         } catch (Exception e) {
             fail(e);
@@ -126,7 +128,8 @@ class GameControllerTest {
             final var game = new GameController("B - 16E3W12EB17E");
             game.executeMove(new Move(
                     new Board.Position(fromRow, fromColumn),
-                    new Board.Position(toRow, toColumn)));
+                    new Board.Position(toRow, toColumn),
+                    Board.Cell.BLACK));
             assertEquals("W - 16E3B5EB6EB17E", game.toString(), "Game state is not correct");
         } catch (Exception e) {
             fail(e);

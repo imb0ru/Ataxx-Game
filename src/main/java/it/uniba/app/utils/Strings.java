@@ -126,6 +126,11 @@ public final class Strings {
         public static final String TIME_COMMAND = "/tempo";
 
         /**
+         * Comando per {@link it.uniba.app.commands.MovesCommand}.
+         */
+        public static final String MOVES_COMMAND = "/mosse";
+
+        /**
          * Messaggio di errore per un comando non riconosciuto.
          */
         public static final String UNRECOGNIZED_COMMAND = "Comando non riconosciuto. "
@@ -157,6 +162,21 @@ public final class Strings {
          * Stringa di formato per lo stato della partita.
          */
         public static final String GAME_STATE_FORMAT = "%s - E' il turno del %s%n%n";
+
+        /**
+         * Stringa per comunicare che non sono state effettuate mosse.
+         */
+        public static final String NO_MOVES = "Non è stata effettuata nessuna mossa.";
+
+        /**
+         * Stringa per iniziare la stampa delle mosse.
+         */
+        public static final String MOVES_HEADER = "Mosse effettuate:%n";
+
+        /**
+         * Stringa di formato per le righe dell'elenco delle mosse.
+         */
+        public static final String MOVES_FORMAT = "%d. %s%n";
     }
 
     /**
@@ -241,6 +261,11 @@ public final class Strings {
          * Messaggio per l'eccezione lanciata se una mossa ha distanza troppo grande.
          */
         public static final String DISTANCE_TOO_BIG_EXCEPTION = "La distanza tra le posizioni deve essere <= 2";
+
+        /**
+         * Stringa di formato per la rappresentazione testuale di una mossa.
+         */
+        public static final String MOVE_FORMAT = "%s-%s (%s)";
     }
 
     /**
