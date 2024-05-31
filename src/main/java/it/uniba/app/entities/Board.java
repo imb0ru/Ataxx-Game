@@ -5,11 +5,26 @@ import it.uniba.app.exceptions.InvalidPositionException;
 import it.uniba.app.utils.Strings;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Classe << Entity >> che rappresenta il tavoliere del gioco.
  */
 public final class Board {
+    /**
+     * Numero massimo di caselle bloccate.
+     */
+    private final int MAX_BLOCKED_CELLS = 9;
+    /**
+     * Elenco delle caselle bloccate.
+     */
+    private final Set<String> blockedCells = new HashSet<>();
+
+    /**
+     * Elenco delle caselle di partenza.
+     */
+    private final Set<String> startingCells = Set.of("a1", "h8", "a8", "h1");
     /**
      * Enumerazione che rappresenta i possibili contenuti di una cella del
      * tavoliere.
@@ -284,5 +299,63 @@ public final class Board {
         }
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * Verifica se una cella è bloccata.
+     *
+     * @param cell la cella da verificare
+     * @return true se la cella è bloccata, false altrimenti
+     */
+    public boolean isCellBlocked(final String cell) {
+        return blockedCells.contains(cell);
+    }
+
+    /**
+     * Aggiunge una cella all'elenco delle celle bloccate.
+     *
+     * @param cell la cella da bloccare
+     * @return true se la cella è stata bloccata correttamente, false se il numero massimo di celle bloccate è già stato raggiunto o se la cella è una cella di partenza
+     */
+    public boolean addBlockedCell(final String cell) {
+        if (blockedCells.size() >= MAX_BLOCKED_CELLS || startingCells.contains(cell)) {
+            return false;
+        }
+        return blockedCells.add(cell);
+    }
+
+    /**
+     * Rimuove una cella dall'elenco delle celle bloccate.
+     *
+     * @param cell la cella da sbloccare
+     * @return true se la cella è stata sbloccata correttamente, false altrimenti
+     */
+    public boolean removeBlockedCell(final String cell) {
+        return blockedCells.remove(cell);
+    }
+
+    /**
+     * Svuota l'elenco delle celle bloccate.
+     */
+    public void clearBlockedCells() {
+        blockedCells.clear();
+    }
+
+    /**
+     * Restituisce il numero di celle bloccate.
+     *
+     * @return il numero di celle bloccate
+     */
+    public int getBlockedCellsSize() {
+        return blockedCells.size();
+    }
+
+    /**
+     * Restituisce il numero massimo di celle bloccabili.
+     *
+     * @return il numero di celle bloccate
+     */
+    public int getMaxBlockedCells() {
+        return MAX_BLOCKED_CELLS;
     }
 }
