@@ -223,4 +223,22 @@ public final class GamePrinter {
         printVerticalBorder();
         printColumns();
     }
+
+    /**
+     * Stampa le mosse effettuate durante la partita dalla più recente alla più vecchia.
+     *
+     * @param game la partita di cui si vogliono stampare le mosse
+     */
+    public static void printMoves(final GameController game) {
+        final var moves = game.getMoves();
+        if (moves.isEmpty()) {
+            System.out.println(Strings.GamePrinter.NO_MOVES);
+            return;
+        }
+        System.out.printf(Strings.GamePrinter.MOVES_HEADER);
+        for (int i = moves.size() - 1; i >= 0; --i) {
+            final var move = moves.get(i);
+            System.out.printf(Strings.GamePrinter.MOVES_FORMAT, i + 1, move);
+        }
+    }
 }

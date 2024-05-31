@@ -11,6 +11,7 @@ import it.uniba.app.commands.EmptyBoardCommand;
 import it.uniba.app.commands.TimeCommand;
 import it.uniba.app.commands.BlockCommand;
 import it.uniba.app.entities.Board;
+import it.uniba.app.commands.MovesCommand;
 import it.uniba.app.utils.Strings;
 
 import java.nio.charset.StandardCharsets;
@@ -79,6 +80,7 @@ public final class AppController {
             case Strings.AppController.EMPTY_BOARD_COMMAND -> EmptyBoardCommand.run();
             case Strings.AppController.BLOCK_COMMAND -> board = BlockCommand.run(this, argument);
             case Strings.AppController.TIME_COMMAND -> TimeCommand.run(this);
+            case Strings.AppController.MOVES_COMMAND -> MovesCommand.run(this);
             default -> {
                 // FIXME: Handle moves
                 System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);
