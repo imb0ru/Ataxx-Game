@@ -435,6 +435,13 @@ public final class Strings {
                                                   + " dall'inizio della partita";
 
         /**
+         * Descrizione del comando `/mosse`.
+         */
+        public static final String MOVES_COMMAND = "  " + AppController.MOVES_COMMAND
+                                                  + "\t\t\tIn gioco, mostra le mosse effettuate"
+                                                  + " dall'inizio della partita";
+
+        /**
          * Descrizione del comando `/blocca`.
          */
         public static final String BLOCK_COMMAND = "  " + AppController.BLOCK_COMMAND + " <cella>"
