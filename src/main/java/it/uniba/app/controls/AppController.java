@@ -1,17 +1,8 @@
 package it.uniba.app.controls;
 
-import it.uniba.app.commands.BoardCommand;
+import it.uniba.app.commands.*;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.uniba.app.commands.PlayCommand;
-import it.uniba.app.commands.QuitCommand;
-import it.uniba.app.commands.HelpCommand;
-import it.uniba.app.commands.WhatMovesCommand;
-import it.uniba.app.commands.ExitCommand;
-import it.uniba.app.commands.EmptyBoardCommand;
-import it.uniba.app.commands.TimeCommand;
-import it.uniba.app.commands.BlockCommand;
 import it.uniba.app.entities.Board;
-import it.uniba.app.commands.MovesCommand;
 import it.uniba.app.utils.Strings;
 
 import java.nio.charset.StandardCharsets;
@@ -82,8 +73,8 @@ public final class AppController {
             case Strings.AppController.TIME_COMMAND -> TimeCommand.run(this);
             case Strings.AppController.MOVES_COMMAND -> MovesCommand.run(this);
             default -> {
-                // FIXME: Handle moves
-                System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);
+                MoveCommand.run(this, mainCommand);
+                //System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);
             }
         }
     }
