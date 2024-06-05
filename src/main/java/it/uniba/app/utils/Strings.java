@@ -584,4 +584,19 @@ public final class Strings {
         public static final String CELL_STARTING_EXCEPTION = "Impossibile bloccare celle di partenza o adiacenti.";
 
     }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.MoveCommand}
+     */
+    public static final class MoveCommand {
+        private MoveCommand() {
+        }
+
+        /**
+         * Messaggio di errore stampato per una mossa con un formato non valido.
+         */
+        public static final String INVALID_MOVE_FORMAT = "Il formato della mossa non e' valido. "
+                                                         + "Deve essere nel formato "
+                                                         + "<cella di partenza>-<cella di destinazione>.";
+    }
 }
