@@ -55,10 +55,8 @@ public record Move(Board.Position from, Board.Position to, Board.Cell player) {
      * @return il tipo della mossa
      */
     public Type getType() {
-        final var rowDistance = Math.abs(this.to.row() - this.from.row());
-        final var columnDistance = Math.abs(this.to.column() - this.from.column());
-
-        if (rowDistance <= JUMP_AND_REPLICATE_DISTANCE && columnDistance <= JUMP_AND_REPLICATE_DISTANCE) {
+        final int distance = Board.Position.distance(this.from, this.to);
+        if (distance <= JUMP_AND_REPLICATE_DISTANCE) {
             return Type.JUMP_AND_REPLICATE;
         }
 
