@@ -142,6 +142,11 @@ public final class Strings {
                                                           + "Digita "
                                                           + HELP_COMMAND
                                                           + " per visualizzare i comandi disponibili.";
+
+        /**
+         * Espressione regolare per una mossa.
+         */
+        public static final String MOVE_REGEX = "^\\s*[a-z][0-9]\\s*-\\s*[a-z][0-9]\\s*$";
     }
 
     /**

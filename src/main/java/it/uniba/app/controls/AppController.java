@@ -73,8 +73,11 @@ public final class AppController {
             case Strings.AppController.TIME_COMMAND -> TimeCommand.run(this);
             case Strings.AppController.MOVES_COMMAND -> MovesCommand.run(this);
             default -> {
-                MoveCommand.run(this, mainCommand);
-                //System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);
+                if(mainCommand.matches(Strings.AppController.MOVE_REGEX)) {
+                    MoveCommand.run(this, mainCommand);
+                } else {
+                    System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);
+                }
             }
         }
     }
