@@ -71,7 +71,7 @@ public final class AppController {
             case Strings.AppController.EMPTY_BOARD_COMMAND -> EmptyBoardCommand.run();
             case Strings.AppController.BLOCK_COMMAND -> BlockCommand.run(this, argument);
             case Strings.AppController.TIME_COMMAND -> TimeCommand.run(this);
-            case Strings.AppController.MOVES_COMMAND -> MovesCommand.run(this);
+            case Strings.AppController.MOVE_LIST_COMMAND -> MoveListCommand.run(this);
             default -> {
                 if(mainCommand.matches(Strings.AppController.MOVE_REGEX)) {
                     MoveCommand.run(this, mainCommand);

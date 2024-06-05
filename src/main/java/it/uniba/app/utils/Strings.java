@@ -1,5 +1,7 @@
 package it.uniba.app.utils;
 
+import it.uniba.app.commands.MoveListCommand;
+
 /**
  * Classe contenente le stringhe utilizzate nell'applicazione.
  */
@@ -131,9 +133,9 @@ public final class Strings {
         public static final String BLOCK_COMMAND = "/blocca";
 
         /**
-         * Comando per {@link it.uniba.app.commands.MovesCommand}.
+         * Comando per {@link MoveListCommand}.
          */
-        public static final String MOVES_COMMAND = "/mosse";
+        public static final String MOVE_LIST_COMMAND = "/mosse";
 
         /**
          * Messaggio di errore per un comando non riconosciuto.
