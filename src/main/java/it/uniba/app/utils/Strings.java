@@ -1,7 +1,5 @@
 package it.uniba.app.utils;
 
-import it.uniba.app.commands.MoveListCommand;
-
 /**
  * Classe contenente le stringhe utilizzate nell'applicazione.
  */
@@ -593,7 +591,7 @@ public final class Strings {
     }
 
     /**
-     * Stringhe utilizzate in {@link it.uniba.app.commands.MoveCommand}
+     * Stringhe utilizzate in {@link it.uniba.app.commands.MoveCommand}.
      */
     public static final class MoveCommand {
         private MoveCommand() {

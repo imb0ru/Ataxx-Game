@@ -1,6 +1,16 @@
 package it.uniba.app.controls;
 
-import it.uniba.app.commands.*;
+import it.uniba.app.commands.HelpCommand;
+import it.uniba.app.commands.PlayCommand;
+import it.uniba.app.commands.WhatMovesCommand;
+import it.uniba.app.commands.BoardCommand;
+import it.uniba.app.commands.QuitCommand;
+import it.uniba.app.commands.ExitCommand;
+import it.uniba.app.commands.EmptyBoardCommand;
+import it.uniba.app.commands.BlockCommand;
+import it.uniba.app.commands.TimeCommand;
+import it.uniba.app.commands.MoveListCommand;
+import it.uniba.app.commands.MoveCommand;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.uniba.app.entities.Board;
 import it.uniba.app.utils.Strings;
@@ -73,7 +83,7 @@ public final class AppController {
             case Strings.AppController.TIME_COMMAND -> TimeCommand.run(this);
             case Strings.AppController.MOVE_LIST_COMMAND -> MoveListCommand.run(this);
             default -> {
-                if(mainCommand.matches(Strings.AppController.MOVE_REGEX)) {
+                if (mainCommand.matches(Strings.AppController.MOVE_REGEX)) {
                     MoveCommand.run(this, mainCommand);
                 } else {
                     System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);

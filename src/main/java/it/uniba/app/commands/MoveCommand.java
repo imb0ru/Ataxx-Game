@@ -9,7 +9,7 @@ import it.uniba.app.utils.Strings;
 /**
  * Classe << Boundary >> che si occupa di eseguire una mossa inserita dall'utente.
  */
-public class MoveCommand {
+public final class MoveCommand {
     private MoveCommand() {
     }
 
@@ -27,8 +27,9 @@ public class MoveCommand {
         }
 
         final var parts = moveString.split("-");
-        if (parts.length != 2)
+        if (parts.length != 2) {
             System.out.println(Strings.MoveCommand.INVALID_MOVE_FORMAT);
+        }
 
         try {
             final var fromPosition = Board.Position.fromString(parts[0].trim());
