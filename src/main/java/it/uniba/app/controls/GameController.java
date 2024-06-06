@@ -282,6 +282,7 @@ public final class GameController {
         if (this.gameState == GameState.IN_PROGRESS
             && getLegalMovesForCurrentPlayer().isEmpty()) {
             this.currentPlayer = current;
+            System.out.println(Strings.GameController.PASS_TURN);
         }
     }
 

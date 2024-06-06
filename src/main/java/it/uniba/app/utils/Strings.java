@@ -337,6 +337,11 @@ public final class Strings {
          */
         public static final String DESTINATION_CELL_OCCUPIED_EXCEPTION = "La cella di destinazione e' occupata";
 
+        /**
+         * Stringa usata quando le pedine di un giocatore sono bloccate e viene passato il turno all'avversario.
+         */
+        public static final String PASS_TURN = "Per impossibilità di movimento, il turno passa all'avversario!";
+
     }
 
     /**
