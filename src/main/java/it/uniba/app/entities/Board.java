@@ -6,8 +6,6 @@ import it.uniba.app.utils.Strings;
 
 import java.util.Arrays;
 
-import static java.lang.Math.max;
-
 /**
  * Classe << Entity >> che rappresenta il tavoliere del gioco.
  */
@@ -105,15 +103,16 @@ public final class Board {
         }
 
         /**
-         * Verifica se una posizione è adiacente a un'altra.
-         * @param from
-         * @param to
-         * @return
+         * Calcola la distanza tra due posizioni.
+         *
+         * @param from la posizione dalla quale si vuole calcolare la distanza
+         * @param to la posizione fino alla quale si vuole calcolare la distanza
+         * @return la distanza tra le due posizioni
          */
         public static int distance(final Position from, final Position to) {
             int rowDiff = Math.abs(from.row() - to.row());
             int colDiff = Math.abs(from.column() - to.column());
-            return max(rowDiff, colDiff);
+            return Math.max(rowDiff, colDiff);
         }
 
         /**

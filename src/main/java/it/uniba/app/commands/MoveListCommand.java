@@ -10,8 +10,8 @@ import it.uniba.app.utils.Strings;
  * Classe << Boundary >> che si occupa di eseguire il comando `/mosse`.
  * Stampa a video le mosse effettuate durante la partita.
  */
-public final class MovesCommand {
-    private MovesCommand() {
+public final class MoveListCommand {
+    private MoveListCommand() {
     }
 
     /**

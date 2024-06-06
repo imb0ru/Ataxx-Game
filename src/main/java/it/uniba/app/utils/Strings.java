@@ -131,9 +131,9 @@ public final class Strings {
         public static final String BLOCK_COMMAND = "/blocca";
 
         /**
-         * Comando per {@link it.uniba.app.commands.MovesCommand}.
+         * Comando per {@link MoveListCommand}.
          */
-        public static final String MOVES_COMMAND = "/mosse";
+        public static final String MOVE_LIST_COMMAND = "/mosse";
 
         /**
          * Messaggio di errore per un comando non riconosciuto.
@@ -142,6 +142,11 @@ public final class Strings {
                                                           + "Digita "
                                                           + HELP_COMMAND
                                                           + " per visualizzare i comandi disponibili.";
+
+        /**
+         * Espressione regolare per una mossa.
+         */
+        public static final String MOVE_REGEX = "^\\s*[a-z][0-9]\\s*-\\s*[a-z][0-9]\\s*$";
     }
 
     /**
@@ -595,5 +600,20 @@ public final class Strings {
          */
         public static final String CELL_STARTING_EXCEPTION = "Impossibile bloccare celle di partenza o adiacenti.";
 
+    }
+
+    /**
+     * Stringhe utilizzate in {@link it.uniba.app.commands.MoveCommand}.
+     */
+    public static final class MoveCommand {
+        private MoveCommand() {
+        }
+
+        /**
+         * Messaggio di errore stampato per una mossa con un formato non valido.
+         */
+        public static final String INVALID_MOVE_FORMAT = "Il formato della mossa non e' valido. "
+                                                         + "Deve essere nel formato "
+                                                         + "<cella di partenza>-<cella di destinazione>.";
     }
 }
