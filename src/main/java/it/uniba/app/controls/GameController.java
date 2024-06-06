@@ -323,6 +323,28 @@ public final class GameController {
         } else {
             this.gameState = GameState.BLACK_WINS;
         }
+
+        if (this.gameState != GameState.IN_PROGRESS) {
+            displayEndGameResults(cells);
+        }
+    }
+
+    /**
+     * Visualizza i risultati di fine partita con il vincitore e i punti segnati.
+     *
+     * @param cells un array contenente il numero di celle bianche, nere e vuote
+     */
+    private void displayEndGameResults(final int[] cells) {
+        String winner = switch (this.gameState) {
+            case BLACK_WINS -> "Nero";
+            case WHITE_WINS -> "Bianco";
+            default -> throw new IllegalStateException("La partita è ancora in corso.");
+        };
+
+        int whitePoints = cells[0];
+        int blackPoints = cells[1];
+
+        System.out.printf(Strings.GameController.END_GAME, winner, whitePoints, blackPoints);
     }
 
     /**
