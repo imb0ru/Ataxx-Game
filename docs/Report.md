@@ -307,6 +307,15 @@ Ogni membro del team ha contribuito con idee e soluzioni innovative. E' stato mo
 Abbiamo sin da subito definito i compiti di ogni componente del team per evitare sovrapposizioni e confusioni.
 I meeting periodici erano un elemento chiave della nostra organizzazione. Questi meeting si svolgevano alla fine di ogni task e avevano lo scopo di supervisionare il lavoro svolto, verificare che il lavoro fosse completato correttamente (secondo gli standard prefissati) e controllare l'assenza di problematiche, cioè identificare eventuali problemi o ostacoli che potevano rallentare il progresso del progetto e trovare soluzioni adeguate.
 
+### (8.3) Utilizzo di piattaforme per la comunicazione
+Per facilitare la comunicazione e l'organizzazione del lavoro, abbiamo utilizzato la piattaforma Discord.
+La piattaforma Discord è stata utilizzata per organizzare meeting regolari, in cui discutevamo dei progressi del progetto, delle problematiche riscontrate e delle strategie future.
+Durante i meeting, abbiamo suddiviso le issue tra i membri del team, assicurandoci che ognuno avesse chiari i propri compiti.
+La piattaforma è stata utilizzata anche per le sessioni di review, in cui abbiamo controllato il lavoro svolto e fornito feedback per migliorare ulteriormente le funzionalità del progetto.
+Anche in caso di supporto e di difficoltà, Discord è stato il nostro principale strumento di supporto, permettendoci di risolvere rapidamente qualsiasi inconveniente.
+
+Grazie a questa struttura organizzativa e all'utilizzo efficace di Discord, siamo riusciti a mantenere un flusso di lavoro fluido e produttivo, garantendo la qualità e la puntualità delle scadenze.
+
 ## (9) Analisi Retrospettiva
 
 All'interno di questa sezione si trovano le relazioni dei vari Sprint
