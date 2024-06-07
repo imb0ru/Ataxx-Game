@@ -130,11 +130,11 @@ A loro volta queste sono composte da
     2) in arancione raggiungibili con mosse che consentono un salto
     3) in rosa le caselle raggiungibili con mosse di tipo a o b
 - (RF8) Il sistema deve permettere di visualizzare le mosse giocate.
-  - (RF8.1) Al comando `/mosse` l'applicazione mostra a schermo la storia delle mosse con notazione algebrica `m. xn ym (p)` dove `m` è il numero della mossa, `xn` è la posizione di partenza e `ym` è la posizione di arrivo e `p` è il giocatore che ha effettuato la mossa.
+  - (RF8.1) Al comando `/mosse` l'applicazione mostra a schermo la storia delle mosse con notazione algebrica `k. xn ym (p)` dove `k` è il numero della mossa, `xn` è la posizione di partenza e `ym` è la posizione di arrivo e `p` è il giocatore che ha effettuato la mossa.
 - (RF9) Il sistema deve permettere di visualizzare il tempo di gioco.
   - (RF9.1) Al comando `/tempo` l'applicazione mostra a schermo il tempo trascorso dall'inizio della partita in formato `ore:minuti:secondi`.
 - (RF10) Il sistema deve permettere di impostare caselle non accessibili.
-  - (RF10.1) Al comando `/blocca xn`, se nessuna partita è in corso, l'applicazione blocca la cella che si trova alla riga `x` e colonna `n` del tavoliere, la cella viene mostrata con sul tavoliere con uno sfondo grigio e non può essere occupata da nessuna pedina.
+  - (RF10.1) Al comando `/blocca xn`, se nessuna partita è in corso, l'applicazione blocca la cella che si trova alla riga `x` e colonna `n` del tavoliere, la cella viene mostrata sul tavoliere con uno sfondo grigio e non può essere occupata da nessuna pedina.
   - (RF10.2) Non è possibile bloccare:
     - (RF10.2.1) le celle di partenza dei giocatori
     - (RF10.2.2) tutte le caselle adiacenti ad una casella di partenza del gioco, rendendo impossibile la mossa di espansione di una pedina a inizio gioco
@@ -148,6 +148,10 @@ A loro volta queste sono composte da
     - (RF11.1.4) Se la cella di partenza è occupata da una pedina del giocatore di turno, la cella di arrivo è vuota, non bloccata e adiacente alla cella di partenza, la mossa è valida e la pedina viene duplicata nella cella di arrivo.
     - (RF11.1.5) Se la cella di partenza è occupata da una pedina del giocatore di turno, la cella di arrivo è vuota, non bloccata e distante 2 dalla cella di partenza, la mossa è valida e la pedina viene spostata nella cella di arrivo.
     - (RF11.1.6) Se la mossa è valida, e nelle celle adiacenti alla cella di arrivo c'è almeno una pedina avversaria, queste vengono convertite nel colore del giocatore di turno.
+- (RF12) Il sistema deve permettere di passare il turno in caso di impossibilità di movimento.
+  - (RF12.1) Se il giocatore di turno non può effettuare nessuna mossa valida, il sistema passa il turno all'avversario.
+- (RF13) Il sistema deve permettere di visualizzare il vincitore della partita.
+  - (RF13.1) Quando tutte le celle del tavoliere sono occupate il sistema deve dichiarare il vincitore e riportare il punteggio finale.
     
 
 ### (3.2) Requisiti non funzionali
