@@ -316,6 +316,12 @@ Anche in caso di supporto e di difficoltà, Discord è stato il nostro principal
 
 Grazie a questa struttura organizzativa e all'utilizzo efficace di Discord, siamo riusciti a mantenere un flusso di lavoro fluido e produttivo, garantendo la qualità e la puntualità delle scadenze.
 
+### (8.4) Tool Utilizzati
+Per lo svolgimento delle varie attività abbiamo utilizzato differenti tool per rappresentarle al meglio.
+Uno di questi è stato **draw.io**, il quale è stato utilizzato per la realizzazione dell'analisi retrospettiva e quindi per realizzare lo schema arrabbiato/triste/felice.
+
+Invece, per la creazione di bozze relative ai diagrammi delle classi abbiamo utilizzato **StarUML** per schematizzare meglio i concetti.
+
 ## (9) Analisi Retrospettiva
 
 All'interno di questa sezione si trovano le relazioni dei vari Sprint
