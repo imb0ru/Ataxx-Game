@@ -290,6 +290,16 @@ verrà segnalato all'utente con un messaggio di avviso.
 
 ![Nessuna partita in corso](/docs/img/nessuna_partita_in_corso.png)
 
+## (8) Processo di sviluppo e organizzazione del lavoro
+In questa sezione analizzeremo il processo di sviluppo utilizzato e la pianificazione del lavoro.
+
+### (8.1) Processo di sviluppo adottato
+Il gruppo Berners-Lee ha scelto, per la realizzazione di questo progetto, di adottare un processo di sviluppo agile basato sul framework Scrum; questo è stato scelto per gestire al meglio il ciclo di sviluppo del progetto Ataxx.
+
+Il Product Owner ci ha assegnato diversi Sprint.
+All'inizio di ogni Sprint si è svolto un Meeting con l'obiettivo di revisionare lo Sprint precedente e migliorare eventuali aspetti.
+Ogni Sprint rappresenta un periodo di tempo (solitamente della durata di due settimane) in cui ogni componente del team sviluppa le funzionalità che sono state richieste.
+
 ## (9) Analisi Retrospettiva
 
 All'interno di questa sezione si trovano le relazioni dei vari Sprint
