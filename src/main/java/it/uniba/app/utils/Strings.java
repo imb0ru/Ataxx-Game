@@ -131,7 +131,7 @@ public final class Strings {
         public static final String BLOCK_COMMAND = "/blocca";
 
         /**
-         * Comando per {@link MoveListCommand}.
+         * Comando per {@link it.uniba.app.commands.MoveListCommand}.
          */
         public static final String MOVE_LIST_COMMAND = "/mosse";
 
@@ -456,9 +456,9 @@ public final class Strings {
         /**
          * Descrizione del comando `/mosse`.
          */
-        public static final String MOVES_COMMAND = "  " + AppController.MOVES_COMMAND
-                                                  + "\t\t\tIn gioco, mostra le mosse effettuate"
-                                                  + " dall'inizio della partita";
+        public static final String MOVE_LIST_COMMAND = "  " + AppController.MOVE_LIST_COMMAND
+                                                       + "\t\t\tIn gioco, mostra le mosse effettuate"
+                                                       + " dall'inizio della partita";
 
         /**
          * Descrizione del comando `/blocca`.
@@ -466,6 +466,11 @@ public final class Strings {
         public static final String BLOCK_COMMAND = "  " + AppController.BLOCK_COMMAND + " <cella>"
                                                    + "\tIn gioco, blocca una cella";
 
+        /**
+         * Descrizione di una possibile mossa durante la partita.
+         */
+        public static final String MOVE_COMMAND = "Per eseguire una mossa durante la partita:\n"
+                                                  + "  <cella di partenza>-<cella di destinazione>";
     }
 
     /**
