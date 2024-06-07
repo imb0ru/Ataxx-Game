@@ -10,7 +10,11 @@
 5. _TDB_
 6. _TDB_
 7. [Manuale utente](#7-manuale-utente)
-8. _TDB_
+8. [Processo di sviluppo e organizzazione del lavoro](#8-processo-di-sviluppo-e-organizzazione-del-lavoro) <br>
+    8.1 [Processo di sviluppo adotatto](#81-processo-di-sviluppo-adottato) <br>
+    8.2 [Organizzazione del Lavoro](#82-organizzazione-del-lavoro) <br>
+    8.3 [Utilizzo di piattaforme per la comunicazione](#83-utilizzo-di-piattaforme-per-la-comunicazione) <br>
+    8.4 [Tool Utilizzati](#84-tool-utilizzati) <br>
 9. [Analisi Retrospettiva](#9-analisi-retrospettiva) <br>
 9.1 [Sprint 0](#91-sprint-0) <br>
 
