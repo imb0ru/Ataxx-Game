@@ -93,42 +93,65 @@ A loro volta queste sono composte da
     mostra il tavoliere con le pedine in posizione iniziale e si
     predispone a ricevere la prima mossa di gioco del nero o altri
     comandi.
-  - (RF2) Il sistema deve permettere di terminare l'applicazione.
-    - (RF2.1) Al comando `/esci` l'applicazione chiede conferma. Se la
-      conferma è positiva, l'applicazione si chiude restituendo il
-      controllo al sistema operativo altrimenti si predispone a ricevere nuovi tentativi o comandi.
-  - (RF3) Il sistema deve permettere al giocatore di abbandonare una partita in corso.
-    - (RF3.1) Al comando `/abbandona` l'applicazione chiede conferma.
-      Se la conferma è positiva, l'app comunica che il Bianco (o il
-      Nero) ha perso per abbandono e dichiara come vincitore
-      l'avversario per x a 0 dove x è il numero di pedine rimaste
-      dell'avversario. Se la conferma è negativa, l'app si predispone
-      a ricevere nuove mosse o comandi.
-  - (RF4) Il sistema deve permettere al giocatore di visualizzare 
-    tutti i comandi disponibili.
-    - (RF4.1) Al comando `/help` o invocando l'app con flag `--help` o `-h` 
-      l'applicazione mostra a schermo tutti i comandi disponibili. Il 
-      risultato è una descrizione concisa seguita dalla lista di 
-      comandi disponibili, uno per riga.
-  - (RF5) Il sistema deve permettere di visualizzare il tavoliere di 
-    gioco vuoto.
-    - (RF5.1) Al comando `/vuoto` l'applicazione mostra a schermo
-      il tavoliere di gioco vuoto di 49 caselle quadrate con le righe 
-      numerate da 1 a 7 e le colonne numerate da `a` a `g`.
-  - (RF6) Il sistema deve permettere di visualizzare il tavoliere di
-       gioco con le pedine in posizione attuale.
-      - (RF6.1) Al comando `/tavoliere` se il gioco non è iniziato 
-        l'app suggerisce il comando `gioca`, altrimenti mostra la 
-        posizione di tutte le pedine sul tavoliere.
-  - (RF7) Il sistema deve permettere di visualizzare le mosse 
-    possibili di una pedina.
-    - (RF7.1) Al comando `/qualimosse` se il gioco non è iniziato 
-      l'app suggerisce il comando `gioca`, altrimenti mostra le 
-      mosse possibili per il giocatore di turno, evidenziando
-      1) in giallo le caselle raggiungibili con mosse che generano una 
-        nuova pedina
-      2) in arancione raggiungibili con mosse che consentono un salto
-      3) in rosa le caselle raggiungibili con mosse di tipo a o b
+- (RF2) Il sistema deve permettere di terminare l'applicazione.
+  - (RF2.1) Al comando `/esci` l'applicazione chiede conferma. Se la
+    conferma è positiva, l'applicazione si chiude restituendo il
+    controllo al sistema operativo altrimenti si predispone a ricevere nuovi tentativi o comandi.
+- (RF3) Il sistema deve permettere al giocatore di abbandonare una partita in corso.
+  - (RF3.1) Al comando `/abbandona` l'applicazione chiede conferma.
+    Se la conferma è positiva, l'app comunica che il Bianco (o il
+    Nero) ha perso per abbandono e dichiara come vincitore
+    l'avversario per x a 0 dove x è il numero di pedine rimaste
+    dell'avversario. Se la conferma è negativa, l'app si predispone
+    a ricevere nuove mosse o comandi.
+- (RF4) Il sistema deve permettere al giocatore di visualizzare 
+  tutti i comandi disponibili.
+  - (RF4.1) Al comando `/help` o invocando l'app con flag `--help` o `-h` 
+    l'applicazione mostra a schermo tutti i comandi disponibili. Il 
+    risultato è una descrizione concisa seguita dalla lista di 
+    comandi disponibili, uno per riga.
+- (RF5) Il sistema deve permettere di visualizzare il tavoliere di 
+  gioco vuoto.
+  - (RF5.1) Al comando `/vuoto` l'applicazione mostra a schermo
+    il tavoliere di gioco vuoto di 49 caselle quadrate con le righe 
+    numerate da 1 a 7 e le colonne numerate da `a` a `g`.
+- (RF6) Il sistema deve permettere di visualizzare il tavoliere di
+     gioco con le pedine in posizione attuale.
+    - (RF6.1) Al comando `/tavoliere` se il gioco non è iniziato 
+      l'app suggerisce il comando `gioca`, altrimenti mostra la 
+      posizione di tutte le pedine sul tavoliere.
+- (RF7) Il sistema deve permettere di visualizzare le mosse 
+  possibili di una pedina.
+  - (RF7.1) Al comando `/qualimosse` se il gioco non è iniziato 
+    l'app suggerisce il comando `gioca`, altrimenti mostra le 
+    mosse possibili per il giocatore di turno, evidenziando
+    1) in giallo le caselle raggiungibili con mosse che generano una 
+      nuova pedina
+    2) in arancione raggiungibili con mosse che consentono un salto
+    3) in rosa le caselle raggiungibili con mosse di tipo a o b
+- (RF8) Il sistema deve permettere di visualizzare le mosse giocate.
+  - (RF8.1) Al comando `/mosse` l'applicazione mostra a schermo la storia delle mosse con notazione algebrica `k. xn ym (p)` dove `k` è il numero della mossa, `xn` è la posizione di partenza e `ym` è la posizione di arrivo e `p` è il giocatore che ha effettuato la mossa.
+- (RF9) Il sistema deve permettere di visualizzare il tempo di gioco.
+  - (RF9.1) Al comando `/tempo` l'applicazione mostra a schermo il tempo trascorso dall'inizio della partita in formato `ore:minuti:secondi`.
+- (RF10) Il sistema deve permettere di impostare caselle non accessibili.
+  - (RF10.1) Al comando `/blocca xn`, se nessuna partita è in corso, l'applicazione blocca la cella che si trova alla riga `x` e colonna `n` del tavoliere, la cella viene mostrata sul tavoliere con uno sfondo grigio e non può essere occupata da nessuna pedina.
+  - (RF10.2) Non è possibile bloccare:
+    - (RF10.2.1) le celle di partenza dei giocatori
+    - (RF10.2.2) tutte le caselle adiacenti ad una casella di partenza del gioco, rendendo impossibile la mossa di espansione di una pedina a inizio gioco
+    - (RF10.2.3) tutte le caselle a distanza 2 da una casella di partenza del gioco, rendendo impossibile la mossa di salto di una pedina a inizio gioco
+    - (RF10.2.4) più di 9 celle
+- (RF11) Il sistema deve permettere di effettuare una mossa.
+  - (RF11.1) Utilizzando la notazione algebrica `xn-ym` dove `xn` è la cella di partenza e `ym` è la cella di arrivo, il giocatore deve poter effettuare una mossa valida:
+    - (RF11.1.1) Se nella cella di partenza non c'è una pedina del giocatore di turno, la mossa non è valida.
+    - (RF11.1.2) Se la cella di arrivo è occupata da una pedina, la mossa non è valida.
+    - (RF11.1.3) Se la cella di arrivo è bloccata, la mossa non è valida.
+    - (RF11.1.4) Se la cella di partenza è occupata da una pedina del giocatore di turno, la cella di arrivo è vuota, non bloccata e adiacente alla cella di partenza, la mossa è valida e la pedina viene duplicata nella cella di arrivo.
+    - (RF11.1.5) Se la cella di partenza è occupata da una pedina del giocatore di turno, la cella di arrivo è vuota, non bloccata e distante 2 dalla cella di partenza, la mossa è valida e la pedina viene spostata nella cella di arrivo.
+    - (RF11.1.6) Se la mossa è valida, e nelle celle adiacenti alla cella di arrivo c'è almeno una pedina avversaria, queste vengono convertite nel colore del giocatore di turno.
+- (RF12) Il sistema deve permettere di passare il turno in caso di impossibilità di movimento.
+  - (RF12.1) Se il giocatore di turno non può effettuare nessuna mossa valida, il sistema passa il turno all'avversario.
+- (RF13) Il sistema deve permettere di visualizzare il vincitore della partita.
+  - (RF13.1) Quando tutte le celle del tavoliere sono occupate il sistema deve dichiarare il vincitore e riportare il punteggio finale.
     
 
 ### (3.2) Requisiti non funzionali
