@@ -130,7 +130,7 @@ A loro volta queste sono composte da
     2) in arancione raggiungibili con mosse che consentono un salto
     3) in rosa le caselle raggiungibili con mosse di tipo a o b
 - (RF8) Il sistema deve permettere di visualizzare le mosse giocate.
-  - (RF8.1) Al comando `/mosse` l'applicazione mostra a schermo la storia delle mosse con notazione algebrica `m. x1n1 x2n2 (p)` dove `m` è il numero della mossa, `x1n1` è la posizione di partenza e `x2n2` è la posizione di arrivo e `p` è il giocatore che ha effettuato la mossa.
+  - (RF8.1) Al comando `/mosse` l'applicazione mostra a schermo la storia delle mosse con notazione algebrica `m. xn ym (p)` dove `m` è il numero della mossa, `xn` è la posizione di partenza e `ym` è la posizione di arrivo e `p` è il giocatore che ha effettuato la mossa.
 - (RF9) Il sistema deve permettere di visualizzare il tempo di gioco.
   - (RF9.1) Al comando `/tempo` l'applicazione mostra a schermo il tempo trascorso dall'inizio della partita in formato `ore:minuti:secondi`.
 - (RF10) Il sistema deve permettere di impostare caselle non accessibili.
