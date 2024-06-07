@@ -300,6 +300,13 @@ Il Product Owner ci ha assegnato diversi Sprint.
 All'inizio di ogni Sprint si è svolto un Meeting con l'obiettivo di revisionare lo Sprint precedente e migliorare eventuali aspetti.
 Ogni Sprint rappresenta un periodo di tempo (solitamente della durata di due settimane) in cui ogni componente del team sviluppa le funzionalità che sono state richieste.
 
+### (8.2) Organizzazione del Lavoro
+Lavorare all'interno di un team è fondamentale per il successo di un progetto. La collaborazione, il rispetto reciproco, la chiarezza dei ruoli e una comunicazione efficace sono i pilastri su cui si basa una squadra vincente.
+
+Ogni membro del team ha contribuito con idee e soluzioni innovative. E' stato molto importante il supporto e il rispetto reciproco per superare le difficoltà e raggiungere gli obiettivi comuni.
+Abbiamo sin da subito definito i compiti di ogni componente del team per evitare sovrapposizioni e confusioni.
+I meeting periodici erano un elemento chiave della nostra organizzazione. Questi meeting si svolgevano alla fine di ogni task e avevano lo scopo di supervisionare il lavoro svolto, verificare che il lavoro fosse completato correttamente (secondo gli standard prefissati) e controllare l'assenza di problematiche, cioè identificare eventuali problemi o ostacoli che potevano rallentare il progresso del progetto e trovare soluzioni adeguate.
+
 ## (9) Analisi Retrospettiva
 
 All'interno di questa sezione si trovano le relazioni dei vari Sprint
