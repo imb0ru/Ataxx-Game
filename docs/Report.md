@@ -134,6 +134,12 @@ A loro volta queste sono composte da
 - (RF9) Il sistema deve permettere di visualizzare il tempo di gioco.
   - (RF9.1) Al comando `/tempo` l'applicazione mostra a schermo il tempo trascorso dall'inizio della partita in formato `ore:minuti:secondi`.
 - (RF10) Il sistema deve permettere di impostare caselle non accessibili.
+  - (RF10.1) Al comando `/blocca xn`, se nessuna partita è in corso, l'applicazione blocca la cella che si trova alla riga `x` e colonna `n` del tavoliere, la cella viene mostrata con sul tavoliere con uno sfondo grigio e non può essere occupata da nessuna pedina.
+  - (RF10.2) Non è possibile bloccare:
+    - (RF10.2.1) le celle di partenza dei giocatori
+    - (RF10.2.2) tutte le caselle adiacenti ad una casella di partenza del gioco, rendendo impossibile la mossa di espansione di una pedina a inizio gioco
+    - (RF10.2.3) tutte le caselle a distanza 2 da una casella di partenza del gioco, rendendo impossibile la mossa di salto di una pedina a inizio gioco
+    - (RF10.2.4) più di 9 celle
     
 
 ### (3.2) Requisiti non funzionali
