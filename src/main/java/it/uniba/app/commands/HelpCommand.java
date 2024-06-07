@@ -40,5 +40,7 @@ public final class HelpCommand {
         System.out.println(Strings.HelpCommand.TIME_COMMAND);
         System.out.println(Strings.HelpCommand.MOVE_LIST_COMMAND);
         System.out.println(Strings.HelpCommand.BLOCK_COMMAND);
+        System.out.println();
+        System.out.println(Strings.HelpCommand.MOVE_COMMAND);
     }
 }

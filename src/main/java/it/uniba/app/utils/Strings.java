@@ -457,6 +457,11 @@ public final class Strings {
         public static final String BLOCK_COMMAND = "  " + AppController.BLOCK_COMMAND + " <cella>"
                                                    + "\tIn gioco, blocca una cella";
 
+        /**
+         * Descrizione di una possibile mossa durante la partita.
+         */
+        public static final String MOVE_COMMAND = "Per eseguire una mossa durante la partita:\n"
+                                                  + "  <cella di partenza>-<cella di destinazione>";
     }
 
     /**
