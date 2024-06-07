@@ -140,6 +140,14 @@ A loro volta queste sono composte da
     - (RF10.2.2) tutte le caselle adiacenti ad una casella di partenza del gioco, rendendo impossibile la mossa di espansione di una pedina a inizio gioco
     - (RF10.2.3) tutte le caselle a distanza 2 da una casella di partenza del gioco, rendendo impossibile la mossa di salto di una pedina a inizio gioco
     - (RF10.2.4) più di 9 celle
+- (RF11) Il sistema deve permettere di effettuare una mossa.
+  - (RF11.1) Utilizzando la notazione algebrica `xn-ym` dove `xn` è la cella di partenza e `ym` è la cella di arrivo, il giocatore deve poter effettuare una mossa valida:
+    - (RF11.1.1) Se nella cella di partenza non c'è una pedina del giocatore di turno, la mossa non è valida.
+    - (RF11.1.2) Se la cella di arrivo è occupata da una pedina, la mossa non è valida.
+    - (RF11.1.3) Se la cella di arrivo è bloccata, la mossa non è valida.
+    - (RF11.1.4) Se la cella di partenza è occupata da una pedina del giocatore di turno, la cella di arrivo è vuota, non bloccata e adiacente alla cella di partenza, la mossa è valida e la pedina viene duplicata nella cella di arrivo.
+    - (RF11.1.5) Se la cella di partenza è occupata da una pedina del giocatore di turno, la cella di arrivo è vuota, non bloccata e distante 2 dalla cella di partenza, la mossa è valida e la pedina viene spostata nella cella di arrivo.
+    - (RF11.1.6) Se la mossa è valida, e nelle celle adiacenti alla cella di arrivo c'è almeno una pedina avversaria, queste vengono convertite nel colore del giocatore di turno.
     
 
 ### (3.2) Requisiti non funzionali
