@@ -299,7 +299,8 @@ public final class GameController {
                 switch (board.getCell(position)) {
                     case BLACK -> ++cells[1];
                     case WHITE -> ++cells[0];
-                    default -> ++cells[2];
+                    case EMPTY -> ++cells[2];
+                    default -> { }
                 }
             }
         }
