@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * CLasse di test per la classe {@link it.uniba.app.entities.Board}
+ * CLasse di test per la classe {@link it.uniba.app.entities.Board}.
  */
 class BoardTest {
     /**
