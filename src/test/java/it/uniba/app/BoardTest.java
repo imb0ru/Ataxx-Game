@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * CLasse di test per la classe {@link it.uniba.app.entities.Board}
  */
-public class BoardTest {
+class BoardTest {
     /**
      * Testa che la configurazione iniziale del tavoliere sia corretta.
      */
