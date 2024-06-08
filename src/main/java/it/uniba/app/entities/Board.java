@@ -413,5 +413,21 @@ public final class Board {
         }
         return false;
     }
+
+    /**
+     * Clona il tavoliere.
+     *
+     * @return una copia del tavoliere
+     */
+    public Board clone() {
+        Board clonedBoard = new Board();
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                clonedBoard.setCell(new Position(i, j), getCell(new Position(i, j)));
+            }
+        }
+        return clonedBoard;
+    }
+
 }
 

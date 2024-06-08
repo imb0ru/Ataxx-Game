@@ -21,7 +21,7 @@ public final class PlayCommand {
      */
     public static void run(final AppController app) {
         if (app.getGame() == null) {
-            app.setGame(new GameController(app.getBoard()));
+            app.setGame(new GameController(app.getBoard().clone()));
             GamePrinter.print(app.getGame(), GamePrinter.PrintMoves.NO, GamePrinter.PrintGameState.YES);
         } else {
             System.out.println(Strings.PlayCommand.GAME_ALREADY_STARTED);
