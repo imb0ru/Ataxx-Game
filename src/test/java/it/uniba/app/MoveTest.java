@@ -5,7 +5,9 @@ import it.uniba.app.entities.Move;
 import it.uniba.app.exceptions.InvalidMoveException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 /**
  * Test per la classe {@link it.uniba.app.entities.Move}.
@@ -30,7 +32,9 @@ class MoveTest {
     @Test
     void constructorThrowsTest() {
         assertThrows(InvalidMoveException.class, () -> {
-            final var distance = Board.Position.distance(Board.Position.fromString("a1"), Board.Position.fromString("a5"));
+            final var distance = Board.Position.distance(
+                Board.Position.fromString("a1"),
+                Board.Position.fromString("a5"));
         }, "La mossa non dovrebbe essere valida a causa della distanza");
     }
 
@@ -41,10 +45,17 @@ class MoveTest {
     @Test
     void moveTypeTest() {
         assertAll(() ->  {
-            final var moveJump = new Move(Board.Position.fromString("a1"), Board.Position.fromString("a3"), Board.Cell.WHITE);
-            assertEquals(Move.Type.JUMP, moveJump.getType(), "a1-a3 dovrebbe essere una mossa di tipo JUMP");
-            final var moveJumpAndReplicate = new Move(Board.Position.fromString("a1"), Board.Position.fromString("a2"), Board.Cell.WHITE);
-            assertEquals(Move.Type.JUMP_AND_REPLICATE, moveJumpAndReplicate.getType(), "a1-a2 dovrebbe essere una mossa di tipo JUMP_AND_REPLICATE");
+            final var moveJump = new Move(
+                Board.Position.fromString("a1"),
+                Board.Position.fromString("a3"), Board.Cell.WHITE);
+            assertEquals(Move.Type.JUMP, moveJump.getType(),
+                "a1-a3 dovrebbe essere una mossa di tipo JUMP");
+
+            final var moveJumpAndReplicate = new Move(
+                Board.Position.fromString("a1"),
+                Board.Position.fromString("a2"), Board.Cell.WHITE);
+            assertEquals(Move.Type.JUMP_AND_REPLICATE, moveJumpAndReplicate.getType(),
+                "a1-a2 dovrebbe essere una mossa di tipo JUMP_AND_REPLICATE");
         });
     }
 }
