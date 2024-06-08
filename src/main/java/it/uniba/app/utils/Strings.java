@@ -76,6 +76,15 @@ public final class Strings {
         public static final String UNRECOGNIZED_OPTION = "Opzione non riconosciuta.\n"
                                                          + "Usa " + HELP_LONG_OPTION + " o " + HELP_SHORT_OPTION
                                                          + " per visualizzare le opzioni disponibili.";
+
+        /**
+         * Stringa usata per annunciare il fine partita con il rispettivo vincitore e i punteggi
+         * di entrambi i giocatori.
+         */
+        public static final String END_GAME_FORMAT = "La partita è terminata!%n"
+                                              + "Il vincitore è il %s.%n"
+                                              + "Il punteggio del Bianco è %d.%n"
+                                              + "Il punteggio del Nero è %d.%n";
     }
 
     /**
@@ -348,14 +357,6 @@ public final class Strings {
          */
         public static final String PASS_TURN = "Per impossibilità di movimento, il turno passa all'avversario!";
 
-        /**
-         * Stringa usata per annunciare il fine partita con il rispettivo vincitore e i punteggi
-         * di entrambi i giocatori.
-         */
-        public static final String END_GAME = "La partita è terminata!%n"
-        + "Il vincitore è il %s.%n"
-        + "Il punteggio del Bianco è %d.%n"
-        + "Il punteggio del Nero è %d.%n";
     }
 
     /**

@@ -2,6 +2,8 @@ package it.uniba.app;
 
 import it.uniba.app.controls.AppController;
 import it.uniba.app.commands.HelpCommand;
+import it.uniba.app.controls.GameController;
+import it.uniba.app.entities.Board;
 import it.uniba.app.utils.Strings;
 
 import java.util.Scanner;
@@ -47,6 +49,20 @@ public final class App {
             System.out.print(Strings.App.PROMPT);
             final String command = keyboard.nextLine().trim();
             appController.run(command);
+
+            final var game = appController.getGame();
+            if (game != null && game.getGameState() != GameController.GameState.IN_PROGRESS) {
+                var winner = switch (game.getGameState()) {
+                    case BLACK_WINS -> Board.Cell.BLACK;
+                    case WHITE_WINS -> Board.Cell.WHITE;
+                    default -> throw new IllegalStateException("La partita è ancora in corso.");
+                };
+
+                final var cellCounts = appController.getGame().countCells();
+                System.out.printf(Strings.App.END_GAME_FORMAT, winner, cellCounts[0], cellCounts[1]);
+
+                appController.setGame(null);
+            }
         }
 
         keyboard.close();
