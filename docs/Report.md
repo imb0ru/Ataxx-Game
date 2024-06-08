@@ -17,6 +17,7 @@
     8.4 [Tool Utilizzati](#84-tool-utilizzati) <br>
 9. [Analisi Retrospettiva](#9-analisi-retrospettiva) <br>
 9.1 [Sprint 0](#91-sprint-0) <br>
+9.2 [Sprint 1](#92-sprint-1) <br>
 
 ## **(1) Introduzione**
 
@@ -329,3 +330,27 @@ che verranno eseguiti durante lo sviluppo del progetto.
 
 ### (9.1) Sprint 0
 ![Retrospettiva Sprint 0](/docs/img/retrospettiva_sprint_0.png)
+
+### (9.2) Sprint 1
+![Retrospettiva Sprint 1](/docs/img/retrospettiva_sprint_1.png)
+
+Nell'immagine precedente, abbiamo analizzato il modello di retrospettiva "Arrabbiato, Triste, Felice" per identificare 
+gli aspetti da migliorare relativi allo Sprint 1. In particolare, esamineremo le soluzioni da adottare per affrontare eventuali problematiche emerse.
+
+### Arrabbiato
+La sezione "**Arrabbiato**" si riferisce a un errore grave emerso nello Sprint 1 nella creazione del modello di dominio. 
+Come team, avremmo dovuto approfondire maggiormente la conoscenza del modello di dominio e delle sue caratteristiche. La formazione continua è cruciale per un team di progetto; una volta individuato l'errore, è necessario correggerlo e risolverlo tempestivamente.
+
+### Triste
+Nella sezione "Triste" emergono diverse problematiche:
+
+- Difficoltà nell'implementazione: Alcuni membri del team hanno incontrato difficoltà nell'implementare alcune funzionalità a causa della scarsa familiarità con il linguaggio di programmazione. Possibili soluzioni includono il supporto da parte dei membri più esperti, la consultazione di materiale online e ulteriori sessioni di formazione interna.
+- Ritardi nelle funzionalità: Alcuni ritardi sono dovuti ad altri impegni, come lo studio di altri corsi. La soluzione a questo problema è una pianificazione dettagliata delle attività, che tenga conto degli impegni universitari e personali, permettendo di adattare i carichi di lavoro in base alle esigenze individuali. È fondamentale incoraggiare una comunicazione aperta e trasparente riguardo agli impegni personali, consentendo al team di riorganizzare le attività e supportarsi a vicenda.
+
+### Felice
+L'ultima sezione evidenzia alcuni aspetti positivi del team:
+
+- Distribuzione del carico di lavoro: Durante ogni Sprint, abbiamo mantenuto una distribuzione equilibrata del carico di lavoro.
+- Ambiente collaborativo: Abbiamo creato un ambiente di lavoro collaborativo e di sostegno, in cui i membri del team si sentono a proprio agio nel chiedere aiuto e nel fornire assistenza.
+
+Concludendo, è essenziale continuare a migliorare la nostra conoscenza tecnica, affinare la pianificazione delle attività e mantenere un ambiente di lavoro positivo e collaborativo.
