@@ -172,6 +172,51 @@ A loro volta queste sono composte da
   - (RNF2.3) Eseguire il container docker con il comando `docker run 
     --rm -it ghcr.io/softeng2324-inf-uniba/ataxx-berners:latest`.
 
+## (6) Riepilogo dei casi di Test
+In questa sezione analizzeremo i casi di Test effettuati su differenti classi.
+Analizziamo nel dettaglio le classi testate:
+
+### Test per la classe `Move`
+
+Di seguito i test selezionati:
+* `constructorTest`: questo metodo testa che la mossa che contiene cella di partenza e cella di arrivo siano correttamente specificate;
+* `constructorThrowsTest`: questo metodo è stato creato per sollevare un'eccezione nel caso in cui le celle specificate vadano oltre la distanza consentita;
+* `moveTypeTest`: questo metodo è stato definito per verificare la tipologia della mossa effettuata da parte del giocatore. Restituisce, in base alla mossa effettuata, la tipologia corretta.
+
+### Test per la classe `Board.Position`
+
+Di seguito i test selezionati:
+* `constructorTest`: questo metodo testa che le righe e le colonne corrispondenti alla posizione siano valide, cioè all'interno del tavoliere;
+* `constructorThrowsTest`: questo metodo serve per sollevare un'eccezione nel caso in cui la posizione non sia valida, ad esempio fuori dal tavoliere;
+* `fromStringTest`: questo metodo testa che la cella di partenza e di arrivo creata a partire dalla stringa siano valide;
+* `fromStringThrowsTest`: questo metodo solleva un'eccezione nel caso in cui la cella di arriva e di partenza create a partire da una stringa non siano valide;
+* `distanceTest`: questo metodo verifica se la distanza tra la cella di partenza e la cella di arrivo sia valida.  
+
+### Test per la classe `GameController`
+
+Di seguito i test selezionati:
+* `initialGameTest`: testa che ogni partita cominciata da zero abbia sempre la stessa configurazione,
+  ovvero che cominci il nero e il tavoliere sia quello specificato nelle regole di gioco.
+* `noWhiteCellsWinTest`, `noBlackCellsWinTest`: in questi due test viene controllata una condizione simile, ovvero che se
+  uno dei due giocatori dovesse arrivare a non avere più celle allora lo stato della partita viene impostato alla vittoria
+  dell'altro giocatore.
+* `correctJumpAndReplicateMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 1 la pedina di partenza non viene
+  spostata e ne venga creata un'altra nella posizione di arrivo.
+* `correctJumpMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 2 la pedina di partenza venga spostata
+  nella posizione d'arrivo.
+* `moveConvertsAdjacentEnemyCellsTest`: in questo test ci assicuriamo che eseguendo una mossa le pedine del nemico adiacenti
+  alla casella di arrivo vengano convertite in pedine del giocatore che ha effettuato la mossa.
+* `moveToBlockedCellTest`: in questo test ci assicuriamo che quando il giocatore prova a fare una mossa che ha come cella
+  di destinazione una cella bloccata viene lanciata un'eccezione.
+
+### Motivazioni dei test
+
+I test sopra descritti contribuiscono a rendere le modifiche al gioco semplici e meno prone ad errori in quanto in questa
+maniera possiamo sempre controllare che i comportamenti base del gioco rimangano invariati.
+
+Infatti, senza di essi, si rischierebbe che una modifica non prudente del codice, potrebbe portare alla creazione di un 
+errore nel codice difficile da rintracciare e che di conseguenza rallenterebbe la produzione di nuovo codice.
+
 ## (7) Manuale Utente
 
 ### Introduzione
