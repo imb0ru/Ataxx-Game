@@ -352,20 +352,21 @@ public final class Board implements Cloneable {
      * @param position posizione della cella da sbloccare
      */
     public void removeBlockedCell(final Position position) {
-        setCell(position, Cell.EMPTY);
-        blockedCellsCounter--;
+        if (getCell(position) == Cell.LOCKED) {
+            setCell(position, Cell.EMPTY);
+            blockedCellsCounter--;
+        }
     }
 
     /**
-     * Setta le celle bloccate a libere.
+     * Setta tutte le celle bloccate a libere.
      */
     public void clearBlockedCells() {
-        for (Cell cell: cells) {
-            if (cell == Cell.LOCKED) {
-                cell = Cell.EMPTY;
+        for (int row = 0; row < SIZE; row++) {
+            for (int column = 0; column < SIZE; column++) {
+                removeBlockedCell(new Position(row, column));
             }
         }
-        blockedCellsCounter = 0;
     }
 
     /**
@@ -388,8 +389,8 @@ public final class Board implements Cloneable {
 
     /**
      * Verifica se una posizione è una posizione iniziale.
-     * @param position
-     * @return
+     * @param position posizione da verificare
+     * @return true se la posizione è una posizione iniziale, false altrimenti
      */
     public boolean isStartingCell(final Position position) {
         for (Position initialPosition : INITIAL_POSITIONS) {
@@ -402,8 +403,9 @@ public final class Board implements Cloneable {
 
     /**
      * Verifica se una posizione è adiacente a una posizione iniziale.
-     * @param position
-     * @return
+     *
+     * @param position posizione da verificare
+     * @return true se la posizione è adiacente a una posizione iniziale, false altrimenti
      */
     public boolean isAdjacentToStartingCell(final Position position) {
         for (Position initialPosition : INITIAL_POSITIONS) {
