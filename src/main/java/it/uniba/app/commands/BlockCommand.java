@@ -19,8 +19,13 @@ public final class BlockCommand {
      */
     public static void run(final AppController app, final String position) {
         Board board = app.getBoard();
-        Board.Position p = Board.Position.fromString(position);
-        System.out.println(p);
+        Board.Position p;
+        try {
+             p = Board.Position.fromString(position);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return;
+        }
 
         if (app.getGame() != null) {
             System.out.println(Strings.BlockCommand.GAME_RUNNING_EXCEPTION);

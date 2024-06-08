@@ -237,7 +237,7 @@ public final class Strings {
         /**
          * Messaggio di errore per il numero di righe non valido.
          */
-        public static final String INVALID_ROW_EXCEPTION_FORMAT = "Riga non valida %d (0 <= riga < %d)";
+        public static final String INVALID_ROW_EXCEPTION_FORMAT = "Riga non valida %d (1 <= riga < %d)";
 
         /**
          * Messaggio di errore per riga non valida.
@@ -247,7 +247,7 @@ public final class Strings {
         /**
          * Messaggio di errore per il numero di colonne non valido.
          */
-        public static final String INVALID_COLUMN_EXCEPTION_FORMAT = "Colonna non valida %d (0 <= colonna < %d)";
+        public static final String INVALID_COLUMN_EXCEPTION_FORMAT = "Colonna non valida %c (a <= colonna < %c)";
 
         /**
          * Messaggio di errore per colonna non valida.
@@ -368,7 +368,7 @@ public final class Strings {
         /**
          * Stringa che contiene la versione del gioco.
          */
-        public static final String GAME_VERSION = "ATAXX 1.0.0 Team Berners-Lee";
+        public static final String GAME_VERSION = "\nATAXX 1.0.0 Team Berners-Lee";
 
         /**
          * Stringa che contiene gli sviluppatori del gioco.
