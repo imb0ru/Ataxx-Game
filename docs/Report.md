@@ -10,7 +10,11 @@
 5. _TDB_
 6. _TDB_
 7. [Manuale utente](#7-manuale-utente)
-8. _TDB_
+8. [Processo di sviluppo e organizzazione del lavoro](#8-processo-di-sviluppo-e-organizzazione-del-lavoro) <br>
+    8.1 [Processo di sviluppo adotatto](#81-processo-di-sviluppo-adottato) <br>
+    8.2 [Organizzazione del Lavoro](#82-organizzazione-del-lavoro) <br>
+    8.3 [Utilizzo di piattaforme per la comunicazione](#83-utilizzo-di-piattaforme-per-la-comunicazione) <br>
+    8.4 [Tool Utilizzati](#84-tool-utilizzati) <br>
 9. [Analisi Retrospettiva](#9-analisi-retrospettiva) <br>
 9.1 [Sprint 0](#91-sprint-0) <br>
 
@@ -285,6 +289,38 @@ Nel caso in cui venisse avviato uno dei comandi (`/tavoliere`, `/qualimosse`, `/
 verrà segnalato all'utente con un messaggio di avviso.
 
 ![Nessuna partita in corso](/docs/img/nessuna_partita_in_corso.png)
+
+## (8) Processo di sviluppo e organizzazione del lavoro
+In questa sezione analizzeremo il processo di sviluppo utilizzato e la pianificazione del lavoro.
+
+### (8.1) Processo di sviluppo adottato
+Il gruppo Berners-Lee ha scelto, per la realizzazione di questo progetto, di adottare un processo di sviluppo agile basato sul framework Scrum; questo è stato scelto per gestire al meglio il ciclo di sviluppo del progetto Ataxx.
+
+Il Product Owner ci ha assegnato diversi Sprint.
+All'inizio di ogni Sprint si è svolto un Meeting con l'obiettivo di revisionare lo Sprint precedente e migliorare eventuali aspetti.
+Ogni Sprint rappresenta un periodo di tempo (solitamente della durata di due settimane) in cui ogni componente del team sviluppa le funzionalità che sono state richieste.
+
+### (8.2) Organizzazione del Lavoro
+Lavorare all'interno di un team è fondamentale per il successo di un progetto. La collaborazione, il rispetto reciproco, la chiarezza dei ruoli e una comunicazione efficace sono i pilastri su cui si basa una squadra vincente.
+
+Ogni membro del team ha contribuito con idee e soluzioni innovative. E' stato molto importante il supporto e il rispetto reciproco per superare le difficoltà e raggiungere gli obiettivi comuni.
+Abbiamo sin da subito definito i compiti di ogni componente del team per evitare sovrapposizioni e confusioni.
+I meeting periodici erano un elemento chiave della nostra organizzazione. Questi meeting si svolgevano alla fine di ogni task e avevano lo scopo di supervisionare il lavoro svolto, verificare che il lavoro fosse completato correttamente (secondo gli standard prefissati) e controllare l'assenza di problematiche, cioè identificare eventuali problemi o ostacoli che potevano rallentare il progresso del progetto e trovare soluzioni adeguate.
+
+### (8.3) Utilizzo di piattaforme per la comunicazione
+Per facilitare la comunicazione e l'organizzazione del lavoro, abbiamo utilizzato la piattaforma Discord.
+La piattaforma Discord è stata utilizzata per organizzare meeting regolari, in cui discutevamo dei progressi del progetto, delle problematiche riscontrate e delle strategie future.
+Durante i meeting, abbiamo suddiviso le issue tra i membri del team, assicurandoci che ognuno avesse chiari i propri compiti.
+La piattaforma è stata utilizzata anche per le sessioni di review, in cui abbiamo controllato il lavoro svolto e fornito feedback per migliorare ulteriormente le funzionalità del progetto.
+Anche in caso di supporto e di difficoltà, Discord è stato il nostro principale strumento di supporto, permettendoci di risolvere rapidamente qualsiasi inconveniente.
+
+Grazie a questa struttura organizzativa e all'utilizzo efficace di Discord, siamo riusciti a mantenere un flusso di lavoro fluido e produttivo, garantendo la qualità e la puntualità delle scadenze.
+
+### (8.4) Tool Utilizzati
+Per lo svolgimento delle varie attività abbiamo utilizzato differenti tool per rappresentarle al meglio.
+Uno di questi è stato **draw.io**, il quale è stato utilizzato per la realizzazione dell'analisi retrospettiva e quindi per realizzare lo schema arrabbiato/triste/felice.
+
+Invece, per la creazione di bozze relative ai diagrammi delle classi abbiamo utilizzato **StarUML** per schematizzare meglio i concetti.
 
 ## (9) Analisi Retrospettiva
 
