@@ -5,9 +5,7 @@ import it.uniba.app.entities.Board;
 import it.uniba.app.entities.Move;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test per la classe {@link GameController}.
@@ -31,12 +29,10 @@ class GameControllerTest {
      */
     @Test
     void noWhiteCellsWinTest() {
-        try {
+        assertAll(() -> {
             final var game = new GameController("B - B48E");
             assertEquals(GameController.GameState.BLACK_WINS, game.getGameState(), "Black should win");
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 
     /**
@@ -44,12 +40,10 @@ class GameControllerTest {
      */
     @Test
     void noBlackCellsWinTest() {
-        try {
+        assertAll(() -> {
             final var game = new GameController("B - W48E");
             assertEquals(GameController.GameState.WHITE_WINS, game.getGameState(), "White should win");
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 
     /**
@@ -57,12 +51,10 @@ class GameControllerTest {
      */
     @Test
     void noLegalMovesTest() {
-        try {
+        assertAll(() -> {
             final var game = new GameController("B - B2W4E3W4E3W4E28E");
             assertTrue(game.getLegalMovesForCurrentPlayer().isEmpty(), "Black should have no legal moves");
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 
     /**
@@ -72,7 +64,7 @@ class GameControllerTest {
      */
     @Test
     void correctJumpAndReplicateMoveTest() {
-        try {
+        assertAll(() -> {
             final var fromRow = 4;
             final var fromColumn = 3;
             final var toRow = 3;
@@ -80,13 +72,11 @@ class GameControllerTest {
 
             final var game = new GameController("B - 31EB17E");
             game.executeMove(new Move(
-                    new Board.Position(fromRow, fromColumn),
-                    new Board.Position(toRow, toColumn),
-                    Board.Cell.BLACK));
+                new Board.Position(fromRow, fromColumn),
+                new Board.Position(toRow, toColumn),
+                Board.Cell.BLACK));
             assertEquals("W - 24EB6EB17E", game.toString(), "Game state is not correct");
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 
     /**
@@ -96,7 +86,7 @@ class GameControllerTest {
      */
     @Test
     void correctJumpMoveTest() {
-        try {
+        assertAll(() -> {
             final var fromRow = 4;
             final var fromColumn = 3;
             final var toRow = 2;
@@ -104,14 +94,11 @@ class GameControllerTest {
 
             final var game = new GameController("B - 31EB17E");
             game.executeMove(new Move(
-                    new Board.Position(fromRow, fromColumn),
-                    new Board.Position(toRow, toColumn),
-                    Board.Cell.BLACK));
+                new Board.Position(fromRow, fromColumn),
+                new Board.Position(toRow, toColumn),
+                Board.Cell.BLACK));
             assertEquals("W - 17EB31E", game.toString(), "Game state is not correct");
-        } catch (Exception e) {
-            fail(e);
-        }
-
+        });
     }
 
     /**
@@ -120,7 +107,7 @@ class GameControllerTest {
      */
     @Test
     void moveConvertsAdjacentEnemyCellsTest() {
-        try {
+        assertAll(() -> {
             final var fromRow = 4;
             final var fromColumn = 3;
             final var toRow = 3;
@@ -132,8 +119,6 @@ class GameControllerTest {
                     new Board.Position(toRow, toColumn),
                     Board.Cell.BLACK));
             assertEquals("W - 16E3B5EB6EB17E", game.toString(), "Game state is not correct");
-        } catch (Exception e) {
-            fail(e);
-        }
+        });
     }
 }
