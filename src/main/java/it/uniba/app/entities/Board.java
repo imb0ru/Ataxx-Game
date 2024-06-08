@@ -86,8 +86,8 @@ public final class Board {
             if (row < 0 || row >= SIZE) {
                 throw new InvalidPositionException(
                     String.format(Strings.Board.INVALID_ROW_EXCEPTION_FORMAT,
-                        row,
-                        SIZE
+                        row + 1,
+                        SIZE + 1
                     )
                 );
             }
@@ -95,8 +95,8 @@ public final class Board {
             if (column < 0 || column >= SIZE) {
                 throw new InvalidPositionException(
                     String.format(Strings.Board.INVALID_COLUMN_EXCEPTION_FORMAT,
-                        column,
-                        SIZE
+                        column + 'a',
+                        SIZE + 'a'
                     )
                 );
             }
@@ -144,7 +144,7 @@ public final class Board {
             if (!Character.isLowerCase(columnCharacter)) {
                 throw new InvalidPositionException(String.format(
                     Strings.Board.INVALID_COLUMN_WHEN_PARSING_EXCEPTION_FORMAT,
-                    columnCharacter
+                    columnCharacter + 'a'
                 ));
             }
 
