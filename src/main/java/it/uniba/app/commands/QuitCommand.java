@@ -48,5 +48,6 @@ public final class QuitCommand {
         int pieceCount = game.countCells()[index];
         System.out.printf(Strings.QuitCommand.QUIT_WIN_FORMAT, enemy, pieceCount, currentPlayer);
         app.setGame(null);
+        app.getBoard().clearBlockedCells();
     }
 }

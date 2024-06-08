@@ -62,6 +62,7 @@ public final class App {
                 System.out.printf(Strings.App.END_GAME_FORMAT, winner, cellCounts[0], cellCounts[1]);
 
                 appController.setGame(null);
+                appController.getBoard().clearBlockedCells();
             }
         }
 
