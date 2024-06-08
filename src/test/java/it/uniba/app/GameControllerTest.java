@@ -3,6 +3,7 @@ package it.uniba.app;
 import it.uniba.app.controls.GameController;
 import it.uniba.app.entities.Board;
 import it.uniba.app.entities.Move;
+import it.uniba.app.exceptions.InvalidMoveException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -115,10 +116,27 @@ class GameControllerTest {
 
             final var game = new GameController("B - 16E3W12EB17E");
             game.executeMove(new Move(
-                    new Board.Position(fromRow, fromColumn),
-                    new Board.Position(toRow, toColumn),
-                    Board.Cell.BLACK));
+                new Board.Position(fromRow, fromColumn),
+                new Board.Position(toRow, toColumn),
+                Board.Cell.BLACK));
             assertEquals("W - 16E3B5EB6EB17E", game.toString(), "Game state is not correct");
+        });
+    }
+
+    /**
+     * Testa che quando il giocatore prova a fare una mossa che ha come cella di destinazione una cella bloccata dia
+     * errore.
+     */
+    @Test
+    void moveToBlockedCellTest() {
+        assertAll(() -> {
+            final var game = new GameController("W - B5EW35EWL4EB");
+            assertThrows(InvalidMoveException.class, () -> {
+                game.executeMove(new Move(
+                    Board.Position.fromString("a7"),
+                    Board.Position.fromString("b7"),
+                    Board.Cell.WHITE));
+            });
         });
     }
 }
