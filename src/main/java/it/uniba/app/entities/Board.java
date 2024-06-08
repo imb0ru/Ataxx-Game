@@ -9,7 +9,7 @@ import java.util.Arrays;
 /**
  * Classe << Entity >> che rappresenta il tavoliere del gioco.
  */
-public final class Board {
+public final class Board implements Cloneable {
     /**
      * Numero massimo di caselle bloccate.
      */
@@ -419,6 +419,7 @@ public final class Board {
      *
      * @return una copia del tavoliere
      */
+    @Override
     public Board clone() {
         Board clonedBoard = new Board();
         for (int i = 0; i < SIZE; i++) {
