@@ -2,7 +2,6 @@ package it.uniba.app.commands;
 
 import it.uniba.app.controls.AppController;
 import it.uniba.app.entities.Board;
-import it.uniba.app.exceptions.InvalidPositionException;
 import it.uniba.app.utils.Strings;
 
 
