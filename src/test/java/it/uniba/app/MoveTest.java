@@ -32,9 +32,10 @@ class MoveTest {
     @Test
     void constructorThrowsTest() {
         assertThrows(InvalidMoveException.class, () -> {
-            final var distance = Board.Position.distance(
+            final var move = new Move(
                 Board.Position.fromString("a1"),
-                Board.Position.fromString("a5"));
+                Board.Position.fromString("a5"),
+                Board.Cell.WHITE);
         }, "La mossa non dovrebbe essere valida a causa della distanza");
     }
 

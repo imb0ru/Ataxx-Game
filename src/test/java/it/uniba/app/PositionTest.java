@@ -43,8 +43,8 @@ class PositionTest {
      */
     @Test
     void fromStringTest() {
-        final var row = 0;
-        final var column = 3;
+        final var row = 2;
+        final var column = 0;
         var position = Board.Position.fromString("a3");
         assertTrue(position.row() == row && position.column() == column,
             "La posizione dovrebbe essere a3");
