@@ -47,7 +47,7 @@ public final class App {
 
         while (appController.isRunning()) {
             System.out.print(Strings.App.PROMPT);
-            final String command = keyboard.nextLine().trim();
+            final String command = keyboard.nextLine().trim().toLowerCase();
             appController.run(command);
 
             final var game = appController.getGame();
