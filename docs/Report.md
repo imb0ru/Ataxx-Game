@@ -309,7 +309,6 @@ verrà segnalato all'utente con un messaggio di avviso.
 Se la mossa inserita non è valida perché il formato non è corretto, verrà segnalato all'utente con un messaggio di errore.
 
 ![Mossa non valida - Formato errato](/docs/img/mossa_non_valida_formato_errato.png)
-<!--- (Immagine mancante poichè regex in appcontroller rende impossibile l'uscita del messaggio di errore, fixme) --->
 
 #### Mossa non valida - Celle non adiacenti
 Se la mossa inserita non è valida perché le celle di partenza e arrivo non sono adiacenti, verrà segnalato all'utente con un messaggio di errore.
