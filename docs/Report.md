@@ -8,7 +8,7 @@
    3.2 [Requisiti non funzionali](#32-requisiti-non-funzionali) <br>
 4. _TDB_
 5. _TDB_
-6. _TDB_
+6. [Riepilogo dei casi di Test](#6-riepilogo-dei-casi-di-test)
 7. [Manuale utente](#7-manuale-utente)
 8. [Processo di sviluppo e organizzazione del lavoro](#8-processo-di-sviluppo-e-organizzazione-del-lavoro) <br>
     8.1 [Processo di sviluppo adotatto](#81-processo-di-sviluppo-adottato) <br>
