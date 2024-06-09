@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 /**
  * Test per la classe {@link it.uniba.app.entities.Move}.
@@ -45,18 +44,23 @@ class MoveTest {
      */
     @Test
     void moveTypeTest() {
-        assertAll(() ->  {
-            final var moveJump = new Move(
+        record TestCase(Move move, Move.Type expectedType) { }
+        final var testCases = new TestCase[] {
+            new TestCase(new Move(
                 Board.Position.fromString("a1"),
-                Board.Position.fromString("a3"), Board.Cell.WHITE);
-            assertEquals(Move.Type.JUMP, moveJump.getType(),
-                "a1-a3 dovrebbe essere una mossa di tipo JUMP");
+                Board.Position.fromString("a3"),
+                Board.Cell.WHITE
+            ), Move.Type.JUMP),
+            new TestCase(new Move(
+                Board.Position.fromString("a1"),
+                Board.Position.fromString("a2"),
+                Board.Cell.WHITE
+            ), Move.Type.JUMP_AND_REPLICATE)
+        };
 
-            final var moveJumpAndReplicate = new Move(
-                Board.Position.fromString("a1"),
-                Board.Position.fromString("a2"), Board.Cell.WHITE);
-            assertEquals(Move.Type.JUMP_AND_REPLICATE, moveJumpAndReplicate.getType(),
-                "a1-a2 dovrebbe essere una mossa di tipo JUMP_AND_REPLICATE");
-        });
+        for (final TestCase testCase : testCases) {
+            assertEquals(testCase.expectedType, testCase.move.getType(),
+                "La tipologia della mossa dovrebbe essere " + testCase.expectedType);
+        }
     }
 }

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -67,34 +66,29 @@ class PositionTest {
      */
     @Test
     void distanceTest() {
-        assertAll(() -> {
-            final int distance1 = 2;
-            final int distance2 = 0;
-            final int distance3 = 5;
-            final int distance4 = 3;
-            assertEquals(distance1, Board.Position.distance(
-                    Board.Position.fromString("a3"),
-                    Board.Position.fromString("a1")
-                ),
-                "La distanza dovrebbe essere 2");
+        record TestCase(Board.Position from, Board.Position to, int expectedDistance) { }
+        final var testCases = new TestCase[] {
+            new TestCase(
+                Board.Position.fromString("a3"),
+                Board.Position.fromString("a1"),
+                2),
+            new TestCase(
+                Board.Position.fromString("c7"),
+                Board.Position.fromString("c7"),
+                0),
+            new TestCase(
+                Board.Position.fromString("f7"),
+                Board.Position.fromString("f2"),
+                5),
+            new TestCase(
+                Board.Position.fromString("g6"),
+                Board.Position.fromString("d3"),
+                3),
+        };
 
-            assertEquals(distance2, Board.Position.distance(
-                    Board.Position.fromString("c7"),
-                    Board.Position.fromString("c7")
-                ),
-                "La distanza dovrebbe essere 0");
-
-            assertEquals(distance3, Board.Position.distance(
-                    Board.Position.fromString("f7"),
-                    Board.Position.fromString("f2")
-                ),
-                "La distanza dovrebbe essere 5");
-
-            assertEquals(distance4, Board.Position.distance(
-                    Board.Position.fromString("g6"),
-                    Board.Position.fromString("g3")
-                ),
-                "La distanza dovrebbe essere 3");
-        });
+        for (TestCase testCase : testCases) {
+            assertEquals(testCase.expectedDistance, Board.Position.distance(testCase.from, testCase.to),
+                "La distanza tra le posizioni dovrebbe essere " + testCase.expectedDistance);
+        }
     }
 }

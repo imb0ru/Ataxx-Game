@@ -3,11 +3,12 @@ package it.uniba.app;
 import it.uniba.app.controls.GameController;
 import it.uniba.app.entities.Board;
 import it.uniba.app.entities.Move;
+import it.uniba.app.exceptions.InvalidBoardException;
+import it.uniba.app.exceptions.InvalidGameException;
 import it.uniba.app.exceptions.InvalidMoveException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -32,33 +33,27 @@ class GameControllerTest {
      * Testa la vittoria del nero nel caso in cui il bianco non possieda pedine.
      */
     @Test
-    void noWhiteCellsWinTest() {
-        assertAll(() -> {
-            final var game = new GameController("B - B48E");
-            assertEquals(GameController.GameState.BLACK_WINS, game.getGameState(), "Black should win");
-        });
+    void noWhiteCellsWinTest() throws InvalidGameException, InvalidBoardException {
+        final var game = new GameController("B - B48E");
+        assertEquals(GameController.GameState.BLACK_WINS, game.getGameState(), "Black should win");
     }
 
     /**
      * Testa la vittoria del bianco nel caso in cui il nero non possieda pedine.
      */
     @Test
-    void noBlackCellsWinTest() {
-        assertAll(() -> {
-            final var game = new GameController("B - W48E");
-            assertEquals(GameController.GameState.WHITE_WINS, game.getGameState(), "White should win");
-        });
+    void noBlackCellsWinTest() throws InvalidGameException, InvalidBoardException {
+        final var game = new GameController("B - W48E");
+        assertEquals(GameController.GameState.WHITE_WINS, game.getGameState(), "White should win");
     }
 
     /**
      * Testa il caso in cui un giocatore non ha mosse disponibili.
      */
     @Test
-    void noLegalMovesTest() {
-        assertAll(() -> {
-            final var game = new GameController("B - B2W4E3W4E3W4E28E");
-            assertTrue(game.getLegalMovesForCurrentPlayer().isEmpty(), "Black should have no legal moves");
-        });
+    void noLegalMovesTest() throws InvalidGameException, InvalidBoardException {
+        final var game = new GameController("B - B2W4E3W4E3W4E28E");
+        assertTrue(game.getLegalMovesForCurrentPlayer().isEmpty(), "Black should have no legal moves");
     }
 
     /**
@@ -67,20 +62,18 @@ class GameControllerTest {
      * la pedina viene spostata e replicata correttamente.
      */
     @Test
-    void correctJumpAndReplicateMoveTest() {
-        assertAll(() -> {
-            final var fromRow = 4;
-            final var fromColumn = 3;
-            final var toRow = 3;
-            final var toColumn = 3;
+    void correctJumpAndReplicateMoveTest() throws InvalidGameException, InvalidBoardException {
+        final var fromRow = 4;
+        final var fromColumn = 3;
+        final var toRow = 3;
+        final var toColumn = 3;
 
-            final var game = new GameController("B - 31EB17E");
-            game.executeMove(new Move(
-                new Board.Position(fromRow, fromColumn),
-                new Board.Position(toRow, toColumn),
-                Board.Cell.BLACK));
-            assertEquals("W - 24EB6EB17E", game.toString(), "Game state is not correct");
-        });
+        final var game = new GameController("B - 31EB17E");
+        game.executeMove(new Move(
+            new Board.Position(fromRow, fromColumn),
+            new Board.Position(toRow, toColumn),
+            Board.Cell.BLACK));
+        assertEquals("W - 24EB6EB17E", game.toString(), "Game state is not correct");
     }
 
     /**
@@ -89,20 +82,18 @@ class GameControllerTest {
      * la pedina viene spostata correttamente.
      */
     @Test
-    void correctJumpMoveTest() {
-        assertAll(() -> {
-            final var fromRow = 4;
-            final var fromColumn = 3;
-            final var toRow = 2;
-            final var toColumn = 3;
+    void correctJumpMoveTest() throws InvalidGameException, InvalidBoardException {
+        final var fromRow = 4;
+        final var fromColumn = 3;
+        final var toRow = 2;
+        final var toColumn = 3;
 
-            final var game = new GameController("B - 31EB17E");
-            game.executeMove(new Move(
-                new Board.Position(fromRow, fromColumn),
-                new Board.Position(toRow, toColumn),
-                Board.Cell.BLACK));
-            assertEquals("W - 17EB31E", game.toString(), "Game state is not correct");
-        });
+        final var game = new GameController("B - 31EB17E");
+        game.executeMove(new Move(
+            new Board.Position(fromRow, fromColumn),
+            new Board.Position(toRow, toColumn),
+            Board.Cell.BLACK));
+        assertEquals("W - 17EB31E", game.toString(), "Game state is not correct");
     }
 
     /**
@@ -110,20 +101,18 @@ class GameControllerTest {
      * celle nemiche queste vengano convertite.
      */
     @Test
-    void moveConvertsAdjacentEnemyCellsTest() {
-        assertAll(() -> {
-            final var fromRow = 4;
-            final var fromColumn = 3;
-            final var toRow = 3;
-            final var toColumn = 3;
+    void moveConvertsAdjacentEnemyCellsTest() throws InvalidGameException, InvalidBoardException {
+        final var fromRow = 4;
+        final var fromColumn = 3;
+        final var toRow = 3;
+        final var toColumn = 3;
 
-            final var game = new GameController("B - 16E3W12EB17E");
-            game.executeMove(new Move(
-                new Board.Position(fromRow, fromColumn),
-                new Board.Position(toRow, toColumn),
-                Board.Cell.BLACK));
-            assertEquals("W - 16E3B5EB6EB17E", game.toString(), "Game state is not correct");
-        });
+        final var game = new GameController("B - 16E3W12EB17E");
+        game.executeMove(new Move(
+            new Board.Position(fromRow, fromColumn),
+            new Board.Position(toRow, toColumn),
+            Board.Cell.BLACK));
+        assertEquals("W - 16E3B5EB6EB17E", game.toString(), "Game state is not correct");
     }
 
     /**
@@ -131,15 +120,13 @@ class GameControllerTest {
      * errore.
      */
     @Test
-    void moveToBlockedCellTest() {
-        assertAll(() -> {
-            final var game = new GameController("W - B5EW35EWL4EB");
-            assertThrows(InvalidMoveException.class, () -> {
-                game.executeMove(new Move(
-                    Board.Position.fromString("a7"),
-                    Board.Position.fromString("b7"),
-                    Board.Cell.WHITE));
-            });
+    void moveToBlockedCellTest() throws InvalidGameException, InvalidBoardException {
+        final var game = new GameController("W - B5EW35EWL4EB");
+        assertThrows(InvalidMoveException.class, () -> {
+            game.executeMove(new Move(
+                Board.Position.fromString("a7"),
+                Board.Position.fromString("b7"),
+                Board.Cell.WHITE));
         });
     }
 }
