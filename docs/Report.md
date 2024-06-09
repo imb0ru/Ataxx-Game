@@ -8,7 +8,7 @@
    3.2 [Requisiti non funzionali](#32-requisiti-non-funzionali) <br>
 4. _TDB_
 5. _TDB_
-6. _TDB_
+6. [Riepilogo dei casi di Test](#6-riepilogo-dei-casi-di-test)
 7. [Manuale utente](#7-manuale-utente)
 8. [Processo di sviluppo e organizzazione del lavoro](#8-processo-di-sviluppo-e-organizzazione-del-lavoro) <br>
     8.1 [Processo di sviluppo adotatto](#81-processo-di-sviluppo-adottato) <br>
@@ -139,10 +139,10 @@ A loro volta queste sono composte da
 - (RF9) Il sistema deve permettere di visualizzare il tempo di gioco.
   - (RF9.1) Al comando `/tempo` l'applicazione mostra a schermo il tempo trascorso dall'inizio della partita in formato `ore:minuti:secondi`.
 - (RF10) Il sistema deve permettere di impostare caselle non accessibili.
-  - (RF10.1) Al comando `/blocca xn`, se nessuna partita è in corso, l'applicazione blocca la cella che si trova alla riga `x` e colonna `n` del tavoliere, la cella viene mostrata sul tavoliere con uno sfondo grigio e non può essere occupata da nessuna pedina.
+  - (RF10.1) Al comando `/blocca xn`, se nessuna partita è in corso, l'applicazione blocca la cella che si trova alla colonna `x` e riga `n` del tavoliere, la cella viene mostrata sul tavoliere con un segnale di divieto rosso e non può essere occupata da nessuna pedina.
   - (RF10.2) Non è possibile bloccare:
     - (RF10.2.1) le celle di partenza dei giocatori
-    - (RF10.2.2) tutte le caselle adiacenti ad una casella di partenza del gioco, rendendo impossibile la mossa di espansione di una pedina a inizio gioco
+    - (RF10.2.2) tutte le caselle adiacenti ad'una casella di partenza del gioco, rendendo impossibile la mossa di espansione di una pedina a inizio gioco
     - (RF10.2.3) tutte le caselle a distanza 2 da una casella di partenza del gioco, rendendo impossibile la mossa di salto di una pedina a inizio gioco
     - (RF10.2.4) più di 9 celle
 - (RF11) Il sistema deve permettere di effettuare una mossa.
@@ -165,12 +165,57 @@ A loro volta queste sono composte da
     terminale di default.
   - (RNF1.2) Per Windows si consiglia di utilizzare Powershell o Git 
     Bash (in questo caso il comando Docker ha come prefisso winpty).
-  - (RNF2) Per eseguire il container docker dell'app è necessario:
-    - (RNF2.1) Avere installato docker sul proprio sistema operativo.
-    - (RNF2.2) Eseguire il comando `docker pull ghcr.
-      io/softeng2324-inf-uniba/ataxx-berners:latest`.
-    - (RNF2.3) Eseguire il container docker con il comando `docker run 
-      --rm -it ghcr.io/softeng2324-inf-uniba/ataxx-berners:latest`.
+- (RNF2) Per eseguire il container docker dell'app è necessario:
+  - (RNF2.1) Avere installato docker sul proprio sistema operativo.
+  - (RNF2.2) Eseguire il comando `docker pull ghcr.
+    io/softeng2324-inf-uniba/ataxx-berners:latest`.
+  - (RNF2.3) Eseguire il container docker con il comando `docker run 
+    --rm -it ghcr.io/softeng2324-inf-uniba/ataxx-berners:latest`.
+
+## (6) Riepilogo dei casi di Test
+In questa sezione analizzeremo i casi di Test effettuati su differenti classi.
+Analizziamo nel dettaglio le classi testate:
+
+### Test per la classe `Move`
+
+Di seguito i test selezionati:
+* `constructorTest`: questo metodo testa che la mossa che contiene cella di partenza e cella di arrivo siano correttamente specificate;
+* `constructorThrowsTest`: questo metodo è stato creato per sollevare un'eccezione nel caso in cui le celle specificate vadano oltre la distanza consentita;
+* `moveTypeTest`: questo metodo è stato definito per verificare la tipologia della mossa effettuata da parte del giocatore. Restituisce, in base alla mossa effettuata, la tipologia corretta.
+
+### Test per la classe `Board.Position`
+
+Di seguito i test selezionati:
+* `constructorTest`: questo metodo testa che le righe e le colonne corrispondenti alla posizione siano valide, cioè all'interno del tavoliere;
+* `constructorThrowsTest`: questo metodo serve per sollevare un'eccezione nel caso in cui la posizione non sia valida, ad esempio fuori dal tavoliere;
+* `fromStringTest`: questo metodo testa che la cella di partenza e di arrivo creata a partire dalla stringa siano valide;
+* `fromStringThrowsTest`: questo metodo solleva un'eccezione nel caso in cui la cella di arriva e di partenza create a partire da una stringa non siano valide;
+* `distanceTest`: questo metodo verifica se la distanza tra la cella di partenza e la cella di arrivo sia valida.  
+
+### Test per la classe `GameController`
+
+Di seguito i test selezionati:
+* `initialGameTest`: testa che ogni partita cominciata da zero abbia sempre la stessa configurazione,
+  ovvero che cominci il nero e il tavoliere sia quello specificato nelle regole di gioco.
+* `noWhiteCellsWinTest`, `noBlackCellsWinTest`: in questi due test viene controllata una condizione simile, ovvero che se
+  uno dei due giocatori dovesse arrivare a non avere più celle allora lo stato della partita viene impostato alla vittoria
+  dell'altro giocatore.
+* `correctJumpAndReplicateMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 1 la pedina di partenza non viene
+  spostata e ne venga creata un'altra nella posizione di arrivo.
+* `correctJumpMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 2 la pedina di partenza venga spostata
+  nella posizione d'arrivo.
+* `moveConvertsAdjacentEnemyCellsTest`: in questo test ci assicuriamo che eseguendo una mossa le pedine del nemico adiacenti
+  alla casella di arrivo vengano convertite in pedine del giocatore che ha effettuato la mossa.
+* `moveToBlockedCellTest`: in questo test ci assicuriamo che quando il giocatore prova a fare una mossa che ha come cella
+  di destinazione una cella bloccata viene lanciata un'eccezione.
+
+### Motivazioni dei test
+
+I test sopra descritti contribuiscono a rendere le modifiche al gioco semplici e meno prone ad errori in quanto in questa
+maniera possiamo sempre controllare che i comportamenti base del gioco rimangano invariati.
+
+Infatti, senza di essi, si rischierebbe che una modifica non prudente del codice, potrebbe portare alla creazione di un 
+errore nel codice difficile da rintracciare e che di conseguenza rallenterebbe la produzione di nuovo codice.
 
 ## (7) Manuale Utente
 
@@ -190,13 +235,13 @@ Per avviare il gioco Ataxx, seguite le istruzioni riportate di seguito in base a
    - Su macOS, premere `Cmd + Spazio`, digitare `Terminal` e premere `Invio`.
    - Su Linux, utilizzare la combinazione di tasti `Ctrl + Alt + T`.
 
-   2. **Navigare alla Directory del Gioco**
+2. **Navigare alla Directory del Gioco**
    - Utilizzare il comando `cd` seguito dal percorso della directory in cui è installato Ataxx. Ad esempio:
      ```sh
      cd C:\Percorso\Al\Gioco\Ataxx
      ```
 
-   3. **Eseguire l'Applicazione**
+3. **Eseguire l'Applicazione**
    - Digitare il comando per eseguire l'applicazione senza flag e premere `Invio`:
      ```sh
      java -jar ataxx-all.jar
@@ -212,13 +257,13 @@ Per avviare il gioco Ataxx, seguite le istruzioni riportate di seguito in base a
    - Su macOS, premere `Cmd + Spazio`, digitare `Terminal` e premere `Invio`.
    - Su Linux, utilizzare la combinazione di tasti `Ctrl + Alt + T`.
 
-   2. **Navigare alla Directory del Gioco**
+2. **Navigare alla Directory del Gioco**
    - Utilizzare il comando `cd` seguito dal percorso della directory in cui è installato Ataxx. Ad esempio:
      ```sh
      cd C:\Percorso\Al\Gioco\Ataxx
      ```
 
-   3. **Eseguire l'Applicazione con il Menu di Aiuto**
+3. **Eseguire l'Applicazione con il Menu di Aiuto**
    - Digitare uno dei seguenti comandi per visualizzare il menu di aiuto e premere `Invio`:
      ```sh
      java -jar ataxx-all.jar -h
@@ -242,18 +287,21 @@ Gli unici comandi utilizzabili subito dopo l'esecuzione dell'applicazione sono:
 - `/help`: mostra l'elenco dei comandi disponibili come nell'esecuzione con le flag `-h` o `--help`.
 ![Comando Help](/docs/img/comando_help.png)
 
-  - `/gioca`: inizia una nuova partita di Ataxx.
-  ![Comando Gioca](/docs/img/comando_gioca.png)
+- `/gioca`: inizia una nuova partita di Ataxx.
+![Comando Gioca](/docs/img/comando_gioca.png)
 
-  - `/esci`: termina l'applicazione chiedendo conferma. Se si risponde si l'applicazione si chiude, altrimenti si predispone a ricevere nuovi comandi.
-  ![Comando Esci](/docs/img/comando_esci.png)
-    - Per confermare l'uscita, digitare `s` e premere `Invio`.
-    ![Conferma Uscita](/docs/img/conferma_esci.png)
-    - Per annullare l'uscita, digitare `n` e premere `Invio`
-    ![Annulla Uscita](/docs/img/annulla_esci.png)
+- `/esci`: termina l'applicazione chiedendo conferma. Se si risponde si l'applicazione si chiude, altrimenti si predispone a ricevere nuovi comandi.
+![Comando Esci](/docs/img/comando_esci.png)
+  - Per confermare l'uscita, digitare `s` e premere `Invio`.
+  ![Conferma Uscita](/docs/img/conferma_esci.png)
+  - Per annullare l'uscita, digitare `n` e premere `Invio`
+  ![Annulla Uscita](/docs/img/annulla_esci.png)
 
-  - `/vuoto`: mostra il tavoliere di gioco vuoto, ovvero senza pedine di gioco.
-  ![Comando Vuoto](/docs/img/comando_vuoto.png)
+- `/vuoto`: mostra il tavoliere di gioco vuoto, ovvero senza pedine di gioco.
+![Comando Vuoto](/docs/img/comando_vuoto.png)
+
+- `/blocca xn`: blocca la cella alla colonna `x` e riga `n` del tavoliere, impedendo a qualsiasi pedina di occuparla.
+![Comando Blocca](/docs/img/comando_blocca.png)
 
 
 ### Comandi disponibili durante una partita
@@ -262,16 +310,29 @@ Dopo aver avviato una partita con il comando `/gioca`, avrai accesso a una serie
 - `/tavoliere` : mostra il tavoliere di gioco con le pedine in posizione attuale.
 ![Comando Tavoliere](/docs/img/comando_tavoliere.png)
 
-  - `/qualimosse` : mostra le mosse possibili per il giocatore di turno, evidenziando le caselle raggiungibili con mosse che generano una nuova pedina, le caselle raggiungibili con mosse che consentono un salto e le caselle raggiungibili con entrambe le mosse.
-  ![Comando Quali Mosse](/docs/img/comando_qualimosse.png)
+- `/qualimosse` : mostra le mosse possibili per il giocatore di turno, evidenziando le caselle raggiungibili con mosse che generano una nuova pedina, le caselle raggiungibili con mosse che consentono un salto e le caselle raggiungibili con entrambe le mosse.
+![Comando Quali Mosse](/docs/img/comando_qualimosse.png)
 
-  - `/abbandona` : permette al giocatore di abbandonare la partita in corso. Se confermato, il giocatore che abbandona perde la partita per x a 0 dove x è il numero di pedine rimaste all'avversario.
-  ![Comando Abbandona](/docs/img/comando_abbandona.png)
-    - Per confermare l'abbandono, digitare `s` e premere `Invio`.
-    ![Conferma Abbandono](/docs/img/conferma_abbandona.png)
-    - Per annullare l'abbandono, digitare `n` e premere `Invio`.
-    ![Annulla Abbandono](/docs/img/annulla_abbandona.png)
+- `/abbandona` : permette al giocatore di abbandonare la partita in corso. Se confermato, il giocatore che abbandona perde la partita per x a 0 dove x è il numero di pedine rimaste all'avversario.
+![Comando Abbandona](/docs/img/comando_abbandona.png)
+  - Per confermare l'abbandono, digitare `s` e premere `Invio`.
+  ![Conferma Abbandono](/docs/img/conferma_abbandona.png)
+  - Per annullare l'abbandono, digitare `n` e premere `Invio`.
+  ![Annulla Abbandono](/docs/img/annulla_abbandona.png)
 
+- `/mosse` : mostra la storia delle mosse con notazione algebrica `k. xn ym (p)` dove `k` è il numero della mossa, `xn` è la posizione di partenza, `ym` è la posizione di arrivo e `p` è il giocatore che ha effettuato la mossa.
+![Comando Mosse](/docs/img/comando_mosse.png)
+
+- `/tempo` : mostra il tempo trascorso dall'inizio della partita in formato `ore:minuti:secondi`.
+![Comando Tempo](/docs/img/comando_tempo.png)
+
+- `xn-ym` : permette di effettuare una mossa valida utilizzando la notazione algebrica `xn-ym` dove `xn` è la cella di partenza e `ym` è la cella di arrivo.
+  - Se la mossa è valida e la distanza tra la cella di partenza e quella di arrivo è di 1, la pedina viene duplicata nella cella di arrivo.
+  ![Comando Mossa Duplica](/docs/img/comando_mossa_duplica.png)
+  - Se la mossa è valida e la distanza tra la cella di partenza e quella di arrivo è di 2, la pedina viene spostata nella cella di arrivo.
+  ![Comando Mossa Salto](/docs/img/comando_mossa_salto.png)
+
+    
 ### Possibili messaggi di errore
 
 Durante l'esecuzione dell'applicazione si possono presentare delle situazioni non previste. Per ora ne esistono solo due
@@ -290,6 +351,11 @@ Nel caso in cui venisse avviato uno dei comandi (`/tavoliere`, `/qualimosse`, `/
 verrà segnalato all'utente con un messaggio di avviso.
 
 ![Nessuna partita in corso](/docs/img/nessuna_partita_in_corso.png)
+
+#### Mossa non valida - Celle non adiacenti
+
+Se la mossa inserita non è valida perché le celle di partenza e arrivo non sono adiacenti, verrà segnalato all'utente con un messaggio di errore.
+![Mossa non valida - Celle non adiacenti](/docs/img/mossa_non_valida_celle_non_adiacenti.png)
 
 ## (8) Processo di sviluppo e organizzazione del lavoro
 In questa sezione analizzeremo il processo di sviluppo utilizzato e la pianificazione del lavoro.
