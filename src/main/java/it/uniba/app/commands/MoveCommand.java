@@ -26,10 +26,11 @@ public final class MoveCommand {
             return;
         }
 
-        final var parts = moveString.split("-");
-        if (parts.length != 2) {
+        if (!moveString.matches(Strings.AppController.MOVE_REGEX)) {
             System.out.println(Strings.MoveCommand.INVALID_MOVE_FORMAT);
+            return;
         }
+        final var parts = moveString.split("-");
 
         try {
             final var fromPosition = Board.Position.fromString(parts[0].trim());

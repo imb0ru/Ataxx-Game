@@ -294,23 +294,58 @@ Durante l'esecuzione dell'applicazione si possono presentare delle situazioni no
 e vengono entrambe gestite comunicando all'utente l'errore.
 
 #### Comando non previsto
-
 Nel caso in cui non venisse inserito nessun comando tra quelli previsti nell `/help`, 
 l'utente sarà avvisato dell'errore e gli verrà consigliato di digitare il comando `/help` per avere una lista dei comandi accettati.
 
 ![Comando non previsto](/docs/img/comando_non_previsto.png)
 
 #### Nessuna partita in corso
-
-Nel caso in cui venisse avviato uno dei comandi (`/tavoliere`, `/qualimosse`, `/abbandona`) prima di aver creato una partita, 
+Nel caso in cui venisse avviato uno dei comandi (`/tavoliere`, `/qualimosse`, `/abbandona`, `/tempo`, `/mosse`, `xn-ym`) prima di aver creato una partita, 
 verrà segnalato all'utente con un messaggio di avviso.
 
 ![Nessuna partita in corso](/docs/img/nessuna_partita_in_corso.png)
 
-#### Mossa non valida - Celle non adiacenti
+#### Mossa non valida - Formato errato
+Se la mossa inserita non è valida perché il formato non è corretto, verrà segnalato all'utente con un messaggio di errore.
 
+![Mossa non valida - Formato errato](/docs/img/mossa_non_valida_formato_errato.png)
+<!--- (Immagine mancante poichè regex in appcontroller rende impossibile l'uscita del messaggio di errore, fixme) --->
+
+#### Mossa non valida - Celle non adiacenti
 Se la mossa inserita non è valida perché le celle di partenza e arrivo non sono adiacenti, verrà segnalato all'utente con un messaggio di errore.
+
 ![Mossa non valida - Celle non adiacenti](/docs/img/mossa_non_valida_celle_non_adiacenti.png)
+
+#### Mossa non valida - Cella già occupata
+Se la mossa inserita non è valida perché la cella di arrivo è già occupata, verrà segnalato all'utente con un messaggio di errore.
+
+![Mossa non valida - Cella già occupata](/docs/img/mossa_non_valida_cella_occupata.png)
+
+#### Mossa non valida - Cella bloccata
+Se la mossa inserita non è valida perché la cella di arrivo è bloccata, verrà segnalato all'utente con un messaggio di errore.
+
+![Mossa non valida - Cella bloccata](/docs/img/mossa_non_valida_cella_bloccata.png)
+
+#### Mossa non valida - Cella non appartenente al giocatore di turno
+Se la mossa inserita non è valida perché la cella di partenza non appartiene al giocatore di turno, verrà segnalato all'utente con un messaggio di errore.
+
+![Mossa non valida - Cella non appartenente al giocatore di turno](/docs/img/mossa_non_valida_cella_non_appartenente.png)
+
+#### Mossa non valida - Riga o colonna non esistente
+Se la mossa inserita non è valida perché la riga o la colonna non esistono, verrà segnalato all'utente con un messaggio di errore.
+
+![Mossa non valida - Riga o colonna non esistente](/docs/img/mossa_non_valida_riga_colonna_non_esistente.png)
+
+#### Lista delle mosse effettuate - Nessuna mossa effettuata
+Se si tenta di visualizzare la lista delle mosse effettuate prima di aver effettuato alcuna mossa, verrà segnalato all'utente con un messaggio di avviso.
+
+![Lista delle mosse effettuate - Nessuna mossa effettuata](/docs/img/lista_mosse_nessuna_mossa.png)
+
+
+
+
+
+
 
 ## (8) Processo di sviluppo e organizzazione del lavoro
 In questa sezione analizzeremo il processo di sviluppo utilizzato e la pianificazione del lavoro.

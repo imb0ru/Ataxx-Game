@@ -83,10 +83,12 @@ public final class AppController {
             case Strings.AppController.TIME_COMMAND -> TimeCommand.run(this);
             case Strings.AppController.MOVE_LIST_COMMAND -> MoveListCommand.run(this);
             default -> {
-                if (mainCommand.matches(Strings.AppController.MOVE_REGEX)) {
-                    MoveCommand.run(this, mainCommand);
-                } else {
+                if (mainCommand.isEmpty()) {
+                    System.out.println(Strings.AppController.EMPTY_COMMAND);
+                } else if (mainCommand.matches(Strings.AppController.COMMAND_REGEX)) {
                     System.out.println(Strings.AppController.UNRECOGNIZED_COMMAND);
+                } else {
+                    MoveCommand.run(this, mainCommand);
                 }
             }
         }

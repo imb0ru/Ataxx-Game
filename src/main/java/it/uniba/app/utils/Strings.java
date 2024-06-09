@@ -153,9 +153,22 @@ public final class Strings {
                                                           + " per visualizzare i comandi disponibili.";
 
         /**
+         * Messaggio di errore per un comando vuoto.
+         */
+        public static final String EMPTY_COMMAND = "Comando vuoto. "
+                                                   + "Digita "
+                                                   + HELP_COMMAND
+                                                   + " per visualizzare i comandi disponibili.";
+
+        /**
          * Espressione regolare per una mossa.
          */
         public static final String MOVE_REGEX = "^\\s*[a-z][0-9]\\s*-\\s*[a-z][0-9]\\s*$";
+
+        /**
+         * Espressione regolare per un comando.
+         */
+        public static final String COMMAND_REGEX = "^\\s*\\/[a-z0-9]+\\s*$";
     }
 
     /**
