@@ -287,7 +287,7 @@ Considerando anche il package dedicato al testing, questo è il diagramma che ne
 
 ### (4.3) Diagramma delle componenti 
 Il sistema è costituito da due componenti:
-- ***Command Line Interface***: fornisce servizi per giocare a battleship attraverso una linea di comando.
+- ***Command Line Interface***: fornisce servizi per giocare ad Ataxx attraverso una linea di comando.
 - ***Ataxx***:  fornisce servizi per gestire partite di ataxx e di manipolare gli elementi del gioco. <br><br>
 
 ![Diagramma delle componenti](/docs/img/diagramma_delle_componenti.png)
