@@ -8,7 +8,8 @@
    3.2 [Requisiti non funzionali](#32-requisiti-non-funzionali) <br>
 4. [System design](#4-system-design)<br>
     4.1 [Stile architetturale](#41-stile-architetturale)<br>
-    4.2 [Diagramma dei Package](#42-diagramma-dei-package)
+    4.2 [Diagramma dei Package](#42-diagramma-dei-package)<br>
+    4.3 [Diagramma delle componenti](#43-diagramma-delle-componenti)<br>
 5. _TDB_
 6. [Riepilogo dei casi di Test](#6-riepilogo-dei-casi-di-test)
 7. [Manuale utente](#7-manuale-utente)
@@ -283,6 +284,29 @@ Ad un livello più basso di astrazione in `it.uniba.app.` il diagramma è il seg
 
 Considerando anche il package dedicato al testing, questo è il diagramma che ne segue:<br><br>
 ![Diagramma_package_alto_livello_2](/docs/img/diagramma_dei_package_alto_livello_2.png)
+
+### (4.3) Diagramma delle componenti 
+Il sistema è costituito da due componenti:
+- ***Command Line Interface***: fornisce servizi per giocare a battleship attraverso una linea di comando.
+- ***Ataxx***:  fornisce servizi per gestire partite di ataxx e di manipolare gli elementi del gioco. <br><br>
+
+![Diagramma delle componenti](/docs/img/diagramma_delle_componenti.png)
+
+Queste due componenti comunicano tra loro tramite l'interfaccia **Ataxx API**.
+
+**Flusso delle operazioni**:
+1) L'utente inserisce un comando tramite la ***Command Line Interface***.
+2) La ***Command Line Interface*** invia questo comando all'***Ataxx API***.
+3) L'***Ataxx API*** comunica con la componente ***Ataxx***, trasmettendo il comando per essere elaborato.
+4) La componente ***Ataxx*** elabora il comando utilizzando la logica di gioco e aggiorna lo stato del gioco di conseguenza.
+5) La risposta o l'aggiornamento dello stato del gioco viene inviato dall'***Ataxx API*** alla ***Command Line Interface***.
+6) La ***Command Line Interface*** visualizza l'output o lo stato aggiornato del gioco all'utente.
+
+Il diagramma illustra chiaramente la relazione tra l'**interfaccia utente a linea di comando** e il sistema di gioco **Ataxx**, 
+con l'**API** che funge da intermediario per la comunicazione. Questo tipo di architettura modularizzata permette una chiara separazione tra la 
+logica del gioco e l'interfaccia utente, facilitando la manutenzione e l'aggiornamento di ciascuna componente indipendentemente.
+
+
 ## (7) Manuale Utente
 
 ### Introduzione
