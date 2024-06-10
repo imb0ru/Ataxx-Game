@@ -1,6 +1,7 @@
 package it.uniba.app;
 
 import it.uniba.app.entities.Board;
+import it.uniba.app.exceptions.UnblockableCellException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,12 +23,12 @@ class BoardTest {
      * Testa che la configurazione del tavoliere dopo aver bloccato alcune celle sia corretta.
      */
     @Test
-    void lockedCellsTest() {
+    void lockedCellsTest() throws UnblockableCellException {
         final var board = new Board();
-        board.addBlockedCell(Board.Position.fromString("c4"));
-        board.addBlockedCell(Board.Position.fromString("d3"));
-        board.addBlockedCell(Board.Position.fromString("d5"));
-        board.addBlockedCell(Board.Position.fromString("e4"));
+        board.blockCell(Board.Position.fromString("c4"));
+        board.blockCell(Board.Position.fromString("d3"));
+        board.blockCell(Board.Position.fromString("d5"));
+        board.blockCell(Board.Position.fromString("e4"));
 
         assertEquals(
             board.toString(),
@@ -39,12 +40,12 @@ class BoardTest {
      * Testa che la configurazione del tavoliere dopo aver bloccato alcune celle e averle sbloccate sia quella iniziale.
      */
     @Test
-    void resetLockedCellsTest() {
+    void resetLockedCellsTest() throws UnblockableCellException {
         final var board = new Board();
-        board.addBlockedCell(Board.Position.fromString("c4"));
-        board.addBlockedCell(Board.Position.fromString("d3"));
-        board.addBlockedCell(Board.Position.fromString("d5"));
-        board.addBlockedCell(Board.Position.fromString("e4"));
+        board.blockCell(Board.Position.fromString("c4"));
+        board.blockCell(Board.Position.fromString("d3"));
+        board.blockCell(Board.Position.fromString("d5"));
+        board.blockCell(Board.Position.fromString("e4"));
         board.clearBlockedCells();
 
         assertEquals(

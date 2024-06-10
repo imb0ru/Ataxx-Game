@@ -2,6 +2,7 @@ package it.uniba.app.entities;
 
 import it.uniba.app.exceptions.InvalidBoardException;
 import it.uniba.app.exceptions.InvalidPositionException;
+import it.uniba.app.exceptions.UnblockableCellException;
 import it.uniba.app.utils.Strings;
 
 import java.util.Arrays;
@@ -10,16 +11,6 @@ import java.util.Arrays;
  * Classe << Entity >> che rappresenta il tavoliere del gioco.
  */
 public final class Board implements Cloneable {
-    /**
-     * Numero massimo di caselle bloccate.
-     */
-    public static final int MAX_BLOCKED_CELLS = 9;
-
-    /**
-     * Contatore delle caselle bloccate.
-     */
-    private int blockedCellsCounter = 0;
-
     /**
      * Enumerazione che rappresenta i possibili contenuti di una cella del
      * tavoliere.
@@ -171,6 +162,11 @@ public final class Board implements Cloneable {
     public static final int SIZE = 7;
 
     /**
+     * Numero massimo di caselle bloccate.
+     */
+    public static final int MAX_BLOCKED_CELLS = 9;
+
+    /**
      * Posizioni iniziali delle pedine.
      */
     private static final Position[] INITIAL_POSITIONS = {
@@ -184,6 +180,11 @@ public final class Board implements Cloneable {
      * Array che contiene le celle del tavoliere.
      */
     private final Cell[] cells = new Cell[SIZE * SIZE];
+
+    /**
+     * Contatore delle caselle bloccate.
+     */
+    private int blockedCellsCounter = 0;
 
     /**
      * Costruttore che inizializza un tavoliere da una stringa specificata che
@@ -283,6 +284,49 @@ public final class Board implements Cloneable {
     }
 
     /**
+     * Blocca la cella nella posizione specificata.
+     *
+     * @param position la posizione della cella da bloccare
+     */
+    public void blockCell(final Position position) throws UnblockableCellException {
+        if (Arrays.stream(INITIAL_POSITIONS).anyMatch(p -> Position.distance(p, position) <= 2)) {
+            throw new UnblockableCellException(Strings.Board.UNBLOCKABLE_CELL_EXCEPTION);
+        }
+
+        if (this.blockedCellsCounter >= MAX_BLOCKED_CELLS) {
+            throw new UnblockableCellException(Strings.Board.MAX_BLOCKED_CELLS_EXCEPTION);
+        }
+
+        if (getCell(position) != Cell.LOCKED) {
+            setCell(position, Cell.LOCKED);
+            this.blockedCellsCounter++;
+        }
+    }
+
+    /**
+     * Sblocca la cella nella posizione specificata.
+     *
+     * @param position la posizione della cella da sbloccare
+     */
+    public void unblockCell(final Position position) {
+        if (getCell(position) == Cell.LOCKED) {
+            setCell(position, Cell.EMPTY);
+            this.blockedCellsCounter--;
+        }
+    }
+
+    /**
+     * Setta tutte le celle bloccate a libere.
+     */
+    public void clearBlockedCells() {
+        for (int row = 0; row < SIZE; row++) {
+            for (int column = 0; column < SIZE; column++) {
+                unblockCell(new Position(row, column));
+            }
+        }
+    }
+
+    /**
      * Restituisce una rappresentazione testuale del tavoliere.
      *
      * @return la rappresentazione testuale del tavoliere
@@ -326,95 +370,6 @@ public final class Board implements Cloneable {
         return stringBuilder.toString();
     }
 
-    /**
-     * Verifica se una cella è bloccata.
-     *
-     * @param cell la cella da verificare
-     * @return true se la cella è bloccata, false altrimenti
-     */
-    public boolean isCellBlocked(final Cell cell) {
-        return cell == Cell.LOCKED;
-    }
-
-    /**
-     * Aggiunge una cella all'elenco delle celle bloccate.
-     *
-     * @param position posizione della cella da bloccare
-     */
-    public void addBlockedCell(final Position position) {
-        setCell(position, Cell.LOCKED);
-        blockedCellsCounter++;
-    }
-
-    /**
-     * Setta la cella bloccata a libera.
-     *
-     * @param position posizione della cella da sbloccare
-     */
-    public void removeBlockedCell(final Position position) {
-        if (getCell(position) == Cell.LOCKED) {
-            setCell(position, Cell.EMPTY);
-            blockedCellsCounter--;
-        }
-    }
-
-    /**
-     * Setta tutte le celle bloccate a libere.
-     */
-    public void clearBlockedCells() {
-        for (int row = 0; row < SIZE; row++) {
-            for (int column = 0; column < SIZE; column++) {
-                removeBlockedCell(new Position(row, column));
-            }
-        }
-    }
-
-    /**
-     * Restituisce il numero di celle bloccate.
-     *
-     * @return il numero di celle bloccate
-     */
-    public int getBlockedCellsSize() {
-        return blockedCellsCounter;
-    }
-
-    /**
-     * Restituisce il numero massimo di celle bloccabili.
-     *
-     * @return il numero di celle bloccate
-     */
-    public int getMaxBlockedCells() {
-        return MAX_BLOCKED_CELLS;
-    }
-
-    /**
-     * Verifica se una posizione è una posizione iniziale.
-     * @param position posizione da verificare
-     * @return true se la posizione è una posizione iniziale, false altrimenti
-     */
-    public boolean isStartingCell(final Position position) {
-        for (Position initialPosition : INITIAL_POSITIONS) {
-            if (position.equals(initialPosition)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Verifica se una posizione è adiacente a una posizione iniziale.
-     *
-     * @param position posizione da verificare
-     * @return true se la posizione è adiacente a una posizione iniziale, false altrimenti
-     */
-    public boolean isAdjacentToStartingCell(final Position position) {
-        for (Position initialPosition : INITIAL_POSITIONS) {
-            if (Position.distance(initialPosition, position) <= 2) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Clona il tavoliere.
@@ -431,6 +386,5 @@ public final class Board implements Cloneable {
         }
         return clonedBoard;
     }
-
 }
 
