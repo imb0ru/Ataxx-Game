@@ -28,7 +28,9 @@ class BoardTest {
     void invalidCharacterInsideStringTest() {
         assertThrows(
             InvalidBoardException.class,
-            () -> { final var board = new Board("B5EW35EW5EX"); },
+            () -> {
+                final var board = new Board("B5EW35EW5EX");
+            },
             "Dovrebbe lanciare un'eccezione quando viene inserito un carattere non valido nella stringa.");
     }
 
@@ -39,7 +41,9 @@ class BoardTest {
     void tooLongStringTest() {
         assertThrows(
             InvalidBoardException.class,
-            () -> { final var board = new Board("B - 50E"); },
+            () -> {
+                final var board = new Board("B - 50E");
+            },
             "Dovrebbe lanciare un'eccezione quando viene usata una stringa con un numero di celle invalido.");
     }
 
@@ -50,7 +54,9 @@ class BoardTest {
     void tooShortStringTest() {
         assertThrows(
             InvalidBoardException.class,
-            () -> { final var board = new Board("B - 48E"); },
+            () -> {
+                final var board = new Board("B - 48E");
+            },
             "Dovrebbe lanciare un'eccezione quando viene usata una stringa con un numero di celle invalido.");
     }
 
@@ -61,7 +67,9 @@ class BoardTest {
     void invalidLockedCellInStringTest() {
         assertThrows(
             InvalidBoardException.class,
-            () -> { final var board = new Board("B5EW35EW5EL"); },
+            () -> {
+                final var board = new Board("B5EW35EW5EL");
+            },
             "Dovrebbe lanciare un'eccezione quando viene bloccata una cella non valida nella stringa.");
     }
 
@@ -72,7 +80,9 @@ class BoardTest {
     void tooManyLockedCellsInStringTest() {
         assertThrows(
             InvalidBoardException.class,
-            () -> { final var board = new Board("B5EW10EL3E7L3EL6EL3EW5EB"); },
+            () -> {
+                final var board = new Board("B5EW10EL3E7L3EL6EL3EW5EB");
+            },
             "Dovrebbe lanciare un'eccezione quando il numero di celle bloccate supera il massimo.");
     }
 
@@ -138,7 +148,7 @@ class BoardTest {
     }
 
     /**
-     * Testa che venga lanciata un'eccezione quando si tenta di eccedere il numero massimo di celle bloccabili
+     * Testa che venga lanciata un'eccezione quando si tenta di eccedere il numero massimo di celle bloccabili.
      */
     @Test
     void maxLockedCellsTest() throws UnblockableCellException {

@@ -37,7 +37,9 @@ class GameControllerTest {
     void invalidGameStringFormatTest() {
         assertThrows(
             InvalidGameException.class,
-            () -> { final var game = new GameController("B - 49E - asdf"); },
+            () -> {
+                final var game = new GameController("B - 49E - asdf");
+            },
             "Dovrebbe lanciare un'eccezione se la stringa della partita non e' corretta.");
     }
 
@@ -48,7 +50,9 @@ class GameControllerTest {
     void invalidCharacterInsideGameStringTest() {
         assertThrows(
             InvalidGameException.class,
-            () -> { final var game = new GameController("X - 49E"); },
+            () -> {
+                final var game = new GameController("X - 49E");
+            },
             "Dovrebbe lanciare un'eccezione se un carattere non è valido nella stringa della partita.");
     }
 
