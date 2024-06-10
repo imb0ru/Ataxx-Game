@@ -177,8 +177,17 @@ Ogni giocatore è identificato da tutte le celle del suo colore assegnato
     --rm -it ghcr.io/softeng2324-inf-uniba/ataxx-berners:latest`.
 
 ## (6) Riepilogo dei casi di Test
+
 In questa sezione analizzeremo i casi di Test effettuati su differenti classi.
-Analizziamo nel dettaglio le classi testate:
+
+Per effettuare i test sono stati utilizzati i seguenti strumenti:
+* [JUnit](https://junit.org/junit5/)
+* [CheckStyle](https://checkstyle.sourceforge.io/)
+* [Spotbugs](https://spotbugs.github.io/)
+* [PMD](https://pmd.github.io/)
+
+In particolare abbiamo utilizzato gli ultime 3 per un'analisi del codice statica e la prima per la creazione ed esecuzione
+di casi di test per diverse classi, analizziamoli nel dettaglio:
 
 ### Test per la classe `Move`
 
@@ -196,14 +205,31 @@ Di seguito i test selezionati:
 * `fromStringThrowsTest`: questo metodo solleva un'eccezione nel caso in cui la cella di arriva e di partenza create a partire da una stringa non siano valide;
 * `distanceTest`: questo metodo verifica se la distanza tra la cella di partenza e la cella di arrivo sia valida.  
 
+### Test per la classe `Board`
+
+Di seguito i test selezionati:
+* `initialBoardTest`: testa che il tavoliere iniziale sia correttamente inizializzato.
+* `invalidCharacterInsideStringTest`: testa che se la stringa del tavoliere contiene caratteri non validi allora venga sollevata un'eccezione che segnala l'errore.
+* `tooLongStringTest`, `tooShortStringTest`: testa che se la stringa del tavoliere contiene un numero di celle non valido venga sollevata un'eccezione che segnala l'errore.
+* `invalidLockedCellInStringTest`: testa che se la stringa del tavoliere contiene celle bloccate in posizioni non valide allora venga sollevata un'eccezione che segnala l'errore.
+* `tooManyLockedCellsInStringTest`: testa che se la stringa del tavoliere contiene più di 9 celle bloccate allora venga sollevata un'eccezione che segnala l'errore.
+* `lockedCellsTest`: testa che la configurazione del tavoliere sia corretta dopo aver bloccato alcune celle.
+* `resetLockedCellsTest`: testa che la configurazione del tavoliere sia corretta dopo aver bloccato alcune celle e successivamente sbloccate.
+* `blockInitialCellsTest`: testa che venga lanciata un'eccezione se si prova a bloccare le celle di partenza dei giocatori.
+* `blockAdjacentInitialCellsTest`: testa che venga lanciata un'eccezione se si prova a bloccare le celle adiacenti alle celle di partenza dei giocatori.
+* `maxLockedCellsTest`: testa che venga lanciata un'eccezione se si prova a bloccare più di 9 celle.
+
 ### Test per la classe `GameController`
 
 Di seguito i test selezionati:
 * `initialGameTest`: testa che ogni partita cominciata da zero abbia sempre la stessa configurazione,
   ovvero che cominci il nero e il tavoliere sia quello specificato nelle regole di gioco.
+* `invalidGameStringFormatTest`: testa che se la stringa della partita non è valida allora venga sollevata un'eccezione che segnala l'errore.
+* `invalidCharacterInsideGameStringTest`: testa che se la stringa della partita contiene caratteri non validi allora venga sollevata un'eccezione che segnala l'errore.
 * `noWhiteCellsWinTest`, `noBlackCellsWinTest`: in questi due test viene controllata una condizione simile, ovvero che se
   uno dei due giocatori dovesse arrivare a non avere più celle allora lo stato della partita viene impostato alla vittoria
   dell'altro giocatore.
+* `noLegalMovesTest`: in questo test si controlla il caso in cui un giocatore non abbia alcun mossa legale.
 * `correctJumpAndReplicateMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 1 la pedina di partenza non viene
   spostata e ne venga creata un'altra nella posizione di arrivo.
 * `correctJumpMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 2 la pedina di partenza venga spostata
@@ -220,6 +246,10 @@ maniera possiamo sempre controllare che i comportamenti base del gioco rimangano
 
 Infatti, senza di essi, si rischierebbe che una modifica non prudente del codice, potrebbe portare alla creazione di un 
 errore nel codice difficile da rintracciare e che di conseguenza rallenterebbe la produzione di nuovo codice.
+
+### Esiti dei casi di test
+
+![Esiti casi di test](/docs/img/esiti_casi_di_test.png)
 
 ## (7) Manuale Utente
 
