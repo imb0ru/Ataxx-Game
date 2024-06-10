@@ -227,7 +227,7 @@ Perciò si è voluto optare per lo stile architetturale Entity Control Boundary 
 classificazione delle classi in tre categorie:
 
 - ENTITY: Rappresenta gli oggetti del dominio, contenenti i dati e la logica di business. Per Ataxx, le entità
-  includono il tabellone di gioco e i pezzi.
+  includono il tabellone di gioco e le mosse.
 - CONTROL: Gestisce il flusso e la logica dell'applicazione, orchestrando le
   interazioni tra Boundary ed Entity. Per Ataxx, i controlli includono la gestione delle mosse dei giocatori
   e l'applicazione delle regole del gioco.
@@ -240,17 +240,17 @@ L'elenco dei package e delle classi in essi contenuti è il seguente:
 
 
 - il package **Commands**, package cha raggruppa le classi che si occupano di eseguire i commandi inseriti dall'utente:
-    - ***BlockCommand***: classe esegue il comando ```  "\blocca" ``` permettendo all'utente di bloccare una cella del tavoliere;
-    - ***BoardCommand***: classe esegue il comando ```  "\tavoliere" ``` perciò stampa il tavoliere della partita in corso;
-    - ***EmptyBoard***: classe esegue il comando ```  "\vuoto" ``` che stampa un tavoliere vuoto;
-    - ***ExitCommand***: classe esegue il comando ```  "\exit" ``` di conseguenza uscendo dall'applicazione;
-    - ***HelpCommand***: classe esegue il comando ```  "\help" ``` percui vengono stampate le informazioni di aiuto per l'utilizzo del gioco;
+    - ***BlockCommand***: classe esegue il comando ```  "/blocca" ``` permettendo all'utente di bloccare una cella del tavoliere;
+    - ***BoardCommand***: classe esegue il comando ```  "/tavoliere" ``` perciò stampa il tavoliere della partita in corso;
+    - ***EmptyBoard***: classe esegue il comando ```  "/vuoto" ``` che stampa un tavoliere vuoto;
+    - ***ExitCommand***: classe esegue il comando ```  "/exit" ``` di conseguenza uscendo dall'applicazione;
+    - ***HelpCommand***: classe esegue il comando ```  "/help" ``` percui vengono stampate le informazioni di aiuto per l'utilizzo del gioco;
     - ***MoveCommand***: classe esegue il comando ``` /mosse ``` e stampa a video le mosse effettuate durante la partita;
-    - ***MoveListCommand***: classe esegue il comando ```  "\qualimosse" ``` che stampa a video le mosse effettuate durante la partita ;
-    - ***PlayCommand***: classe esegue il comando ```  "\gioca" ```  che comincia una nuova partita nel caso in cui non ce ne fosse già una in corso;
-    - ***QiutCommand***: classe esegue il comando ```  "\abbandona" ``` il quale permette all'utente di abbandonare la partita in corso.
-    - ***TimeCommand***: classe esegue il comando ```  "\tempo" ``` che stampa a video il tempo di gioco della partita;
-    - ***WhatMovesCommand***: classe che esegue il comando ```  "\qualimosse" ``` il quale stampa a video il tavoliere con le mosse che può effettuare il giocatore corrente;
+    - ***MoveListCommand***: classe esegue il comando ```  "/mosse" ``` e stampa a video le mosse effettuate durante la partita ;
+    - ***PlayCommand***: classe esegue il comando ```  "/gioca" ```  che comincia una nuova partita nel caso in cui non ce ne fosse già una in corso;
+    - ***QuitCommand***: classe esegue il comando ```  "/abbandona" ``` il quale permette all'utente di abbandonare la partita in corso.
+    - ***TimeCommand***: classe esegue il comando ```  "/tempo" ``` che stampa a video il tempo di gioco della partita;
+    - ***WhatMovesCommand***: classe che esegue il comando ```  "/qualimosse" ``` il quale stampa a video il tavoliere con le mosse che può effettuare il giocatore corrente;
       <br><br>
 - il package **Controls** contenente:
     - ***AppController***: classe principale dell'applicazione.
