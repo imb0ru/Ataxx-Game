@@ -6,7 +6,9 @@
 3. [Requisiti specifici](#3-requisiti-specifici) <br>
    3.1 [Requisiti funzionali](#31-requisiti-funzionali) <br>
    3.2 [Requisiti non funzionali](#32-requisiti-non-funzionali) <br>
-4. _TDB_
+4. [System design](#4-system-design)<br>
+    4.1 [Stile architetturale](#41-stile-architetturale)<br>
+    4.2 [Diagramma dei Package](#42-diagramma-dei-package)
 5. _TDB_
 6. [Riepilogo dei casi di Test](#6-riepilogo-dei-casi-di-test)
 7. [Manuale utente](#7-manuale-utente)
@@ -217,6 +219,70 @@ maniera possiamo sempre controllare che i comportamenti base del gioco rimangano
 Infatti, senza di essi, si rischierebbe che una modifica non prudente del codice, potrebbe portare alla creazione di un 
 errore nel codice difficile da rintracciare e che di conseguenza rallenterebbe la produzione di nuovo codice.
 
+## **(4) System Design**
+
+### (4.1) Stile architetturale
+La suddivisione in package è stata effettuata accomunando le varie classi in base alle loro responsabilità e compiti svolti.
+Perciò si è voluto optare per lo stile architetturale Entity Control Boundary (ECB) che prevede la
+classificazione delle classi in tre categorie:
+
+- ENTITY: Rappresenta gli oggetti del dominio, contenenti i dati e la logica di business. Per Ataxx, le entità
+  includono il tabellone di gioco e i pezzi.
+- CONTROL: Gestisce il flusso e la logica dell'applicazione, orchestrando le
+  interazioni tra Boundary ed Entity. Per Ataxx, i controlli includono la gestione delle mosse dei giocatori
+  e l'applicazione delle regole del gioco.
+- BOUNDARY: sono le classi che si occupano di interfacciarsi con l'utente e di gestire le logiche di presentazione.
+  In particolare si occupano di ricevere i comandi dell'utente e di mostrare i risultati delle operazioni.
+
+L'elenco dei package e delle classi in essi contenuti è il seguente:
+- il package **Boundaries** contenente:
+    - ***GamePrinter***: classe che si occupa di stampare lo stato della partita;
+
+
+- il package **Commands**, package cha raggruppa le classi che si occupano di eseguire i commandi inseriti dall'utente:
+    - ***BlockCommand***: classe esegue il comando ```  "\blocca" ``` permettendo all'utente di bloccare una cella del tavoliere;
+    - ***BoardCommand***: classe esegue il comando ```  "\tavoliere" ``` perciò stampa il tavoliere della partita in corso;
+    - ***EmptyBoard***: classe esegue il comando ```  "\vuoto" ``` che stampa un tavoliere vuoto;
+    - ***ExitCommand***: classe esegue il comando ```  "\exit" ``` di conseguenza uscendo dall'applicazione;
+    - ***HelpCommand***: classe esegue il comando ```  "\help" ``` percui vengono stampate le informazioni di aiuto per l'utilizzo del gioco;
+    - ***MoveCommand***: classe esegue il comando ``` /mosse ``` e stampa a video le mosse effettuate durante la partita;
+    - ***MoveListCommand***: classe esegue il comando ```  "\qualimosse" ``` che stampa a video le mosse effettuate durante la partita ;
+    - ***PlayCommand***: classe esegue il comando ```  "\gioca" ```  che comincia una nuova partita nel caso in cui non ce ne fosse già una in corso;
+    - ***QiutCommand***: classe esegue il comando ```  "\abbandona" ``` il quale permette all'utente di abbandonare la partita in corso.
+    - ***TimeCommand***: classe esegue il comando ```  "\tempo" ``` che stampa a video il tempo di gioco della partita;
+    - ***WhatMovesCommand***: classe che esegue il comando ```  "\qualimosse" ``` il quale stampa a video il tavoliere con le mosse che può effettuare il giocatore corrente;
+      <br><br>
+- il package **Controls** contenente:
+    - ***AppController***: classe principale dell'applicazione.
+      Gestisce le chiamate dei comandi di gioco in base alle azioni dell'utente;
+    - ***GameController***: classe che gestisce la logica di gioco;
+      <br><br>
+- il package **Entities** contenente:
+    - ***Board***: classe che rappresenta il tavoliere del gioco;
+    - ***Move***: classe che rappresenta una mossa all'interno della partita;
+- il package **Exceptions** raggruppa tutte le classi che si occupano delle eccezioni durante l'esecuzione del gioco, contiene le seguenti classi:
+    - ***InvalidBoardException***: eccezione lanciata quando il tavoliere non è valido;
+    - ***InvalidGameException***: eccezione lanciata quando la stringa che rappresenta lo stato della partita non è valida;
+    - ***InvalidMoveException***: eccezione non controllata che rappresenta una mossa non valida;
+    - ***InvalidPositionException***: eccezione non controllata che gestisce una posizione non valida;
+      <br><br>
+- il package **Utils** contentente le classi:
+    - ***Color***: classe che si occupa dell'enumerazione dei colori disponibili per la stampa.
+    - ***Strings***: classe contenente le stringhe utilizzate nell'applicazione.
+      <br><br>
+- Infine, situata nel package di default(it.uniba.app), la classe **App** che si occupa dell'inizializzazione e avvio del software, come definito dal workflow utilizzato.
+
+### (4.2) Diagramma dei Package
+Tra i vari package del progetto esistono delle dipendenze. Una dipendenza indica che un modulo o un pacchetto
+richiede l'accesso a un altro modulo o pacchetto per funzionare correttamente.<br>
+Questo è come si mostra il diagramma dei package ad un livello alto di astrazione: <br><br>
+![Diagramma_package_alto_livello](/docs/img/diagramma_dei_package_alto_livello.png)
+
+Ad un livello più basso di astrazione in `it.uniba.app.` il diagramma è il seguente:<br><br>
+![Diagramma_package_basso_livello](/docs/img/diagramma_dei_package_basso_livello.png)
+
+Considerando anche il package dedicato al testing, questo è il diagramma che ne segue:<br><br>
+![Diagramma_package_alto_livello_2](/docs/img/diagramma_dei_package_alto_livello_2.png)
 ## (7) Manuale Utente
 
 ### Introduzione
