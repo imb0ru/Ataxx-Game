@@ -63,18 +63,17 @@ mondo di Ataxx e mostrate la vostra abilità nel conquistare la griglia
 di gioco!**
 
 ## (2) Modello di Dominio
-![Modello di Dominio](/docs/img/modello_dominio.png)
 
-La logica del dominio di interesse del sistema software ruota attorno 
-al concetto di `GameController`.
+Diagramma costruito con [StarUML v6.0.1](https://staruml.io/)
+
+![Modello di Dominio](/docs/img/modello_dominio.png)
 
 I concetti più importanti a cui fa riferimento sono i seguenti:
 
-| Concetto di appartenenza | Attributo   | Descrizione                                                                                                                                  |
-|--------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `Board`                  | `board`     | È il riferimento al tavoliere che contiene le pedine della partita.                                                                          |
-| `Cell`                   | `cells`     | È l'array che contiene tutte le celle del tavoliere. Possono essere vuote (`EMPTY`), nere (`BLACK`) o bianche (`WHITE`).                     |
-| `GameState`              | `gameState` | È lo stato in cui la partita si può trovare. Può essere in corso (`IN_PROGRESS`), vinta dal nero (`BLACK_WINS`) o dal bianco (`WHITE_WINS`). |
+| Concetto di appartenenza | Attributo   | Descrizione                                                                                                                                   |
+|--------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| `Board`                  | `board`     | È il riferimento al tavoliere che contiene le pedine della partita.                                                                           |
+| `Cell`                   | `cells`     | È l'array che contiene tutte le celle del tavoliere. Possono essere vuote (`EMPTY`), nere (`BLACK`), bianche (`WHITE`) o bloccate (`LOCKED`). |
 
 Inoltre ogni partita può essere vista come una sequenza di mosse 
 (rappresentate dal concetto `Move`).
@@ -89,6 +88,11 @@ Inoltre ogni mossa è composta da una posizione di partenza e arrivo
 A loro volta queste sono composte da
 * `row`: la riga sul tavoliere
 * `column`: la colonna sul tavoliere
+
+Infine abbiamo il concetto di `Player` che rappresenta i giocatori della partita.
+Ogni giocatore è identificato da tutte le celle del suo colore assegnato 
+(cella `BLACK` per un giocatore, cella `WHITE` per l'altro).
+
 
 ## (3) Requisiti Specifici
 
