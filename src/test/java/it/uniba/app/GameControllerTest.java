@@ -5,6 +5,7 @@ import it.uniba.app.entities.Board;
 import it.uniba.app.entities.Move;
 import it.uniba.app.exceptions.InvalidGameException;
 import it.uniba.app.exceptions.InvalidMoveException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,6 +21,7 @@ class GameControllerTest {
      * corrente sia il nero, che il tavoliere sia quello iniziale e che ci siano
      * mosse legali disponibili per il giocatore corrente.
      */
+    @DisplayName("initialGameTest: Stato di una partita iniziale corretto")
     @Test
     void initialGameTest() {
         Board board = new Board();
@@ -33,6 +35,7 @@ class GameControllerTest {
     /**
      * Testa che venga lanciata un'eccezione quando la stringa di inizializzazione non è corretta.
      */
+    @DisplayName("invalidGameStringFormatTest: Formato della stringa della partita non valido")
     @Test
     void invalidGameStringFormatTest() {
         assertThrows(
@@ -46,6 +49,7 @@ class GameControllerTest {
     /**
      * Testa che venga lanciata un'eccezione quando la stringa di inizializzazione contiene un carattere non valido.
      */
+    @DisplayName("invalidCharacterInsideGameStringTest: Carattere non valido nella stringa della partita")
     @Test
     void invalidCharacterInsideGameStringTest() {
         assertThrows(
@@ -59,6 +63,7 @@ class GameControllerTest {
     /**
      * Testa la vittoria del nero nel caso in cui il bianco non possieda pedine.
      */
+    @DisplayName("noWhiteCellsWinTest: Vincita del nero nel caso in cui il bianco non abbia pedine.")
     @Test
     void noWhiteCellsWinTest() throws InvalidGameException {
         final var game = new GameController("B - B48E");
@@ -68,6 +73,7 @@ class GameControllerTest {
     /**
      * Testa la vittoria del bianco nel caso in cui il nero non possieda pedine.
      */
+    @DisplayName("noBlackCellsWinTest: Vincita del bianco nel caso in cui il nero non abbia pedine.")
     @Test
     void noBlackCellsWinTest() throws InvalidGameException {
         final var game = new GameController("B - W48E");
@@ -77,6 +83,7 @@ class GameControllerTest {
     /**
      * Testa il caso in cui un giocatore non ha mosse disponibili.
      */
+    @DisplayName("noLegalMovesTest: Nessuna mossa legale disponibile")
     @Test
     void noLegalMovesTest() throws InvalidGameException {
         final var game = new GameController("B - B2W4E3W4E3W4E28E");
@@ -90,6 +97,7 @@ class GameControllerTest {
      * {@link it.uniba.app.entities.Move.Type#JUMP_AND_REPLICATE}
      * la pedina viene spostata e replicata correttamente.
      */
+    @DisplayName("correctJumpAndReplicateMoveTest: Esecuzione di una mossa di tipo 1 corretto")
     @Test
     void correctJumpAndReplicateMoveTest() throws InvalidGameException {
         final var fromRow = 4;
@@ -110,6 +118,7 @@ class GameControllerTest {
      * {@link it.uniba.app.entities.Move.Type#JUMP}
      * la pedina viene spostata correttamente.
      */
+    @DisplayName("correctJumpMoveTest: Esecuzione di una mossa di tipo 2 corretto")
     @Test
     void correctJumpMoveTest() throws InvalidGameException {
         final var fromRow = 4;
@@ -129,6 +138,7 @@ class GameControllerTest {
      * Testa che quando il giocatore si sposta in una pedina adiacente a delle
      * celle nemiche queste vengano convertite.
      */
+    @DisplayName("moveConvertsAdjacentEnemyCellsTest: Conversione di celle nemiche adiacenti")
     @Test
     void moveConvertsAdjacentEnemyCellsTest() throws InvalidGameException {
         final var fromRow = 4;
@@ -148,6 +158,7 @@ class GameControllerTest {
      * Testa che quando il giocatore prova a fare una mossa che ha come cella di destinazione una cella bloccata dia
      * errore.
      */
+    @DisplayName("moveToBlockedCellTest: Mossa su una cella bloccata")
     @Test
     void moveToBlockedCellTest() throws InvalidGameException {
         final var game = new GameController("W - B5EW17EL13EW10E");

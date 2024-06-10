@@ -3,6 +3,7 @@ package it.uniba.app;
 import it.uniba.app.entities.Board;
 import it.uniba.app.exceptions.InvalidBoardException;
 import it.uniba.app.exceptions.UnblockableCellException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,6 +16,7 @@ class BoardTest {
     /**
      * Testa che la configurazione iniziale del tavoliere sia corretta.
      */
+    @DisplayName("initialBoardTest: Configurazione iniziale corretta")
     @Test
     void initialBoardTest() {
         final var board = new Board();
@@ -24,6 +26,7 @@ class BoardTest {
     /**
      * Testa che venga lanciata un'eccezione quando c'è un carattere non valido nella stringa del tavoliere.
      */
+    @DisplayName("invalidCharacterInsideStringTest: Carattere non valido nella stringa del tavoliere")
     @Test
     void invalidCharacterInsideStringTest() {
         assertThrows(
@@ -37,6 +40,7 @@ class BoardTest {
     /**
      * Testa che venga lanciata un'eccezione quando il numero di celle della stringa non è valido.
      */
+    @DisplayName("tooLongStringTest: Stringa del tavoliere troppo lunga")
     @Test
     void tooLongStringTest() {
         assertThrows(
@@ -50,6 +54,7 @@ class BoardTest {
     /**
      * Testa che venga lanciata un'eccezione quando il numero di celle della stringa non è valido.
      */
+    @DisplayName("tooLongStringTest: Stringa del tavoliere troppo corta")
     @Test
     void tooShortStringTest() {
         assertThrows(
@@ -63,6 +68,7 @@ class BoardTest {
     /**
      * Testa che venga lanciata un'eccezione quando c'è una cella bloccata nella stringa non valida.
      */
+    @DisplayName("tooLongStringTest: Cella non bloccabile nella stringa del tavoliere")
     @Test
     void invalidLockedCellInStringTest() {
         assertThrows(
@@ -76,6 +82,7 @@ class BoardTest {
     /**
      * Testa che venga lanciata un'eccezione quando il numero di celle bloccate supera il massimo nella stringa.
      */
+    @DisplayName("tooLongStringTest: Numero di celle bloccabili superato nella stringa del tavoliere")
     @Test
     void tooManyLockedCellsInStringTest() {
         assertThrows(
@@ -89,6 +96,7 @@ class BoardTest {
     /**
      * Testa che la configurazione del tavoliere dopo aver bloccato alcune celle sia corretta.
      */
+    @DisplayName("tooLongStringTest: Configurazione del tavoliere corretta dopo aver bloccato alcune celle")
     @Test
     void lockedCellsTest() throws UnblockableCellException {
         final var board = new Board();
@@ -106,6 +114,7 @@ class BoardTest {
     /**
      * Testa che la configurazione del tavoliere dopo aver bloccato alcune celle e averle sbloccate sia quella iniziale.
      */
+    @DisplayName("tooLongStringTest: Configurazione del tavoliere corretta dopo aver bloccato e sbloccato alcune celle")
     @Test
     void resetLockedCellsTest() throws UnblockableCellException {
         final var board = new Board();
@@ -124,6 +133,7 @@ class BoardTest {
     /**
      * Testa che venga lanciata un'eccezione quando si tenta di bloccare una cella iniziale.
      */
+    @DisplayName("tooLongStringTest: Blocco di una cella iniziale")
     @Test
     void blockInitialCellTest() {
         final var board = new Board();
@@ -137,6 +147,7 @@ class BoardTest {
     /**
      * Testa che venga lanciata un'eccezione quando si tenta di bloccare una cella adiacente a una iniziale.
      */
+    @DisplayName("tooLongStringTest: Blocco di una cella adiacente a una iniziale")
     @Test
     void blockAdjacentToInitialCellTest() {
         final var board = new Board();
@@ -150,6 +161,7 @@ class BoardTest {
     /**
      * Testa che venga lanciata un'eccezione quando si tenta di eccedere il numero massimo di celle bloccabili.
      */
+    @DisplayName("tooLongStringTest: Blocco di un numero di celle superiore al massimo")
     @Test
     void maxLockedCellsTest() throws UnblockableCellException {
         final var board = new Board();
