@@ -132,19 +132,19 @@ public final class Board implements Cloneable {
                 ));
             }
 
+            char columnCharacter = positionString.charAt(0);
+            if (Character.isDigit(columnCharacter)) {
+                throw new InvalidPositionException(String.format(
+                    Strings.Board.INVALID_COLUMN_WHEN_PARSING_EXCEPTION_FORMAT,
+                    columnCharacter
+                ));
+            }
+
             char rowCharacter = positionString.charAt(1);
             if (!Character.isDigit(rowCharacter)) {
                 throw new InvalidPositionException(String.format(
                     Strings.Board.INVALID_ROW_WHEN_PARSING_EXCEPTION_FORMAT,
                     rowCharacter
-                ));
-            }
-
-            char columnCharacter = positionString.charAt(0);
-            if (!Character.isLowerCase(columnCharacter)) {
-                throw new InvalidPositionException(String.format(
-                    Strings.Board.INVALID_COLUMN_WHEN_PARSING_EXCEPTION_FORMAT,
-                    columnCharacter + 'a'
                 ));
             }
 
