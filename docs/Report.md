@@ -6,9 +6,11 @@
 3. [Requisiti specifici](#3-requisiti-specifici) <br>
    3.1 [Requisiti funzionali](#31-requisiti-funzionali) <br>
    3.2 [Requisiti non funzionali](#32-requisiti-non-funzionali) <br>
-4. _TDB_
+4. [System Design](#4-system-design)<br>
+    4.1 [Stile architetturale](#41-stile_architetturale)<br>
+    4.1 [Diagramma dei_package](#42-diagramma-dei-package)<br>
 5. _TDB_
-6. [Riepilogo dei casi di Test](#6-riepilogo-dei-casi-di-test)
+6. _TDB_
 7. [Manuale utente](#7-manuale-utente)
 8. [Processo di sviluppo e organizzazione del lavoro](#8-processo-di-sviluppo-e-organizzazione-del-lavoro) <br>
     8.1 [Processo di sviluppo adotatto](#81-processo-di-sviluppo-adottato) <br>
@@ -17,7 +19,6 @@
     8.4 [Tool Utilizzati](#84-tool-utilizzati) <br>
 9. [Analisi Retrospettiva](#9-analisi-retrospettiva) <br>
 9.1 [Sprint 0](#91-sprint-0) <br>
-9.2 [Sprint 1](#92-sprint-1) <br>
 
 ## **(1) Introduzione**
 
@@ -139,10 +140,10 @@ A loro volta queste sono composte da
 - (RF9) Il sistema deve permettere di visualizzare il tempo di gioco.
   - (RF9.1) Al comando `/tempo` l'applicazione mostra a schermo il tempo trascorso dall'inizio della partita in formato `ore:minuti:secondi`.
 - (RF10) Il sistema deve permettere di impostare caselle non accessibili.
-  - (RF10.1) Al comando `/blocca xn`, se nessuna partita è in corso, l'applicazione blocca la cella che si trova alla colonna `x` e riga `n` del tavoliere, la cella viene mostrata sul tavoliere con un segnale di divieto rosso e non può essere occupata da nessuna pedina.
+  - (RF10.1) Al comando `/blocca xn`, se nessuna partita è in corso, l'applicazione blocca la cella che si trova alla riga `x` e colonna `n` del tavoliere, la cella viene mostrata sul tavoliere con uno sfondo grigio e non può essere occupata da nessuna pedina.
   - (RF10.2) Non è possibile bloccare:
     - (RF10.2.1) le celle di partenza dei giocatori
-    - (RF10.2.2) tutte le caselle adiacenti ad'una casella di partenza del gioco, rendendo impossibile la mossa di espansione di una pedina a inizio gioco
+    - (RF10.2.2) tutte le caselle adiacenti ad una casella di partenza del gioco, rendendo impossibile la mossa di espansione di una pedina a inizio gioco
     - (RF10.2.3) tutte le caselle a distanza 2 da una casella di partenza del gioco, rendendo impossibile la mossa di salto di una pedina a inizio gioco
     - (RF10.2.4) più di 9 celle
 - (RF11) Il sistema deve permettere di effettuare una mossa.
@@ -165,58 +166,77 @@ A loro volta queste sono composte da
     terminale di default.
   - (RNF1.2) Per Windows si consiglia di utilizzare Powershell o Git 
     Bash (in questo caso il comando Docker ha come prefisso winpty).
-- (RNF2) Per eseguire il container docker dell'app è necessario:
-  - (RNF2.1) Avere installato docker sul proprio sistema operativo.
-  - (RNF2.2) Eseguire il comando `docker pull ghcr.
-    io/softeng2324-inf-uniba/ataxx-berners:latest`.
-  - (RNF2.3) Eseguire il container docker con il comando `docker run 
-    --rm -it ghcr.io/softeng2324-inf-uniba/ataxx-berners:latest`.
+  - (RNF2) Per eseguire il container docker dell'app è necessario:
+    - (RNF2.1) Avere installato docker sul proprio sistema operativo.
+    - (RNF2.2) Eseguire il comando `docker pull ghcr.
+      io/softeng2324-inf-uniba/ataxx-berners:latest`.
+    - (RNF2.3) Eseguire il container docker con il comando `docker run 
+      --rm -it ghcr.io/softeng2324-inf-uniba/ataxx-berners:latest`.
 
-## (6) Riepilogo dei casi di Test
-In questa sezione analizzeremo i casi di Test effettuati su differenti classi.
-Analizziamo nel dettaglio le classi testate:
+## **(4) System Design**
 
-### Test per la classe `Move`
+### (4.1) Stile architetturale
+La suddivisione in package è stata effettuata accomunando le varie classi in base alle loro responsabilità e compiti svolti. 
+Perciò si è voluto optare per lo stile architetturale Entity Control Boundary (ECB) che prevede la 
+classificazione delle classi in tre categorie:
 
-Di seguito i test selezionati:
-* `constructorTest`: questo metodo testa che la mossa che contiene cella di partenza e cella di arrivo siano correttamente specificate;
-* `constructorThrowsTest`: questo metodo è stato creato per sollevare un'eccezione nel caso in cui le celle specificate vadano oltre la distanza consentita;
-* `moveTypeTest`: questo metodo è stato definito per verificare la tipologia della mossa effettuata da parte del giocatore. Restituisce, in base alla mossa effettuata, la tipologia corretta.
+- ENTITY: Rappresenta gli oggetti del dominio, contenenti i dati e la logica di business. Per Ataxx, le entità 
+    includono il tabellone di gioco e i pezzi.
+- CONTROL: Gestisce il flusso e la logica dell'applicazione, orchestrando le
+  interazioni tra Boundary ed Entity. Per Ataxx, i controlli includono la gestione delle mosse dei giocatori
+  e l'applicazione delle regole del gioco.
+- BOUNDARY: sono le classi che si occupano di interfacciarsi con l'utente e di gestire le logiche di presentazione. 
+  In particolare si occupano di ricevere i comandi dell'utente e di mostrare i risultati delle operazioni.
 
-### Test per la classe `Board.Position`
+L'elenco dei package e delle classi in essi contenuti è il seguente:
+ - il package **Boundaries** contenente:
+    - ***GamePrinter***: classe che si occupa di stampare lo stato della partita;
+   
+   
+ - il package **Commands**, package cha raggruppa le classi che si occupano di eseguire i commandi inseriti dall'utente:
+   - ***BlockCommand***: classe esegue il comando ```  "\blocca" ``` permettendo all'utente di bloccare una cella del tavoliere;
+   - ***BoardCommand***: classe esegue il comando ```  "\tavoliere" ``` perciò stampa il tavoliere della partita in corso;
+   - ***EmptyBoard***: classe esegue il comando ```  "\vuoto" ``` che stampa un tavoliere vuoto;
+   - ***ExitCommand***: classe esegue il comando ```  "\exit" ``` di conseguenza uscendo dall'applicazione;
+   - ***HelpCommand***: classe esegue il comando ```  "\help" ``` percui vengono stampate le informazioni di aiuto per l'utilizzo del gioco;
+   - ***MoveCommand***: classe esegue il comando ``` /mosse ``` e stampa a video le mosse effettuate durante la partita;
+   - ***MoveListCommand***: classe esegue il comando ```  "\qualimosse" ``` che stampa a video le mosse effettuate durante la partita ;
+   - ***PlayCommand***: classe esegue il comando ```  "\gioca" ```  che comincia una nuova partita nel caso in cui non ce ne fosse già una in corso;
+   - ***QiutCommand***: classe esegue il comando ```  "\abbandona" ``` il quale permette all'utente di abbandonare la partita in corso.
+   - ***TimeCommand***: classe esegue il comando ```  "\tempo" ``` che stampa a video il tempo di gioco della partita;
+   - ***WhatMovesCommand***: classe che esegue il comando ```  "\qualimosse" ``` il quale stampa a video il tavoliere con le mosse che può effettuare il giocatore corrente;
+     <br><br>
+ - il package **Controls** contenente:
+    - ***AppController***: classe principale dell'applicazione. 
+   Gestisce le chiamate dei comandi di gioco in base alle azioni dell'utente;
+    - ***GameController***: classe che gestisce la logica di gioco;
+ <br><br>
+ - il package **Entities** contenente:
+    - ***Board***: classe che rappresenta il tavoliere del gioco;
+    - ***Move***: classe che rappresenta una mossa all'interno della partita;
+ - il package **Exceptions** raggruppa tutte le classi che si occupano delle eccezioni durante l'esecuzione del gioco, contiene le seguenti classi:
+    - ***InvalidBoardException***: eccezione lanciata quando il tavoliere non è valido;
+    - ***InvalidGameException***: eccezione lanciata quando la stringa che rappresenta lo stato della partita non è valida;
+    - ***InvalidMoveException***: eccezione non controllata che rappresenta una mossa non valida;
+    - ***InvalidPositionException***: eccezione non controllata che gestisce una posizione non valida;
+ <br><br>
+ - il package **Utils** contentente le classi:
+    - ***Color***: classe che si occupa dell'enumerazione dei colori disponibili per la stampa.
+    - ***Strings***: classe contenente le stringhe utilizzate nell'applicazione.
+ <br><br>
+ - Infine, situata nel package di default(it.uniba.app), la classe **App** che si occupa dell'inizializzazione e avvio del software, come definito dal workflow utilizzato.
 
-Di seguito i test selezionati:
-* `constructorTest`: questo metodo testa che le righe e le colonne corrispondenti alla posizione siano valide, cioè all'interno del tavoliere;
-* `constructorThrowsTest`: questo metodo serve per sollevare un'eccezione nel caso in cui la posizione non sia valida, ad esempio fuori dal tavoliere;
-* `fromStringTest`: questo metodo testa che la cella di partenza e di arrivo creata a partire dalla stringa siano valide;
-* `fromStringThrowsTest`: questo metodo solleva un'eccezione nel caso in cui la cella di arriva e di partenza create a partire da una stringa non siano valide;
-* `distanceTest`: questo metodo verifica se la distanza tra la cella di partenza e la cella di arrivo sia valida.  
+ ### (4.2) Diagramma dei Package
+Tra i vari package del progetto esistono delle dipendenze. Una dipendenza indica che un modulo o un pacchetto 
+richiede l'accesso a un altro modulo o pacchetto per funzionare correttamente.<br>
+Questo è come si mostra il diagramma dei package ad un livello alto di astrazione: <br><br>
+![Diagramma_package_alto_livello](/docs/img/diagramma_dei_package_alto_livello.png)
 
-### Test per la classe `GameController`
+Ad un livello più basso di astrazione in `it.uniba.app.` il diagramma è il seguente:<br><br>
+![Diagramma_package_basso_livello](/docs/img/diagramma_dei_package_basso_livello.png)
 
-Di seguito i test selezionati:
-* `initialGameTest`: testa che ogni partita cominciata da zero abbia sempre la stessa configurazione,
-  ovvero che cominci il nero e il tavoliere sia quello specificato nelle regole di gioco.
-* `noWhiteCellsWinTest`, `noBlackCellsWinTest`: in questi due test viene controllata una condizione simile, ovvero che se
-  uno dei due giocatori dovesse arrivare a non avere più celle allora lo stato della partita viene impostato alla vittoria
-  dell'altro giocatore.
-* `correctJumpAndReplicateMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 1 la pedina di partenza non viene
-  spostata e ne venga creata un'altra nella posizione di arrivo.
-* `correctJumpMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 2 la pedina di partenza venga spostata
-  nella posizione d'arrivo.
-* `moveConvertsAdjacentEnemyCellsTest`: in questo test ci assicuriamo che eseguendo una mossa le pedine del nemico adiacenti
-  alla casella di arrivo vengano convertite in pedine del giocatore che ha effettuato la mossa.
-* `moveToBlockedCellTest`: in questo test ci assicuriamo che quando il giocatore prova a fare una mossa che ha come cella
-  di destinazione una cella bloccata viene lanciata un'eccezione.
-
-### Motivazioni dei test
-
-I test sopra descritti contribuiscono a rendere le modifiche al gioco semplici e meno prone ad errori in quanto in questa
-maniera possiamo sempre controllare che i comportamenti base del gioco rimangano invariati.
-
-Infatti, senza di essi, si rischierebbe che una modifica non prudente del codice, potrebbe portare alla creazione di un 
-errore nel codice difficile da rintracciare e che di conseguenza rallenterebbe la produzione di nuovo codice.
-
+Considerando anche il package dedicato al testing, questo è il diagramma che ne segue:<br><br>
+![Diagramma_package_alto_livello_2](/docs/img/diagramma_dei_package_alto_livello_2.png)
 ## (7) Manuale Utente
 
 ### Introduzione
@@ -235,13 +255,13 @@ Per avviare il gioco Ataxx, seguite le istruzioni riportate di seguito in base a
    - Su macOS, premere `Cmd + Spazio`, digitare `Terminal` e premere `Invio`.
    - Su Linux, utilizzare la combinazione di tasti `Ctrl + Alt + T`.
 
-2. **Navigare alla Directory del Gioco**
+   2. **Navigare alla Directory del Gioco**
    - Utilizzare il comando `cd` seguito dal percorso della directory in cui è installato Ataxx. Ad esempio:
      ```sh
      cd C:\Percorso\Al\Gioco\Ataxx
      ```
 
-3. **Eseguire l'Applicazione**
+   3. **Eseguire l'Applicazione**
    - Digitare il comando per eseguire l'applicazione senza flag e premere `Invio`:
      ```sh
      java -jar ataxx-all.jar
@@ -257,13 +277,13 @@ Per avviare il gioco Ataxx, seguite le istruzioni riportate di seguito in base a
    - Su macOS, premere `Cmd + Spazio`, digitare `Terminal` e premere `Invio`.
    - Su Linux, utilizzare la combinazione di tasti `Ctrl + Alt + T`.
 
-2. **Navigare alla Directory del Gioco**
+   2. **Navigare alla Directory del Gioco**
    - Utilizzare il comando `cd` seguito dal percorso della directory in cui è installato Ataxx. Ad esempio:
      ```sh
      cd C:\Percorso\Al\Gioco\Ataxx
      ```
 
-3. **Eseguire l'Applicazione con il Menu di Aiuto**
+   3. **Eseguire l'Applicazione con il Menu di Aiuto**
    - Digitare uno dei seguenti comandi per visualizzare il menu di aiuto e premere `Invio`:
      ```sh
      java -jar ataxx-all.jar -h
@@ -287,21 +307,18 @@ Gli unici comandi utilizzabili subito dopo l'esecuzione dell'applicazione sono:
 - `/help`: mostra l'elenco dei comandi disponibili come nell'esecuzione con le flag `-h` o `--help`.
 ![Comando Help](/docs/img/comando_help.png)
 
-- `/gioca`: inizia una nuova partita di Ataxx.
-![Comando Gioca](/docs/img/comando_gioca.png)
+  - `/gioca`: inizia una nuova partita di Ataxx.
+  ![Comando Gioca](/docs/img/comando_gioca.png)
 
-- `/esci`: termina l'applicazione chiedendo conferma. Se si risponde si l'applicazione si chiude, altrimenti si predispone a ricevere nuovi comandi.
-![Comando Esci](/docs/img/comando_esci.png)
-  - Per confermare l'uscita, digitare `s` e premere `Invio`.
-  ![Conferma Uscita](/docs/img/conferma_esci.png)
-  - Per annullare l'uscita, digitare `n` e premere `Invio`
-  ![Annulla Uscita](/docs/img/annulla_esci.png)
+  - `/esci`: termina l'applicazione chiedendo conferma. Se si risponde si l'applicazione si chiude, altrimenti si predispone a ricevere nuovi comandi.
+  ![Comando Esci](/docs/img/comando_esci.png)
+    - Per confermare l'uscita, digitare `s` e premere `Invio`.
+    ![Conferma Uscita](/docs/img/conferma_esci.png)
+    - Per annullare l'uscita, digitare `n` e premere `Invio`
+    ![Annulla Uscita](/docs/img/annulla_esci.png)
 
-- `/vuoto`: mostra il tavoliere di gioco vuoto, ovvero senza pedine di gioco.
-![Comando Vuoto](/docs/img/comando_vuoto.png)
-
-- `/blocca xn`: blocca la cella alla colonna `x` e riga `n` del tavoliere, impedendo a qualsiasi pedina di occuparla.
-![Comando Blocca](/docs/img/comando_blocca.png)
+  - `/vuoto`: mostra il tavoliere di gioco vuoto, ovvero senza pedine di gioco.
+  ![Comando Vuoto](/docs/img/comando_vuoto.png)
 
 
 ### Comandi disponibili durante una partita
@@ -310,106 +327,34 @@ Dopo aver avviato una partita con il comando `/gioca`, avrai accesso a una serie
 - `/tavoliere` : mostra il tavoliere di gioco con le pedine in posizione attuale.
 ![Comando Tavoliere](/docs/img/comando_tavoliere.png)
 
-- `/qualimosse` : mostra le mosse possibili per il giocatore di turno, evidenziando le caselle raggiungibili con mosse che generano una nuova pedina, le caselle raggiungibili con mosse che consentono un salto e le caselle raggiungibili con entrambe le mosse.
-![Comando Quali Mosse](/docs/img/comando_qualimosse.png)
+  - `/qualimosse` : mostra le mosse possibili per il giocatore di turno, evidenziando le caselle raggiungibili con mosse che generano una nuova pedina, le caselle raggiungibili con mosse che consentono un salto e le caselle raggiungibili con entrambe le mosse.
+  ![Comando Quali Mosse](/docs/img/comando_qualimosse.png)
 
-- `/abbandona` : permette al giocatore di abbandonare la partita in corso. Se confermato, il giocatore che abbandona perde la partita per x a 0 dove x è il numero di pedine rimaste all'avversario.
-![Comando Abbandona](/docs/img/comando_abbandona.png)
-  - Per confermare l'abbandono, digitare `s` e premere `Invio`.
-  ![Conferma Abbandono](/docs/img/conferma_abbandona.png)
-  - Per annullare l'abbandono, digitare `n` e premere `Invio`.
-  ![Annulla Abbandono](/docs/img/annulla_abbandona.png)
+  - `/abbandona` : permette al giocatore di abbandonare la partita in corso. Se confermato, il giocatore che abbandona perde la partita per x a 0 dove x è il numero di pedine rimaste all'avversario.
+  ![Comando Abbandona](/docs/img/comando_abbandona.png)
+    - Per confermare l'abbandono, digitare `s` e premere `Invio`.
+    ![Conferma Abbandono](/docs/img/conferma_abbandona.png)
+    - Per annullare l'abbandono, digitare `n` e premere `Invio`.
+    ![Annulla Abbandono](/docs/img/annulla_abbandona.png)
 
-- `/mosse` : mostra la storia delle mosse con notazione algebrica `k. xn ym (p)` dove `k` è il numero della mossa, `xn` è la posizione di partenza, `ym` è la posizione di arrivo e `p` è il giocatore che ha effettuato la mossa.
-![Comando Mosse](/docs/img/comando_mosse.png)
-
-- `/tempo` : mostra il tempo trascorso dall'inizio della partita in formato `ore:minuti:secondi`.
-![Comando Tempo](/docs/img/comando_tempo.png)
-
-- `xn-ym` : permette di effettuare una mossa valida utilizzando la notazione algebrica `xn-ym` dove `xn` è la cella di partenza e `ym` è la cella di arrivo.
-  - Se la mossa è valida e la distanza tra la cella di partenza e quella di arrivo è di 1, la pedina viene duplicata nella cella di arrivo.
-  ![Comando Mossa Duplica](/docs/img/comando_mossa_duplica.png)
-  - Se la mossa è valida e la distanza tra la cella di partenza e quella di arrivo è di 2, la pedina viene spostata nella cella di arrivo.
-  ![Comando Mossa Salto](/docs/img/comando_mossa_salto.png)
-
-    
 ### Possibili messaggi di errore
 
 Durante l'esecuzione dell'applicazione si possono presentare delle situazioni non previste. Per ora ne esistono solo due
 e vengono entrambe gestite comunicando all'utente l'errore.
 
 #### Comando non previsto
+
 Nel caso in cui non venisse inserito nessun comando tra quelli previsti nell `/help`, 
 l'utente sarà avvisato dell'errore e gli verrà consigliato di digitare il comando `/help` per avere una lista dei comandi accettati.
 
 ![Comando non previsto](/docs/img/comando_non_previsto.png)
 
 #### Nessuna partita in corso
-Nel caso in cui venisse avviato uno dei comandi (`/tavoliere`, `/qualimosse`, `/abbandona`, `/tempo`, `/mosse`, `xn-ym`) prima di aver creato una partita, 
+
+Nel caso in cui venisse avviato uno dei comandi (`/tavoliere`, `/qualimosse`, `/abbandona`) prima di aver creato una partita, 
 verrà segnalato all'utente con un messaggio di avviso.
 
 ![Nessuna partita in corso](/docs/img/nessuna_partita_in_corso.png)
-
-#### Mossa non valida - Formato errato
-Se la mossa inserita non è valida perché il formato non è corretto, verrà segnalato all'utente con un messaggio di errore.
-
-![Mossa non valida - Formato errato](/docs/img/mossa_non_valida_formato_errato.png)
-
-#### Mossa non valida - Celle non adiacenti
-Se la mossa inserita non è valida perché le celle di partenza e arrivo non sono adiacenti, verrà segnalato all'utente con un messaggio di errore.
-
-![Mossa non valida - Celle non adiacenti](/docs/img/mossa_non_valida_celle_non_adiacenti.png)
-
-#### Mossa non valida - Cella già occupata
-Se la mossa inserita non è valida perché la cella di arrivo è già occupata, verrà segnalato all'utente con un messaggio di errore.
-
-![Mossa non valida - Cella già occupata](/docs/img/mossa_non_valida_cella_occupata.png)
-
-#### Mossa non valida - Cella bloccata
-Se la mossa inserita non è valida perché la cella di arrivo è bloccata, verrà segnalato all'utente con un messaggio di errore.
-
-![Mossa non valida - Cella bloccata](/docs/img/mossa_non_valida_cella_bloccata.png)
-
-#### Mossa non valida - Cella non appartenente al giocatore di turno
-Se la mossa inserita non è valida perché la cella di partenza non appartiene al giocatore di turno, verrà segnalato all'utente con un messaggio di errore.
-
-![Mossa non valida - Cella non appartenente al giocatore di turno](/docs/img/mossa_non_valida_cella_non_appartenente.png)
-
-#### Mossa non valida - Riga o colonna non esistente
-Se la mossa inserita non è valida perché la riga o la colonna non esistono, verrà segnalato all'utente con un messaggio di errore.
-
-![Mossa non valida - Riga o colonna non esistente](/docs/img/mossa_non_valida_riga_colonna_non_esistente.png)
-
-#### Lista delle mosse effettuate - Nessuna mossa effettuata
-Se si tenta di visualizzare la lista delle mosse effettuate prima di aver effettuato alcuna mossa, verrà segnalato all'utente con un messaggio di avviso.
-
-![Lista delle mosse effettuate - Nessuna mossa effettuata](/docs/img/lista_mosse_nessuna_mossa.png)
-
-#### Blocco di una cella - Gioco in corso
-Se si tenta di bloccare una cella mentre una partita è in corso, verrà segnalato all'utente con un messaggio di errore.
-
-![Blocco di una cella - Gioco in corso](/docs/img/blocco_cella_gioco_in_corso.png)
-
-#### Blocco di una cella - Cella già bloccata
-Se si tenta di bloccare una cella già bloccata, verrà segnalato all'utente con un messaggio di errore.
-
-![Blocco di una cella - Cella già bloccata](/docs/img/blocco_cella_gia_bloccata.png)
-
-#### Blocco di una cella - Cella di partenza o adiacenti
-Se si tenta di bloccare una delle celle di partenza o una delle celle adiacenti ad'una cella di partenza dei giocatori, verrà segnalato all'utente con un messaggio di errore.
-
-![Blocco di una cella - Cella di partenza](/docs/img/blocco_cella_partenza_adiacenti.png)
-
-
-#### Blocco di una cella - Numero massimo di celle bloccate raggiunto
-Se si tenta di bloccare più di 9 celle, verrà segnalato all'utente con un messaggio di errore.
-
-![Blocco di una cella - Numero massimo di celle bloccate raggiunto](/docs/img/blocco_celle_massimo_raggiunto.png)
-
-#### Blocco di una cella - Formato cella errato
-Se si tenta di bloccare una cella con un formato errato, verrà segnalato all'utente con un messaggio di errore.
-
-![Blocco di una cella - Formato cella errato](/docs/img/blocco_cella_formato_errato.png)
 
 ## (8) Processo di sviluppo e organizzazione del lavoro
 In questa sezione analizzeremo il processo di sviluppo utilizzato e la pianificazione del lavoro.
@@ -450,27 +395,3 @@ che verranno eseguiti durante lo sviluppo del progetto.
 
 ### (9.1) Sprint 0
 ![Retrospettiva Sprint 0](/docs/img/retrospettiva_sprint_0.png)
-
-### (9.2) Sprint 1
-![Retrospettiva Sprint 1](/docs/img/retrospettiva_sprint_1.png)
-
-Nell'immagine precedente, abbiamo analizzato il modello di retrospettiva "Arrabbiato, Triste, Felice" per identificare 
-gli aspetti da migliorare relativi allo Sprint 1. In particolare, esamineremo le soluzioni da adottare per affrontare eventuali problematiche emerse.
-
-### Arrabbiato
-La sezione "**Arrabbiato**" si riferisce a un errore grave emerso nello Sprint 1 nella creazione del modello di dominio. 
-Come team, avremmo dovuto approfondire maggiormente la conoscenza del modello di dominio e delle sue caratteristiche. La formazione continua è cruciale per un team di progetto; una volta individuato l'errore, è necessario correggerlo e risolverlo tempestivamente.
-
-### Triste
-Nella sezione "Triste" emergono diverse problematiche:
-
-- Difficoltà nell'implementazione: Alcuni membri del team hanno incontrato difficoltà nell'implementare alcune funzionalità a causa della scarsa familiarità con il linguaggio di programmazione. Possibili soluzioni includono il supporto da parte dei membri più esperti, la consultazione di materiale online e ulteriori sessioni di formazione interna.
-- Ritardi nelle funzionalità: Alcuni ritardi sono dovuti ad altri impegni, come lo studio di altri corsi. La soluzione a questo problema è una pianificazione dettagliata delle attività, che tenga conto degli impegni universitari e personali, permettendo di adattare i carichi di lavoro in base alle esigenze individuali. È fondamentale incoraggiare una comunicazione aperta e trasparente riguardo agli impegni personali, consentendo al team di riorganizzare le attività e supportarsi a vicenda.
-
-### Felice
-L'ultima sezione evidenzia alcuni aspetti positivi del team:
-
-- Distribuzione del carico di lavoro: Durante ogni Sprint, abbiamo mantenuto una distribuzione equilibrata del carico di lavoro.
-- Ambiente collaborativo: Abbiamo creato un ambiente di lavoro collaborativo e di sostegno, in cui i membri del team si sentono a proprio agio nel chiedere aiuto e nel fornire assistenza.
-
-Concludendo, è essenziale continuare a migliorare la nostra conoscenza tecnica, affinare la pianificazione delle attività e mantenere un ambiente di lavoro positivo e collaborativo.
