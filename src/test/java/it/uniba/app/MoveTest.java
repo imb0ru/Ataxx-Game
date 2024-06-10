@@ -19,7 +19,10 @@ class MoveTest {
      */
     @Test
     void constructorTest() {
-        final var move = new Move(Board.Position.fromString("a1"), Board.Position.fromString("a3"), Board.Cell.WHITE);
+        final var move = new Move(
+            Board.Position.fromString("a1"),
+            Board.Position.fromString("a3"),
+            Board.Cell.WHITE);
         assertEquals("a1-a3 (W)", move.toString(), "La mossa dovrebbe essere a1-a3 (W)");
     }
 

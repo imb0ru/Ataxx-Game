@@ -92,10 +92,8 @@ public final class GameController {
      *
      * @param gameString la stringa che rappresenta la partita
      * @throws InvalidGameException se la stringa non rappresenta una partita
-     * @throws InvalidBoardException se la stringa contiene una stringa per il
-     *                               tavoliere non valida
      */
-    public GameController(final String gameString) throws InvalidGameException, InvalidBoardException {
+    public GameController(final String gameString) throws InvalidGameException {
         final var parts = gameString.split(" - ");
         if (parts.length != 2) {
             throw new InvalidGameException(Strings.GameController.INVALID_GAME_STRING_EXCEPTION);
@@ -111,7 +109,14 @@ public final class GameController {
             default -> throw new InvalidGameException(Strings.GameController.INVALID_CURRENT_PLAYER_EXCEPTION);
         };
 
-        this.board = new Board(parts[1]);
+        try {
+            this.board = new Board(parts[1]);
+        } catch (InvalidBoardException exception) {
+            throw new InvalidGameException(
+                Strings.GameController.INVALID_BOARD_EXCEPTION + exception.getMessage(),
+                exception);
+        }
+
         updateGameState();
     }
 

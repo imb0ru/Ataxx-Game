@@ -228,12 +228,17 @@ public final class Board implements Cloneable {
                 throw new InvalidBoardException(Strings.Board.BOARD_TOO_LONG_EXCEPTION);
             }
 
-            Arrays.fill(
-                this.cells,
-                boardIndex,
-                boardIndex + count,
-                cell
-            );
+            if (cell == Cell.LOCKED) {
+                for (int i = boardIndex; i < boardIndex + count; i++) {
+                    try {
+                        blockCell(new Position(i / SIZE, i % SIZE));
+                    } catch (UnblockableCellException exception) {
+                        throw new InvalidBoardException(exception.getMessage(), exception);
+                    }
+                }
+            } else {
+                Arrays.fill(this.cells, boardIndex, boardIndex + count, cell);
+            }
 
             boardIndex += count;
             ++index;

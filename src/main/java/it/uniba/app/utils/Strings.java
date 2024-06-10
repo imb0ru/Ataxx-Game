@@ -365,6 +365,11 @@ public final class Strings {
             "La cella di partenza non contiene il giocatore corrente";
 
         /**
+         * Stringa per l'eccezione lanciata se il tavoliere non è valido.
+         */
+        public static final String INVALID_BOARD_EXCEPTION = "Tavoliere non valido: ";
+
+        /**
          * Stringa per l'eccezione lanciata se la cella di destinazione è bloccata.
          */
         public static final String DESTINATION_CELL_LOCKED_EXCEPTION = "La cella di destinazione e' bloccata";

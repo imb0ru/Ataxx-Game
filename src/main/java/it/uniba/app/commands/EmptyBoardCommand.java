@@ -21,7 +21,7 @@ public final class EmptyBoardCommand {
 
         try {
              game = new GameController("W - 49E");
-        } catch (InvalidGameException | InvalidBoardException exception) {
+        } catch (InvalidGameException exception) {
             // NOTE: This should never happen.
             throw new AssertionError(exception);
         }
