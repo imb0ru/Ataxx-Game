@@ -6,7 +6,10 @@
 3. [Requisiti specifici](#3-requisiti-specifici) <br>
    3.1 [Requisiti funzionali](#31-requisiti-funzionali) <br>
    3.2 [Requisiti non funzionali](#32-requisiti-non-funzionali) <br>
-4. _TDB_
+4. [System design](#4-system-design)<br>
+    4.1 [Stile architetturale](#41-stile-architetturale)<br>
+    4.2 [Diagramma dei Package](#42-diagramma-dei-package)<br>
+    4.3 [Diagramma delle componenti](#43-diagramma-delle-componenti)<br>
 5. _TDB_
 6. [Riepilogo dei casi di Test](#6-riepilogo-dei-casi-di-test)
 7. [Manuale utente](#7-manuale-utente)
@@ -162,7 +165,6 @@ Ogni giocatore è identificato da tutte le celle del suo colore assegnato
 - (RF13) Il sistema deve permettere di visualizzare il vincitore della partita.
   - (RF13.1) Quando tutte le celle del tavoliere sono occupate il sistema deve dichiarare il vincitore e riportare il punteggio finale.
     
-
 ### (3.2) Requisiti non funzionali
 - (RNF1) Il container docker dell'app deve essere eseguito da terminali che supportano Unicode con encoding UTF-8 e UTF-16.
   - (RNF1.1) Per Linux e MacOS si consiglia di utilizzare il 
@@ -175,6 +177,92 @@ Ogni giocatore è identificato da tutte le celle del suo colore assegnato
     io/softeng2324-inf-uniba/ataxx-berners:latest`.
   - (RNF2.3) Eseguire il container docker con il comando `docker run 
     --rm -it ghcr.io/softeng2324-inf-uniba/ataxx-berners:latest`.
+
+## **(4) System Design**
+
+### (4.1) Stile architetturale
+La suddivisione in package è stata effettuata accomunando le varie classi in base alle loro responsabilità e compiti svolti.
+Perciò si è voluto optare per lo stile architetturale Entity Control Boundary (ECB) che prevede la
+classificazione delle classi in tre categorie:
+
+- ENTITY: Rappresenta gli oggetti del dominio, contenenti i dati e la logica di business. Per Ataxx, le entità
+  includono il tabellone di gioco e le mosse.
+- CONTROL: Gestisce il flusso e la logica dell'applicazione, orchestrando le
+  interazioni tra Boundary ed Entity. Per Ataxx, i controlli includono la gestione delle mosse dei giocatori
+  e l'applicazione delle regole del gioco.
+- BOUNDARY: sono le classi che si occupano di interfacciarsi con l'utente e di gestire le logiche di presentazione.
+  In particolare si occupano di ricevere i comandi dell'utente e di mostrare i risultati delle operazioni.
+
+L'elenco dei package e delle classi in essi contenuti è il seguente:
+- il package **Boundaries** contenente:
+    - ***GamePrinter***: classe che si occupa di stampare lo stato della partita;
+
+
+- il package **Commands**, package cha raggruppa le classi che si occupano di eseguire i commandi inseriti dall'utente:
+    - ***BlockCommand***: classe esegue il comando ```  "/blocca" ``` permettendo all'utente di bloccare una cella del tavoliere;
+    - ***BoardCommand***: classe esegue il comando ```  "/tavoliere" ``` perciò stampa il tavoliere della partita in corso;
+    - ***EmptyBoard***: classe esegue il comando ```  "/vuoto" ``` che stampa un tavoliere vuoto;
+    - ***ExitCommand***: classe esegue il comando ```  "/exit" ``` di conseguenza uscendo dall'applicazione;
+    - ***HelpCommand***: classe esegue il comando ```  "/help" ``` percui vengono stampate le informazioni di aiuto per l'utilizzo del gioco;
+    - ***MoveCommand***: classe esegue il comando ``` /mosse ``` e stampa a video le mosse effettuate durante la partita;
+    - ***MoveListCommand***: classe esegue il comando ```  "/mosse" ``` e stampa a video le mosse effettuate durante la partita ;
+    - ***PlayCommand***: classe esegue il comando ```  "/gioca" ```  che comincia una nuova partita nel caso in cui non ce ne fosse già una in corso;
+    - ***QuitCommand***: classe esegue il comando ```  "/abbandona" ``` il quale permette all'utente di abbandonare la partita in corso.
+    - ***TimeCommand***: classe esegue il comando ```  "/tempo" ``` che stampa a video il tempo di gioco della partita;
+    - ***WhatMovesCommand***: classe che esegue il comando ```  "/qualimosse" ``` il quale stampa a video il tavoliere con le mosse che può effettuare il giocatore corrente;
+      <br><br>
+- il package **Controls** contenente:
+    - ***AppController***: classe principale dell'applicazione.
+      Gestisce le chiamate dei comandi di gioco in base alle azioni dell'utente;
+    - ***GameController***: classe che gestisce la logica di gioco;
+      <br><br>
+- il package **Entities** contenente:
+    - ***Board***: classe che rappresenta il tavoliere del gioco;
+    - ***Move***: classe che rappresenta una mossa all'interno della partita;
+- il package **Exceptions** raggruppa tutte le classi che si occupano delle eccezioni durante l'esecuzione del gioco, contiene le seguenti classi:
+    - ***InvalidBoardException***: eccezione lanciata quando il tavoliere non è valido;
+    - ***InvalidGameException***: eccezione lanciata quando la stringa che rappresenta lo stato della partita non è valida;
+    - ***InvalidMoveException***: eccezione non controllata che rappresenta una mossa non valida;
+    - ***InvalidPositionException***: eccezione non controllata che gestisce una posizione non valida;
+      <br><br>
+- il package **Utils** contentente le classi:
+    - ***Color***: classe che si occupa dell'enumerazione dei colori disponibili per la stampa.
+    - ***Strings***: classe contenente le stringhe utilizzate nell'applicazione.
+      <br><br>
+- Infine, situata nel package di default(it.uniba.app), la classe **App** che si occupa dell'inizializzazione e avvio del software, come definito dal workflow utilizzato.
+
+### (4.2) Diagramma dei Package
+Tra i vari package del progetto esistono delle dipendenze. Una dipendenza indica che un modulo o un pacchetto
+richiede l'accesso a un altro modulo o pacchetto per funzionare correttamente.<br>
+Questo è come si mostra il diagramma dei package ad un livello alto di astrazione: <br><br>
+![Diagramma_package_alto_livello](/docs/img/diagramma_dei_package_alto_livello.png)
+
+Ad un livello più basso di astrazione in `it.uniba.app.` il diagramma è il seguente:<br><br>
+![Diagramma_package_basso_livello](/docs/img/diagramma_dei_package_basso_livello.png)
+
+Considerando anche il package dedicato al testing, questo è il diagramma che ne segue:<br><br>
+![Diagramma_package_alto_livello_2](/docs/img/diagramma_dei_package_alto_livello_2.png)
+
+### (4.3) Diagramma delle componenti
+Il sistema è costituito da due componenti:
+- ***Command Line Interface***: fornisce servizi per giocare ad Ataxx attraverso una linea di comando.
+- ***Ataxx***:  fornisce servizi per gestire partite di ataxx e di manipolare gli elementi del gioco. <br><br>
+
+![Diagramma delle componenti](/docs/img/diagramma_delle_componenti.png)
+
+Queste due componenti comunicano tra loro tramite l'interfaccia **Ataxx API**.
+
+**Flusso delle operazioni**:
+1) L'utente inserisce un comando tramite la ***Command Line Interface***.
+2) La ***Command Line Interface*** invia questo comando all'***Ataxx API***.
+3) L'***Ataxx API*** comunica con la componente ***Ataxx***, trasmettendo il comando per essere elaborato.
+4) La componente ***Ataxx*** elabora il comando utilizzando la logica di gioco e aggiorna lo stato del gioco di conseguenza.
+5) La risposta o l'aggiornamento dello stato del gioco viene inviato dall'***Ataxx API*** alla ***Command Line Interface***.
+6) La ***Command Line Interface*** visualizza l'output o lo stato aggiornato del gioco all'utente.
+
+Il diagramma illustra chiaramente la relazione tra l'**interfaccia utente a linea di comando** e il sistema di gioco **Ataxx**,
+con l'**API** che funge da intermediario per la comunicazione. Questo tipo di architettura modularizzata permette una chiara separazione tra la
+logica del gioco e l'interfaccia utente, facilitando la manutenzione e l'aggiornamento di ciascuna componente indipendentemente.
 
 ## (6) Riepilogo dei casi di Test
 
