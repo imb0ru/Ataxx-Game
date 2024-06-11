@@ -3,6 +3,7 @@ package it.uniba.app;
 import it.uniba.app.entities.Board;
 import it.uniba.app.entities.Move;
 import it.uniba.app.exceptions.InvalidMoveException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,9 +18,13 @@ class MoveTest {
      * contenga cella di partenza e cella di arrivo che sono stati
      * specificati.
      */
+    @DisplayName("constructorTest: Costruttore con parametri validi")
     @Test
     void constructorTest() {
-        final var move = new Move(Board.Position.fromString("a1"), Board.Position.fromString("a3"), Board.Cell.WHITE);
+        final var move = new Move(
+            Board.Position.fromString("a1"),
+            Board.Position.fromString("a3"),
+            Board.Cell.WHITE);
         assertEquals("a1-a3 (W)", move.toString(), "La mossa dovrebbe essere a1-a3 (W)");
     }
 
@@ -28,6 +33,7 @@ class MoveTest {
      * partenza e la cella di arrivo è maggiore di quella consentita e solleva, di
      * conseguenza, un'eccezione.
      */
+    @DisplayName("constructorThrowsTest: Costruttore con parametri non validi")
     @Test
     void constructorThrowsTest() {
         assertThrows(InvalidMoveException.class, () -> {
@@ -42,6 +48,7 @@ class MoveTest {
      * Testa che, dopo aver passato la cella di partenza e la cella di
      * arrivo, la tipologia della mossa sia quella corretta.
      */
+    @DisplayName("moveTypeTest: Tipologia della mossa corretto")
     @Test
     void moveTypeTest() {
         record TestCase(Move move, Move.Type expectedType) { }

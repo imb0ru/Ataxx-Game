@@ -2,7 +2,6 @@ package it.uniba.app.commands;
 
 import it.uniba.app.boundaries.GamePrinter;
 import it.uniba.app.controls.GameController;
-import it.uniba.app.exceptions.InvalidBoardException;
 import it.uniba.app.exceptions.InvalidGameException;
 
 /**
@@ -21,7 +20,7 @@ public final class EmptyBoardCommand {
 
         try {
              game = new GameController("W - 49E");
-        } catch (InvalidGameException | InvalidBoardException exception) {
+        } catch (InvalidGameException exception) {
             // NOTE: This should never happen.
             throw new AssertionError(exception);
         }

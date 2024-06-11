@@ -2,6 +2,7 @@ package it.uniba.app;
 
 import it.uniba.app.entities.Board;
 import it.uniba.app.exceptions.InvalidPositionException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,6 +16,7 @@ class PositionTest {
     /**
      * Testa che, dopo la chiamata al costruttore, le righe e le colonne siano valide.
      */
+    @DisplayName("constructorTest: Costruttore con parametri validi")
     @Test
     void constructorTest() {
         final var row = 0;
@@ -28,6 +30,7 @@ class PositionTest {
      * Testa che, dopo la chiamata al costruttore, venga sollevata
      * un'eccezione nel caso in cui la riga non sia valida.
      */
+    @DisplayName("constructorThrowsTest: Costruttore con parametri non validi")
     @Test
     void constructorThrowsTest() {
         final var row = 10;
@@ -40,6 +43,7 @@ class PositionTest {
      * Testa che, dopo aver creato la posizione partendo dalla
      * stringa, questa abbia riga e colonna valide.
      */
+    @DisplayName("fromStringTest: Creazione posizione da una stringa valida")
     @Test
     void fromStringTest() {
         final var row = 2;
@@ -54,6 +58,7 @@ class PositionTest {
      * stringa, venga sollevata un'eccezione nel caso in cui la posizione
      * non sia valida.
      */
+    @DisplayName("fromStringThrowsTest: Creazione posizione da una stringa non valida")
     @Test
     void fromStringThrowsTest() {
         assertThrows(InvalidPositionException.class, () -> Board.Position.fromString("h9"),
@@ -64,6 +69,7 @@ class PositionTest {
      * Testa che, dopo aver passato come stringhe la posizione di partenza e
      * di arrivo, la distanza tra esse sia valida.
      */
+    @DisplayName("distanceTest: Calcolo distanza tra due posizioni")
     @Test
     void distanceTest() {
         record TestCase(Board.Position from, Board.Position to, int expectedDistance) { }

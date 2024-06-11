@@ -165,7 +165,6 @@ Ogni giocatore è identificato da tutte le celle del suo colore assegnato
 - (RF13) Il sistema deve permettere di visualizzare il vincitore della partita.
   - (RF13.1) Quando tutte le celle del tavoliere sono occupate il sistema deve dichiarare il vincitore e riportare il punteggio finale.
     
-
 ### (3.2) Requisiti non funzionali
 - (RNF1) Il container docker dell'app deve essere eseguito da terminali che supportano Unicode con encoding UTF-8 e UTF-16.
   - (RNF1.1) Per Linux e MacOS si consiglia di utilizzare il 
@@ -178,51 +177,6 @@ Ogni giocatore è identificato da tutte le celle del suo colore assegnato
     io/softeng2324-inf-uniba/ataxx-berners:latest`.
   - (RNF2.3) Eseguire il container docker con il comando `docker run 
     --rm -it ghcr.io/softeng2324-inf-uniba/ataxx-berners:latest`.
-
-## (6) Riepilogo dei casi di Test
-In questa sezione analizzeremo i casi di Test effettuati su differenti classi.
-Analizziamo nel dettaglio le classi testate:
-
-### Test per la classe `Move`
-
-Di seguito i test selezionati:
-* `constructorTest`: questo metodo testa che la mossa che contiene cella di partenza e cella di arrivo siano correttamente specificate;
-* `constructorThrowsTest`: questo metodo è stato creato per sollevare un'eccezione nel caso in cui le celle specificate vadano oltre la distanza consentita;
-* `moveTypeTest`: questo metodo è stato definito per verificare la tipologia della mossa effettuata da parte del giocatore. Restituisce, in base alla mossa effettuata, la tipologia corretta.
-
-### Test per la classe `Board.Position`
-
-Di seguito i test selezionati:
-* `constructorTest`: questo metodo testa che le righe e le colonne corrispondenti alla posizione siano valide, cioè all'interno del tavoliere;
-* `constructorThrowsTest`: questo metodo serve per sollevare un'eccezione nel caso in cui la posizione non sia valida, ad esempio fuori dal tavoliere;
-* `fromStringTest`: questo metodo testa che la cella di partenza e di arrivo creata a partire dalla stringa siano valide;
-* `fromStringThrowsTest`: questo metodo solleva un'eccezione nel caso in cui la cella di arriva e di partenza create a partire da una stringa non siano valide;
-* `distanceTest`: questo metodo verifica se la distanza tra la cella di partenza e la cella di arrivo sia valida.  
-
-### Test per la classe `GameController`
-
-Di seguito i test selezionati:
-* `initialGameTest`: testa che ogni partita cominciata da zero abbia sempre la stessa configurazione,
-  ovvero che cominci il nero e il tavoliere sia quello specificato nelle regole di gioco.
-* `noWhiteCellsWinTest`, `noBlackCellsWinTest`: in questi due test viene controllata una condizione simile, ovvero che se
-  uno dei due giocatori dovesse arrivare a non avere più celle allora lo stato della partita viene impostato alla vittoria
-  dell'altro giocatore.
-* `correctJumpAndReplicateMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 1 la pedina di partenza non viene
-  spostata e ne venga creata un'altra nella posizione di arrivo.
-* `correctJumpMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 2 la pedina di partenza venga spostata
-  nella posizione d'arrivo.
-* `moveConvertsAdjacentEnemyCellsTest`: in questo test ci assicuriamo che eseguendo una mossa le pedine del nemico adiacenti
-  alla casella di arrivo vengano convertite in pedine del giocatore che ha effettuato la mossa.
-* `moveToBlockedCellTest`: in questo test ci assicuriamo che quando il giocatore prova a fare una mossa che ha come cella
-  di destinazione una cella bloccata viene lanciata un'eccezione.
-
-### Motivazioni dei test
-
-I test sopra descritti contribuiscono a rendere le modifiche al gioco semplici e meno prone ad errori in quanto in questa
-maniera possiamo sempre controllare che i comportamenti base del gioco rimangano invariati.
-
-Infatti, senza di essi, si rischierebbe che una modifica non prudente del codice, potrebbe portare alla creazione di un 
-errore nel codice difficile da rintracciare e che di conseguenza rallenterebbe la produzione di nuovo codice.
 
 ## **(4) System Design**
 
@@ -289,7 +243,7 @@ Ad un livello più basso di astrazione in `it.uniba.app.` il diagramma è il seg
 Considerando anche il package dedicato al testing, questo è il diagramma che ne segue:<br><br>
 ![Diagramma_package_alto_livello_2](/docs/img/diagramma_dei_package_alto_livello_2.png)
 
-### (4.3) Diagramma delle componenti 
+### (4.3) Diagramma delle componenti
 Il sistema è costituito da due componenti:
 - ***Command Line Interface***: fornisce servizi per giocare ad Ataxx attraverso una linea di comando.
 - ***Ataxx***:  fornisce servizi per gestire partite di ataxx e di manipolare gli elementi del gioco. <br><br>
@@ -306,10 +260,96 @@ Queste due componenti comunicano tra loro tramite l'interfaccia **Ataxx API**.
 5) La risposta o l'aggiornamento dello stato del gioco viene inviato dall'***Ataxx API*** alla ***Command Line Interface***.
 6) La ***Command Line Interface*** visualizza l'output o lo stato aggiornato del gioco all'utente.
 
-Il diagramma illustra chiaramente la relazione tra l'**interfaccia utente a linea di comando** e il sistema di gioco **Ataxx**, 
-con l'**API** che funge da intermediario per la comunicazione. Questo tipo di architettura modularizzata permette una chiara separazione tra la 
+Il diagramma illustra chiaramente la relazione tra l'**interfaccia utente a linea di comando** e il sistema di gioco **Ataxx**,
+con l'**API** che funge da intermediario per la comunicazione. Questo tipo di architettura modularizzata permette una chiara separazione tra la
 logica del gioco e l'interfaccia utente, facilitando la manutenzione e l'aggiornamento di ciascuna componente indipendentemente.
 
+## (6) Riepilogo dei casi di Test
+
+In questa sezione analizzeremo i casi di Test effettuati su differenti classi.
+
+Per effettuare i test sono stati utilizzati i seguenti strumenti:
+* [JUnit](https://junit.org/junit5/)
+* [CheckStyle](https://checkstyle.sourceforge.io/)
+* [Spotbugs](https://spotbugs.github.io/)
+* [PMD](https://pmd.github.io/)
+
+In particolare abbiamo utilizzato gli ultime 3 per un'analisi del codice statica e la prima per la creazione ed esecuzione
+di casi di test per diverse classi, analizziamoli nel dettaglio:
+
+### Test per la classe `Move`
+
+Di seguito i test selezionati:
+* `constructorTest`: questo metodo testa che la mossa che contiene cella di partenza e cella di arrivo siano correttamente specificate;
+* `constructorThrowsTest`: questo metodo è stato creato per sollevare un'eccezione nel caso in cui le celle specificate vadano oltre la distanza consentita;
+* `moveTypeTest`: questo metodo è stato definito per verificare la tipologia della mossa effettuata da parte del giocatore. Restituisce, in base alla mossa effettuata, la tipologia corretta.
+
+### Test per la classe `Board.Position`
+
+Di seguito i test selezionati:
+* `constructorTest`: questo metodo testa che le righe e le colonne corrispondenti alla posizione siano valide, cioè all'interno del tavoliere;
+* `constructorThrowsTest`: questo metodo serve per sollevare un'eccezione nel caso in cui la posizione non sia valida, ad esempio fuori dal tavoliere;
+* `fromStringTest`: questo metodo testa che la cella di partenza e di arrivo creata a partire dalla stringa siano valide;
+* `fromStringThrowsTest`: questo metodo solleva un'eccezione nel caso in cui la cella di arriva e di partenza create a partire da una stringa non siano valide;
+* `distanceTest`: questo metodo verifica se la distanza tra la cella di partenza e la cella di arrivo sia valida.  
+
+### Test per la classe `Board`
+
+Di seguito i test selezionati:
+* `initialBoardTest`: testa che il tavoliere iniziale sia correttamente inizializzato.
+* `invalidCharacterInsideStringTest`: testa che se la stringa del tavoliere contiene caratteri non validi allora venga sollevata un'eccezione che segnala l'errore.
+* `tooLongStringTest`, `tooShortStringTest`: testa che se la stringa del tavoliere contiene un numero di celle non valido venga sollevata un'eccezione che segnala l'errore.
+* `invalidLockedCellInStringTest`: testa che se la stringa del tavoliere contiene celle bloccate in posizioni non valide allora venga sollevata un'eccezione che segnala l'errore.
+* `tooManyLockedCellsInStringTest`: testa che se la stringa del tavoliere contiene più di 9 celle bloccate allora venga sollevata un'eccezione che segnala l'errore.
+* `lockedCellsTest`: testa che la configurazione del tavoliere sia corretta dopo aver bloccato alcune celle.
+* `resetLockedCellsTest`: testa che la configurazione del tavoliere sia corretta dopo aver bloccato alcune celle e successivamente sbloccate.
+* `blockInitialCellsTest`: testa che venga lanciata un'eccezione se si prova a bloccare le celle di partenza dei giocatori.
+* `blockAdjacentInitialCellsTest`: testa che venga lanciata un'eccezione se si prova a bloccare le celle adiacenti alle celle di partenza dei giocatori.
+* `maxLockedCellsTest`: testa che venga lanciata un'eccezione se si prova a bloccare più di 9 celle.
+
+### Test per la classe `GameController`
+
+Di seguito i test selezionati:
+* `initialGameTest`: testa che ogni partita cominciata da zero abbia sempre la stessa configurazione,
+  ovvero che cominci il nero e il tavoliere sia quello specificato nelle regole di gioco.
+* `invalidGameStringFormatTest`: testa che se la stringa della partita non è valida allora venga sollevata un'eccezione che segnala l'errore.
+* `invalidCharacterInsideGameStringTest`: testa che se la stringa della partita contiene caratteri non validi allora venga sollevata un'eccezione che segnala l'errore.
+* `noWhiteCellsWinTest`, `noBlackCellsWinTest`: in questi due test viene controllata una condizione simile, ovvero che se
+  uno dei due giocatori dovesse arrivare a non avere più celle allora lo stato della partita viene impostato alla vittoria
+  dell'altro giocatore.
+* `noLegalMovesTest`: in questo test si controlla il caso in cui un giocatore non abbia alcun mossa legale.
+* `correctJumpAndReplicateMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 1 la pedina di partenza non viene
+  spostata e ne venga creata un'altra nella posizione di arrivo.
+* `correctJumpMoveTest`: in questo test ci assicuriamo che con una mossa di tipo 2 la pedina di partenza venga spostata
+  nella posizione d'arrivo.
+* `moveConvertsAdjacentEnemyCellsTest`: in questo test ci assicuriamo che eseguendo una mossa le pedine del nemico adiacenti
+  alla casella di arrivo vengano convertite in pedine del giocatore che ha effettuato la mossa.
+* `moveToBlockedCellTest`: in questo test ci assicuriamo che quando il giocatore prova a fare una mossa che ha come cella
+  di destinazione una cella bloccata viene lanciata un'eccezione.
+
+### Motivazioni dei test
+
+I test sopra descritti contribuiscono a rendere le modifiche al gioco semplici e meno prone ad errori in quanto in questa
+maniera possiamo sempre controllare che i comportamenti base del gioco rimangano invariati.
+
+Infatti, senza di essi, si rischierebbe che una modifica non prudente del codice, potrebbe portare alla creazione di un 
+errore nel codice difficile da rintracciare e che di conseguenza rallenterebbe la produzione di nuovo codice.
+
+### Esiti dei casi di test
+
+![Esiti casi di test](/docs/img/esiti_casi_di_test.png)
+
+### Esiti dei tool di analisi statica
+
+![Esiti CheckStyle main](/docs/img/ataxx_checkstyle_main_results.png)
+
+![Esiti CheckStyle test](/docs/img/ataxx_checkstyle_test_results.png)
+
+![Esiti SpotBugs main](/docs/img/ataxx_spotbugs_main_results.png)
+
+![Esiti SpotBugs test](/docs/img/ataxx_spotbugs_test_results.png)
+
+![Esiti PMD](/docs/img/ataxx_pmd_results.png)
 
 ## (7) Manuale Utente
 

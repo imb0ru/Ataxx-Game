@@ -2,6 +2,7 @@ package it.uniba.app.commands;
 
 import it.uniba.app.controls.AppController;
 import it.uniba.app.entities.Board;
+import it.uniba.app.exceptions.UnblockableCellException;
 import it.uniba.app.utils.Strings;
 
 
@@ -15,13 +16,13 @@ public final class BlockCommand {
     /**
      * Esegue il comando.
      * @param app riferimento al contesto dell'applicazione
-     * @param position coordinate della casella da bloccare
+     * @param positionString coordinate della casella da bloccare
      */
-    public static void run(final AppController app, final String position) {
+    public static void run(final AppController app, final String positionString) {
         Board board = app.getBoard();
-        Board.Position p;
+        Board.Position position;
         try {
-             p = Board.Position.fromString(position);
+             position = Board.Position.fromString(positionString);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return;
@@ -29,15 +30,19 @@ public final class BlockCommand {
 
         if (app.getGame() != null) {
             System.out.println(Strings.BlockCommand.GAME_RUNNING_EXCEPTION);
-        } else if (board.getBlockedCellsSize() >= board.getMaxBlockedCells()) {
-            System.out.println(Strings.BlockCommand.MAX_BLOCKED_CELLS_EXCEPTION);
-        } else if (board.isCellBlocked(board.getCell(p))) {
+            return;
+        }
+
+        if (board.getCell(position) == Board.Cell.LOCKED) {
             System.out.println(Strings.BlockCommand.CELL_ALREADY_BLOCKED_EXCEPTION);
-        } else if (board.isStartingCell(p) || board.isAdjacentToStartingCell(p)) {
-            System.out.println(Strings.BlockCommand.CELL_STARTING_EXCEPTION);
-        } else {
-            board.addBlockedCell(p);
-            System.out.println(Strings.BlockCommand.CELL_BLOCKED + p.toString());
+            return;
+        }
+
+        try {
+            board.blockCell(position);
+            System.out.printf(Strings.BlockCommand.CELL_BLOCKED_FORMAT, position);
+        } catch (UnblockableCellException exception) {
+            System.out.println(exception.getMessage());
         }
     }
 }

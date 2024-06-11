@@ -290,6 +290,16 @@ public final class Strings {
          * Messaggio di errore per tavoliere troppo lungo.
          */
         public static final String BOARD_TOO_LONG_EXCEPTION = "Tavoliere troppo lungo";
+
+        /**
+         * Messaggio di errore per il tentativo di bloccare una cella che non è possibile bloccare.
+         */
+        public static final String UNBLOCKABLE_CELL_EXCEPTION = "Impossibile bloccare celle di partenza o adiacenti.";
+
+        /**
+         * Messaggio di errore per il tentativo di bloccare troppe celle.
+         */
+        public static final String MAX_BLOCKED_CELLS_EXCEPTION = "Hai raggiunto il numero massimo di celle bloccate.";
     }
 
     /**
@@ -353,6 +363,11 @@ public final class Strings {
          */
         public static final String INVALID_STARTING_CELL_EXCEPTION =
             "La cella di partenza non contiene il giocatore corrente";
+
+        /**
+         * Stringa per l'eccezione lanciata se il tavoliere non è valido.
+         */
+        public static final String INVALID_BOARD_EXCEPTION = "Tavoliere non valido: ";
 
         /**
          * Stringa per l'eccezione lanciata se la cella di destinazione è bloccata.
@@ -609,11 +624,6 @@ public final class Strings {
         public static final String GAME_RUNNING_EXCEPTION = "Impossibile bloccare celle durante una partita in corso.";
 
         /**
-         * Messaggio di errore per il tentativo di bloccare troppe celle.
-         */
-        public static final String MAX_BLOCKED_CELLS_EXCEPTION = "Hai raggiunto il numero massimo di celle bloccate.";
-
-        /**
          * Messaggio di errore per il tentativo di bloccare una cella già bloccata.
          */
         public static final String CELL_ALREADY_BLOCKED_EXCEPTION = "La cella selezionata è già bloccata.";
@@ -621,12 +631,7 @@ public final class Strings {
         /**
          * Messaggio di avvenuto blocco di una cella.
          */
-        public static final String CELL_BLOCKED = "Cella bloccata: ";
-
-        /**
-         * Messaggio di errore per il tentativo di bloccare una cella di partenza.
-         */
-        public static final String CELL_STARTING_EXCEPTION = "Impossibile bloccare celle di partenza o adiacenti.";
+        public static final String CELL_BLOCKED_FORMAT = "Cella bloccata: %s%n";
 
     }
 
