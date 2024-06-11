@@ -339,6 +339,18 @@ errore nel codice difficile da rintracciare e che di conseguenza rallenterebbe l
 
 ![Esiti casi di test](/docs/img/esiti_casi_di_test.png)
 
+### Esiti dei tool di analisi statica
+
+![Esiti CheckStyle main](/docs/img/ataxx_checkstyle_main_results.png)
+
+![Esiti CheckStyle test](/docs/img/ataxx_checkstyle_test_results.png)
+
+![Esiti SpotBugs main](/docs/img/ataxx_spotbugs_main_results.png)
+
+![Esiti SpotBugs test](/docs/img/ataxx_spotbugs_test_results.png)
+
+![Esiti PMD](/docs/img/ataxx_pmd_results.png)
+
 ## (7) Manuale Utente
 
 ### Introduzione
