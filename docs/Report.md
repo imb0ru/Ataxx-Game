@@ -291,8 +291,8 @@ In realtà questa è l'accorpamento delle seguenti tre user story:
 
 #### Come giocatore voglio chiudere il gioco([#24](https://github.com/softeng2324-inf-uniba/progetto-berners-lee/issues/24))
 
-![Diagramma di sequenza esci](/docs/img/diagramma_sequenza_user_story_esci.jpeg)
 ![Diagramma delle classi esci](/docs/img/diagramma_classi_user_story_esci.jpeg)
+![Diagramma di sequenza esci](/docs/img/diagramma_sequenza_user_story_esci.jpeg)
 
 ### (5.2) Principi di OO Design
 
