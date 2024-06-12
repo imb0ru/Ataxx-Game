@@ -10,7 +10,10 @@
     4.1 [Stile architetturale](#41-stile-architetturale)<br>
     4.2 [Diagramma dei Package](#42-diagramma-dei-package)<br>
     4.3 [Diagramma delle componenti](#43-diagramma-delle-componenti)<br>
-5. _TDB_
+5. [OO Design](#5-oo-design)<br>
+    5.1 [Diagrammi delle classi e di sequenza](#51-diagrammi-delle-classi-e-di-sequenza)<br>
+    5.2 [Principi di OO Design](#52-principi-di-oo-design)<br>
+    5.3 [Commenti sulle decisioni prese](#53-commenti-sulle-decisioni-prese)<br>
 6. [Riepilogo dei casi di Test](#6-riepilogo-dei-casi-di-test)
 7. [Manuale utente](#7-manuale-utente)
 8. [Processo di sviluppo e organizzazione del lavoro](#8-processo-di-sviluppo-e-organizzazione-del-lavoro) <br>
@@ -263,6 +266,94 @@ Queste due componenti comunicano tra loro tramite l'interfaccia **Ataxx API**.
 Il diagramma illustra chiaramente la relazione tra l'**interfaccia utente a linea di comando** e il sistema di gioco **Ataxx**,
 con l'**API** che funge da intermediario per la comunicazione. Questo tipo di architettura modularizzata permette una chiara separazione tra la
 logica del gioco e l'interfaccia utente, facilitando la manutenzione e l'aggiornamento di ciascuna componente indipendentemente.
+
+## (5) OO Design
+
+### (5.1) Diagrammi delle classi e di sequenza
+
+Riportiamo i diagrammi delle classi e i diagrammi di sequenza delle user story reputate più importanti.
+
+#### Come giocatore voglio iniziare una nuova partita ([#19](https://github.com/softeng2324-inf-uniba/progetto-berners-lee/issues/19))
+
+![Diagramma delle classi gioca](/docs/img/diagramma_classi_user_story_gioca.png)
+![Diagramma di sequenza gioca](/docs/img/diagramma_sequenza_user_story_gioca.png)
+
+#### Come giocatore voglio effettuare una mossa
+
+In realtà questa è l'accorpamento delle seguenti tre user story:
+* [#49: Giocare una nuova pedina in una casella adiacente ad una propria pedina](https://github.com/softeng2324-inf-uniba/progetto-berners-lee/issues/49)
+* [#50: Spostare una propria pedina saltando una casella adiacente](https://github.com/softeng2324-inf-uniba/progetto-berners-lee/issues/50)
+* [#51: Catturare una pedina avversaria come effetto di una mossa](https://github.com/softeng2324-inf-uniba/progetto-berners-lee/issues/51)
+
+
+![Diagramma delle classi mossa](/docs/img/diagramma_classi_user_story_mossa.png)
+![Diagramma di sequenza mossa](/docs/img/diagramma_sequenza_user_story_mossa.png)
+
+#### Come giocatore voglio chiudere il gioco([#24](https://github.com/softeng2324-inf-uniba/progetto-berners-lee/issues/24))
+
+![Diagramma delle classi esci](/docs/img/diagramma_classi_user_story_esci.jpeg)
+![Diagramma di sequenza esci](/docs/img/diagramma_sequenza_user_story_esci.jpeg)
+
+### (5.2) Principi di OO Design
+
+Essendo il progetto realizzato in Java, un linguaggio esclusivamente _Object-Oriented_, l'architettura si doveva
+attenere ai seguenti principi:
+* **Information Hiding**
+
+  L'information hiding prevede che ogni classe debba nascondere i suoi attributi tramite i modificatori di visibilità
+  (ad esempio: `private`) e di permettere l'accesso e la modifica ad essi, dove necessario, tramite degli appositi
+  setter e getter che permettono un controllo maggiore sui dati.
+* **Alta coesione**
+
+  Avendo adoperato lo stile architetturale ECB, dove possibile, ogni classe ha una
+  responsabilità ben definita e le rende facili da comprendere, riusare e modificare.
+* **Basso accoppiamento**
+
+  Si potrebbe dire che questa è una conseguenza dei preceenti due punti e quindi evita che un cambiamento di un
+  componente si propaghi ad altri.
+* **Presentazione separata**
+
+  Ancora una volta questo risulta essere una conseguenza dello stile ECB e quindi le classi _Boundary_ si occupano solo
+  di logica di presentazione e di interfacciarsi con l'utente, mentre le classi _Control_ si occupano della logica del
+  gioco (vedi la distinzione tra `GamePrinter` e `GameController`)
+* **Do not Repeat Yourself (DRY)**
+  
+  Il principio _DRY_ viene rispettato in quanto non ci sono duplicazioni di codice all'interno del progetto. Ogni 
+  funzionalità che poteva essere riutilizzata è stata estrapolata in un metodo apposito in modo tale da ridurre le 
+  sorgenti di errore dovute alla ridondanza del codice.
+
+Inoltre vengono seguiti anche i principi SOLID, delle linee guida a cui ispirarsi per scrivere software leggibile, 
+efficiente ed elegante:
+* **Single Responsibility**
+
+  È una conseguenza dell'aver separato, dove possibile, le classi seguendo lo stile ECB.
+* **Open/Closed**
+
+  Il codice risulta modulare, è possibile aggiungere nuove funzionalità senza dover modificare codice esistente.
+* **Liskov Substitution**
+
+  In questo progetto non vengono utilizzate classi derivate e quindi non viene applicato.
+* **Interface Segregation**
+
+  Non avendo utilizzato interfacce in questo progetto, non viene applicato.
+* **Dependency Inversion**
+
+  In questo progetto non vengono utilizzate classi derivate e quindi non viene applicato.
+
+### (5.3) Commenti sulle decisioni prese
+
+L'aver deciso di seguito il più possibile i principi di OO design ha reso la scrittura e la modifica del codice molto
+agibile e come risultato abbiamo ottenuto un codice che risulta leggibile e ordinato.
+
+#### Altri commenti
+
+Abbiamo inoltre deciso per evitare codice duplicato di creare una classe apposita per le stringhe stampate in output 
+(vedi `Strings`). Senza di essa una modifica di una stringa usata in più parti del codice avrebbe richiesto una modifica 
+per ogni parte del codice dove venisse utilizzata, avendo invece creato una classe che le contiene va modificata solo 
+l'occorrenza nella classe `Strings`.
+
+Inoltre il vantaggio di avere una classe simile è che in futuro, se si volessero supportare più linguaggi, si può
+modificare la classe per caricare delle stringhe diverse in base al linguaggio che si vuole utilizzare per il gioco.
 
 ## (6) Riepilogo dei casi di Test
 
